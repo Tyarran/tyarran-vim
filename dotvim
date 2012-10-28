@@ -1,0 +1,84 @@
+"Chargement de pathogen
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+set t_Co=256
+set nocompatible
+set nu
+set ai
+set si
+syntax on
+set hlsearch
+set cursorline
+filetype on
+filetype indent on
+filetype plugin on
+set tabstop=8
+set shiftwidth=4
+set expandtab
+set smarttab
+set shiftround
+"set guifont=Monospace\ Regular\ 11
+"set guifont=Droid\ Sans\ Mono\ Regular\ 13
+set guifont=Monaco\ 12
+"colorscheme wombat
+colorscheme mustang
+map <Tab> :bp!<Enter>
+map <BS> :bn!<Enter>
+map <C-Tab> :NERDTreeToggle<Enter>
+map <C-t> :tabnew<CR>
+map <C-n> :NERDTreeToggle<CR>
+set omnifunc=pythoncomplete#Complete
+imap <C-Space> <C-x><C-o>
+map <C-F12> :TagbarToggle<enter>
+imap <C-q> <C-y>,
+imap <Tab> <C-y>,
+:noremap <C-h> :set hlsearch! hlsearch?<CR>
+"on vire le maximum de chose dans l'interface
+"set guioptions=m
+"set guioptions=t
+"au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim 
+set ofu=syntaxcomplete#Complete
+
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
+
+""""""""""""""""""""""""""""""
+" => Python section
+""""""""""""""""""""""""""""""
+let python_highlight_all = 1
+au FileType python syn keyword pythonDecorator True None False self
+
+au BufNewFile,BufRead *.jinja set syntax=htmljinja
+au BufNewFile,BufRead *.mako set ft=mako
+
+au FileType python inoremap <buffer> $r return
+au FileType python inoremap <buffer> $i import
+au FileType python inoremap <buffer> $p print
+au FileType python inoremap <buffer> $f #--- PH ----------------------------------------------<esc>FP2xi
+au FileType python map <buffer> <leader>1 /class
+au FileType python map <buffer> <leader>2 /def
+au FileType python map <buffer> <leader>C ?class
+au FileType python map <buffer> <leader>D ?def
