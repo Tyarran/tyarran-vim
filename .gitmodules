@@ -73,3 +73,9 @@
 [submodule "bundle/minibufexpl.vim"]
 	path = bundle/minibufexpl.vim
 	url = https://github.com/fholgado/minibufexpl.vim.git
+[submodule "bundle/L9"]
+	path = bundle/L9
+	url = https://github.com/vim-scripts/L9.git
+[submodule "FuzzyFinder"]
+	path = FuzzyFinder
+	url = https://github.com/vim-scripts/FuzzyFinder.git
