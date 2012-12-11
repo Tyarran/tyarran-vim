@@ -1,7 +1,38 @@
-"Chargement de pathogen
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+set nocompatible               " be iMproved
+filetype off                   " required!
 
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+
+"Bundle
+
+Bundle 'CSApprox'
+Bundle 'fugitive.vim'
+Bundle 'HTML5-Syntax-File'
+Bundle 'L9'
+Bundle 'minibufexplorerpp'
+Bundle 'The-NERD-tree'
+Bundle 'The-NERD-Commenter'
+Bundle 'simple-pairs'
+Bundle 'snipMate'
+Bundle 'sudo.vim'
+Bundle 'SuperTab-continued.'
+Bundle 'Syntastic'
+Bundle 'Tagbar'
+Bundle 'taglist.vim'
+Bundle 'taglist-plus'
+Bundle 'mako.vim'
+Bundle 'vim-flake8'
+Bundle 'matchit.zip'
+Bundle 'wombat256.vim'
+Bundle 'Mustang2'
+Bundle 'ZenCoding.vim'
+Bundle 'pep8'
+Bundle 'FuzzyFinder'
+
+
+set paste
 set t_Co=256
 set nocompatible
 set nu
@@ -22,7 +53,8 @@ set shiftround
 "set guifont=Droid\ Sans\ Mono\ Regular\ 13
 set guifont=Monaco\ 12
 "colorscheme wombat
-colorscheme mustang
+colorscheme wombat256mod
+"colorscheme mustang
 map <Tab> :bp!<Enter>
 map <BS> :bn!<Enter>
 map <C-Tab> :NERDTreeToggle<Enter>
@@ -39,6 +71,7 @@ imap <Tab> <C-y>,
 "set guioptions=t
 "au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim 
 set ofu=syntaxcomplete#Complete
+let NERDTreeIgnore = ['\.pyc$']
 
 set diffexpr=MyDiff()
 function MyDiff()
