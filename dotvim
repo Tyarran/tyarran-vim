@@ -1,6 +1,8 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
+let $PATH=$PATH . ':' . $HOME . '/bin'
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -15,7 +17,6 @@ Bundle 'minibufexplorerpp'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
 Bundle 'simple-pairs'
-Bundle 'snipMate'
 Bundle 'sudo.vim'
 Bundle 'SuperTab-continued.'
 Bundle 'Syntastic'
@@ -23,14 +24,22 @@ Bundle 'Tagbar'
 Bundle 'taglist.vim'
 Bundle 'taglist-plus'
 Bundle 'mako.vim'
-Bundle 'vim-flake8'
 Bundle 'matchit.zip'
 Bundle 'wombat256.vim'
 Bundle 'Mustang2'
 Bundle 'ZenCoding.vim'
-Bundle 'pep8'
-Bundle 'FuzzyFinder'
-
+Bundle 'UltiSnips'
+Bundle 'https://github.com/alindeman/grb256.git'
+Bundle 'https://github.com/29decibel/codeschool-vim-theme.git'
+Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
+Bundle 'https://github.com/scrooloose/syntastic.git'
+Bundle 'surround.vim'
+Bundle 'ctrlp.vim'
+Bundle 'python.vim'
+Bundle 'Enhanced-Javascript-syntax'
+Bundle 'https://github.com/uguu-org/vim-matrix-screensaver.git'
+Bundle 'https://github.com/chriskempson/vim-tomorrow-theme'
+Bundle 'https://github.com/davidhalter/jedi-vim.git'
 
 set paste
 set t_Co=256
@@ -49,12 +58,8 @@ set shiftwidth=4
 set expandtab
 set smarttab
 set shiftround
-"set guifont=Monospace\ Regular\ 11
-"set guifont=Droid\ Sans\ Mono\ Regular\ 13
-set guifont=Monaco\ 12
-"colorscheme wombat
-colorscheme wombat256mod
-"colorscheme mustang
+set guifont=Monospace\ 10
+colorscheme Tomorrow-Night
 map <Tab> :bp!<Enter>
 map <BS> :bn!<Enter>
 map <C-Tab> :NERDTreeToggle<Enter>
@@ -64,14 +69,33 @@ set omnifunc=pythoncomplete#Complete
 imap <C-Space> <C-x><C-o>
 map <C-F12> :TagbarToggle<enter>
 imap <C-q> <C-y>,
-imap <Tab> <C-y>,
+map <C-p> <Leader>t
+map <C-b> :CommandTBuffer<CR>
+map <C-j> :CtrlPBuffer<CR>
 :noremap <C-h> :set hlsearch! hlsearch?<CR>
+map <C-slash> <Leader>c<space>
+"map :clear :%bd<CR> :NERDTree
+
+"Splits deplacements
+"map <c-j> <c-w>j
+"map <c-k> <c-w>k
+"map <c-l> <c-w>l
+"map <c-h> <c-w>h
+"
 "on vire le maximum de chose dans l'interface
+set guioptions=Ace
+set guioptions+=m
 "set guioptions=m
 "set guioptions=t
 "au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim 
 set ofu=syntaxcomplete#Complete
 let NERDTreeIgnore = ['\.pyc$']
+
+"Lint configuration
+let g:syntastic_python_checker = 'flake8'
+let g:syntastic_python_flake8_args= '--max-line-length=119'
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*/build/*
 
 set diffexpr=MyDiff()
 function MyDiff()
