@@ -58,7 +58,7 @@ set shiftwidth=4
 set expandtab
 set smarttab
 set shiftround
-set guifont=Monospace\ 10
+set guifont=inconsolata-g\ 12
 colorscheme Tomorrow-Night
 map <Tab> :bp!<Enter>
 map <BS> :bn!<Enter>
