@@ -10,37 +10,32 @@ call vundle#rc()
 "Bundle
 
 Bundle 'CSApprox'
-Bundle 'fugitive.vim'
-Bundle 'HTML5-Syntax-File'
-Bundle 'L9'
-Bundle 'minibufexplorerpp'
-Bundle 'The-NERD-tree'
-Bundle 'The-NERD-Commenter'
-Bundle 'simple-pairs'
-Bundle 'sudo.vim'
-Bundle 'SuperTab-continued.'
-Bundle 'Syntastic'
-Bundle 'Tagbar'
-Bundle 'taglist.vim'
-Bundle 'taglist-plus'
-Bundle 'mako.vim'
-Bundle 'matchit.zip'
-Bundle 'wombat256.vim'
-Bundle 'Mustang2'
-Bundle 'ZenCoding.vim'
-Bundle 'UltiSnips'
-Bundle 'https://github.com/alindeman/grb256.git'
-Bundle 'https://github.com/29decibel/codeschool-vim-theme.git'
-Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
-Bundle 'https://github.com/scrooloose/syntastic.git'
-Bundle 'surround.vim'
-Bundle 'ctrlp.vim'
-Bundle 'python.vim'
 Bundle 'Enhanced-Javascript-syntax'
-Bundle 'https://github.com/uguu-org/vim-matrix-screensaver.git'
+Bundle 'LustyExplorer'
+Bundle 'SuperTab'
+Bundle 'Syntastic'
+Bundle 'The-NERD-Commenter'
+Bundle 'The-NERD-tree'
+Bundle 'UltiSnips'
+Bundle 'minibufexplorerpp'
+Bundle 'ctrlp.vim'
+Bundle 'fugitive.vim'
+Bundle 'https://github.com/Lokaltog/powerline.git'
 Bundle 'https://github.com/chriskempson/vim-tomorrow-theme'
 Bundle 'https://github.com/davidhalter/jedi-vim.git'
+Bundle 'https://github.com/uguu-org/vim-matrix-screensaver.git'
+Bundle 'mako.vim'
+Bundle 'matchit.zip'
+Bundle 'simple-pairs'
+Bundle 'sudo.vim'
+Bundle 'surround.vim'
+Bundle 'taglist.vim'
+Bundle 'vim-flake8'
+Bundle 'https://github.com/mattn/emmet-vim.git'
 
+
+set hidden
+set antialias
 set paste
 set t_Co=256
 set nocompatible
@@ -53,89 +48,45 @@ set cursorline
 filetype on
 filetype indent on
 filetype plugin on
-set tabstop=8
+set tabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab
 set shiftround
-set guifont=inconsolata-g\ 12
+set guifont=inconsolata-g\ 11
 colorscheme Tomorrow-Night
-map <Tab> :bp!<Enter>
-map <BS> :bn!<Enter>
-map <C-Tab> :NERDTreeToggle<Enter>
-map <C-t> :tabnew<CR>
+map <Tab> :bp!<CR>
+map <BS> :bn!<CR>
 map <C-n> :NERDTreeToggle<CR>
-set omnifunc=pythoncomplete#Complete
-imap <C-Space> <C-x><C-o>
-map <C-F12> :TagbarToggle<enter>
-imap <C-q> <C-y>,
-map <C-p> <Leader>t
-map <C-b> :CommandTBuffer<CR>
-map <C-j> :CtrlPBuffer<CR>
-:noremap <C-h> :set hlsearch! hlsearch?<CR>
-map <C-slash> <Leader>c<space>
-"map :clear :%bd<CR> :NERDTree
+map <C-F12> :TagbarToggle<CR>
+map <F6> :SyntasticCheck<CR>
+noremap <C-h> :set hlsearch! hlsearch?<CR>
 
-"Splits deplacements
-"map <c-j> <c-w>j
-"map <c-k> <c-w>k
-"map <c-l> <c-w>l
-"map <c-h> <c-w>h
-"
-"on vire le maximum de chose dans l'interface
+let mapleader=","
+
+"Supprime le maximum de chose dans l'interface
 set guioptions=Ace
-set guioptions+=m
-"set guioptions=m
-"set guioptions=t
-"au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim 
-set ofu=syntaxcomplete#Complete
 let NERDTreeIgnore = ['\.pyc$']
 
 "Lint configuration
-let g:syntastic_python_checker = 'flake8'
+let g:syntastic_debug = 1
+let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args= '--max-line-length=119'
+let g:flake8_max_line_length=119
+
+"Supertab
+let g:jedi#autocompletion_command = "<C-n>"
+
+"Git
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gbl :Gblame<CR>
+nnoremap <Leader>gbr :Gbrowse<CR>
+nnoremap <Leader>gdiff :Gdiff<CR>
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*/build/*
 
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
-
-""""""""""""""""""""""""""""""
-" => Python section
-""""""""""""""""""""""""""""""
-let python_highlight_all = 1
-au FileType python syn keyword pythonDecorator True None False self
-
-au BufNewFile,BufRead *.jinja set syntax=htmljinja
-au BufNewFile,BufRead *.mako set ft=mako
-
-au FileType python inoremap <buffer> $r return
-au FileType python inoremap <buffer> $i import
-au FileType python inoremap <buffer> $p print
-au FileType python inoremap <buffer> $f #--- PH ----------------------------------------------<esc>FP2xi
-au FileType python map <buffer> <leader>1 /class
-au FileType python map <buffer> <leader>2 /def
-au FileType python map <buffer> <leader>C ?class
-au FileType python map <buffer> <leader>D ?def
+"Emmet
+let g:user_emmet_mode='a'
+let g:user_emmet_leader_key = '<leader>'
+"let g:user_emmet_expandabbr_key = '<leader>e'
