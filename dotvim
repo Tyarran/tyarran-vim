@@ -18,12 +18,14 @@ Bundle 'Tagbar'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'UltiSnips'
+Bundle 'badwolf'
 Bundle 'ctrlp.vim'
 Bundle 'fugitive.vim'
 Bundle 'https://github.com/Lokaltog/powerline.git'
 Bundle 'https://github.com/chriskempson/vim-tomorrow-theme'
 Bundle 'https://github.com/davidhalter/jedi-vim.git'
 Bundle 'https://github.com/mattn/emmet-vim.git'
+Bundle 'https://github.com/pthrasher/conqueterm-vim.git'
 Bundle 'https://github.com/uguu-org/vim-matrix-screensaver.git'
 Bundle 'mako.vim'
 Bundle 'matchit.zip'
@@ -31,8 +33,7 @@ Bundle 'minibufexplorerpp'
 Bundle 'simple-pairs'
 Bundle 'sudo.vim'
 Bundle 'surround.vim'
-"Bundle 'taglist-plus'
-"Bundle 'taglist.vim'
+Bundle 'taglist.vim'
 Bundle 'vim-flake8'
 
 
@@ -56,7 +57,7 @@ set expandtab
 set smarttab
 set shiftround
 set guifont=inconsolata-g\ 11
-colorscheme Tomorrow-Night
+colorscheme badwolf
 map <Tab> :bp!<CR>
 map <BS> :bn!<CR>
 map <C-n> :NERDTreeToggle<CR>
