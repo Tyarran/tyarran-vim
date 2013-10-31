@@ -9,8 +9,11 @@ call vundle#rc()
 
 "Bundle
 
+"Bundle 'taglist-plus'
+"Bundle 'taglist.vim'
 Bundle 'CSApprox'
 Bundle 'Enhanced-Javascript-syntax'
+Bundle 'Handlebars'
 Bundle 'LustyExplorer'
 Bundle 'SuperTab'
 Bundle 'Syntastic'
@@ -27,13 +30,13 @@ Bundle 'https://github.com/davidhalter/jedi-vim.git'
 Bundle 'https://github.com/mattn/emmet-vim.git'
 Bundle 'https://github.com/pthrasher/conqueterm-vim.git'
 Bundle 'https://github.com/uguu-org/vim-matrix-screensaver.git'
+Bundle 'less-syntax'
 Bundle 'mako.vim'
 Bundle 'matchit.zip'
 Bundle 'minibufexplorerpp'
 Bundle 'simple-pairs'
 Bundle 'sudo.vim'
 Bundle 'surround.vim'
-Bundle 'taglist.vim'
 Bundle 'vim-flake8'
 
 
