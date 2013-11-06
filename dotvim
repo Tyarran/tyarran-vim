@@ -8,9 +8,6 @@ call vundle#rc()
 
 
 "Bundle
-
-"Bundle 'taglist-plus'
-"Bundle 'taglist.vim'
 Bundle 'CSApprox'
 Bundle 'Enhanced-Javascript-syntax'
 Bundle 'Handlebars'
@@ -63,9 +60,12 @@ set guifont=inconsolata-g\ 11
 colorscheme badwolf
 map <Tab> :bp!<CR>
 map <BS> :bn!<CR>
-map <C-n> :NERDTreeToggle<CR>
+map <C-b> :NERDTreeToggle<CR>
 map <C-F12> :TagbarToggle<CR>
+map <C-n> :TagbarToggle<CR>
 map <F6> :SyntasticCheck<CR>
+map <c-p> :CtrlPCurWD<CR>
+set ic  "Insensitive case
 noremap <C-h> :set hlsearch! hlsearch?<CR>
 
 let mapleader=","
