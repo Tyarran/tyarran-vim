@@ -18,13 +18,14 @@ Bundle 'Tagbar'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'UltiSnips'
-Bundle 'badwolf'
 Bundle 'ctrlp.vim'
 Bundle 'fugitive.vim'
 Bundle 'https://github.com/Lokaltog/powerline.git'
 Bundle 'https://github.com/chriskempson/vim-tomorrow-theme'
 Bundle 'https://github.com/davidhalter/jedi-vim.git'
+Bundle 'https://github.com/flazz/vim-colorschemes.git'
 Bundle 'https://github.com/mattn/emmet-vim.git'
+Bundle 'https://github.com/mitsuhiko/vim-jinja.git'
 Bundle 'https://github.com/pthrasher/conqueterm-vim.git'
 Bundle 'https://github.com/uguu-org/vim-matrix-screensaver.git'
 Bundle 'less-syntax'
@@ -57,16 +58,18 @@ set expandtab
 set smarttab
 set shiftround
 set guifont=inconsolata-g\ 11
-colorscheme badwolf
+set relativenumber
+colorscheme mustang
 map <Tab> :bp!<CR>
 map <BS> :bn!<CR>
 map <C-b> :NERDTreeToggle<CR>
 map <C-F12> :TagbarToggle<CR>
 map <C-n> :TagbarToggle<CR>
 map <F6> :SyntasticCheck<CR>
-map <c-p> :CtrlPCurWD<CR>
+"map <c-p> :CtrlPCurWD<CR>
 set ic  "Insensitive case
 noremap <C-h> :set hlsearch! hlsearch?<CR>
+map <c-d> :bd!<CR>
 
 let mapleader=","
 
@@ -89,6 +92,10 @@ nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gbl :Gblame<CR>
 nnoremap <Leader>gbr :Gbrowse<CR>
 nnoremap <Leader>gdiff :Gdiff<CR>
+
+"FIXME
+"Align comments
+"nnoremap <Leader>cb <leader>c<SPACE>
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*/build/*
 
