@@ -1,7 +1,7 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-let $PATH=$PATH . ':' . $HOME . '/bin'
+"let $PATH=$PATH . ':' . $HOME . '/bin'
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -59,7 +59,7 @@ set smarttab
 set shiftround
 set guifont=inconsolata-g\ 11
 set relativenumber
-colorscheme mustang
+colorscheme Tomorrow-Night
 map <Tab> :bp!<CR>
 map <BS> :bn!<CR>
 map <C-b> :NERDTreeToggle<CR>
@@ -78,13 +78,13 @@ set guioptions=Ace
 let NERDTreeIgnore = ['\.pyc$']
 
 "Lint configuration
-let g:syntastic_debug = 1
+let g:syntastic_debug = 0
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args= '--max-line-length=119'
 let g:flake8_max_line_length=119
 
 "Supertab
-let g:jedi#autocompletion_command = "<C-n>"
+let g:jedi#ompletions_command = "<C-n>"
 
 "Git
 nnoremap <Leader>gs :Gstatus<CR>
