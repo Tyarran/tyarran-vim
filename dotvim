@@ -8,11 +8,15 @@ call vundle#rc()
 
 
 "Bundle
+"Bundle 'LustyExplorer'
+"Bundle 'SuperTab'
+"Bundle 'https://github.com/Lokaltog/powerline.git'
+"Bundle 'https://github.com/flazz/vim-colorschemes.git'
+"Bundle 'https://github.com/pthrasher/conqueterm-vim.git'
+"Bundle 'matchit.zip'
 Bundle 'CSApprox'
 Bundle 'Enhanced-Javascript-syntax'
 Bundle 'Handlebars'
-Bundle 'LustyExplorer'
-Bundle 'SuperTab'
 Bundle 'Syntastic'
 Bundle 'Tagbar'
 Bundle 'The-NERD-Commenter'
@@ -20,19 +24,18 @@ Bundle 'The-NERD-tree'
 Bundle 'UltiSnips'
 Bundle 'ctrlp.vim'
 Bundle 'fugitive.vim'
-Bundle 'groenewege/vim-less'
-Bundle 'https://github.com/Lokaltog/powerline.git'
 Bundle 'https://github.com/chriskempson/vim-tomorrow-theme'
 Bundle 'https://github.com/davidhalter/jedi-vim.git'
-Bundle 'https://github.com/flazz/vim-colorschemes.git'
 Bundle 'https://github.com/mattn/emmet-vim.git'
-Bundle 'https://github.com/mitsuhiko/vim-jinja.git'
-Bundle 'https://github.com/pthrasher/conqueterm-vim.git'
+"Bundle 'https://github.com/mitsuhiko/vim-jinja.git'
+"Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
 Bundle 'https://github.com/uguu-org/vim-matrix-screensaver.git'
+Bundle 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
+"Bundle 'https://github.com/Valloric/YouCompleteMe.git'
+Bundle 'less-syntax'
 Bundle 'mako.vim'
-Bundle 'matchit.zip'
 Bundle 'minibufexplorerpp'
-Bundle 'simple-pairs'
+"Bundle 'simple-pairs'
 Bundle 'sudo.vim'
 Bundle 'surround.vim'
 Bundle 'vim-flake8'
@@ -57,8 +60,9 @@ set shiftwidth=4
 set expandtab
 set smarttab
 set shiftround
-set guifont=inconsolata-g\ 11
-set relativenumber
+set guifont=inconsolata-g\ 10
+"set relativenumber
+"colorscheme mustang
 colorscheme Tomorrow-Night
 map <Tab> :bp!<CR>
 map <BS> :bn!<CR>
@@ -70,11 +74,13 @@ map <F6> :SyntasticCheck<CR>
 set ic  "Insensitive case
 noremap <C-h> :set hlsearch! hlsearch?<CR>
 map <c-d> :bd!<CR>
+set colorcolumn=+1
+set colorcolumn=120
 
 let mapleader=","
 
 "Supprime le maximum de chose dans l'interface
-set guioptions=Ace
+set guioptions=Acem
 let NERDTreeIgnore = ['\.pyc$']
 
 "Lint configuration
@@ -84,7 +90,7 @@ let g:syntastic_python_flake8_args= '--max-line-length=119'
 let g:flake8_max_line_length=119
 
 "Supertab
-let g:jedi#ompletions_command = "<C-n>"
+let g:jedi#completions_command = "<C-n>"
 
 "Git
 nnoremap <Leader>gs :Gstatus<CR>
