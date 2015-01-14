@@ -1,45 +1,48 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-"let $PATH=$PATH . ':' . $HOME . '/bin'
+let $PATH=$PATH . ':' . $HOME . '/.local/bin'
+let $PATH=$PATH . ':' . $HOME . '/bin'
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 
-"Bundle
-"Bundle 'LustyExplorer'
+Bundle "honza/vim-snippets"
+"Bundle "https://github.com/vim-scripts/python.vim--Vasiliev.git"
+"Bundle 'CSApprox'
+"Bundle 'Enhanced-Javascript-syntax'
+"Bundle 'Handlebars'
+"Bundle 'https://github.com/ervandew/supertab.git'
 "Bundle 'SuperTab'
-"Bundle 'https://github.com/Lokaltog/powerline.git'
-"Bundle 'https://github.com/flazz/vim-colorschemes.git'
-"Bundle 'https://github.com/pthrasher/conqueterm-vim.git'
-"Bundle 'matchit.zip'
-Bundle 'CSApprox'
-Bundle 'Enhanced-Javascript-syntax'
-Bundle 'Handlebars'
+"Plugin 'SirVer/ultisnips'
 Bundle 'Syntastic'
 Bundle 'Tagbar'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'UltiSnips'
 Bundle 'ctrlp.vim'
+"Bundle 'flatland'
 Bundle 'fugitive.vim'
+Bundle 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
 Bundle 'https://github.com/chriskempson/vim-tomorrow-theme'
-Bundle 'https://github.com/davidhalter/jedi-vim.git'
+"Bundle 'https://github.com/davidhalter/jedi-vim.git'
 Bundle 'https://github.com/mattn/emmet-vim.git'
-"Bundle 'https://github.com/mitsuhiko/vim-jinja.git'
 "Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
 Bundle 'https://github.com/uguu-org/vim-matrix-screensaver.git'
-Bundle 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
-"Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 Bundle 'less-syntax'
 Bundle 'mako.vim'
+Bundle 'matchit.zip'
+Bundle 'mileszs/ack.vim'
 Bundle 'minibufexplorerpp'
-"Bundle 'simple-pairs'
 Bundle 'sudo.vim'
 Bundle 'surround.vim'
 Bundle 'vim-flake8'
-
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'https://github.com/mbriggs/vim-themes.git'
+Bundle 'https://github.com/FuDesign2008/codeschool.vim.git'
+Plugin 'simple-pairs'
+"Bundle 'Conque-Shell'
 
 set hidden
 set antialias
@@ -60,10 +63,11 @@ set shiftwidth=4
 set expandtab
 set smarttab
 set shiftround
-set guifont=inconsolata-g\ 10
-"set relativenumber
-"colorscheme mustang
-colorscheme Tomorrow-Night
+set guifont=Monaco\ for\ Powerline\ 10
+set relativenumber
+"set omnifunc=jedi#completions
+colorscheme Tomorrow-Night-Bright
+"colorscheme flatland
 map <Tab> :bp!<CR>
 map <BS> :bn!<CR>
 map <C-b> :NERDTreeToggle<CR>
@@ -74,6 +78,7 @@ map <F6> :SyntasticCheck<CR>
 set ic  "Insensitive case
 noremap <C-h> :set hlsearch! hlsearch?<CR>
 map <c-d> :bd!<CR>
+map <C-f> :Ack<space>
 set colorcolumn=+1
 set colorcolumn=120
 
@@ -89,8 +94,21 @@ let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args= '--max-line-length=119'
 let g:flake8_max_line_length=119
 
-"Supertab
-let g:jedi#completions_command = "<C-n>"
+"Jedi
+"let g:jedi#auto_initialization = 1
+"let g:jedi#completions_command = "<C-n>"
+let g:jedi#popup_on_dot = 1
+let g:jedi#use_tabs_not_buffers = 1
+
+
+let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
+
+"Ultisnip
+"let g:UltiSnipsExpandTrigger="<C-p>" 
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
 
 "Git
 nnoremap <Leader>gs :Gstatus<CR>
@@ -99,11 +117,14 @@ nnoremap <Leader>gbl :Gblame<CR>
 nnoremap <Leader>gbr :Gbrowse<CR>
 nnoremap <Leader>gdiff :Gdiff<CR>
 
+"Multiple cursors
+let g:multi_cursor_start_key='<C-m>'
+
 "FIXME
 "Align comments
 "nnoremap <Leader>cb <leader>c<SPACE>
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*/build/*
+"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*/build/*
 
 "Emmet
 let g:user_emmet_mode='a'
