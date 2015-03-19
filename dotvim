@@ -1,5 +1,5 @@
 set nocompatible               " be iMproved
-filetype off                   " required!
+filetype on                   " required!
 
 let $PATH=$PATH . ':' . $HOME . '/.local/bin'
 let $PATH=$PATH . ':' . $HOME . '/bin'
@@ -10,12 +10,9 @@ call vundle#rc()
 
 Bundle "honza/vim-snippets"
 "Bundle "https://github.com/vim-scripts/python.vim--Vasiliev.git"
-"Bundle 'CSApprox'
-"Bundle 'Enhanced-Javascript-syntax'
-"Bundle 'Handlebars'
-"Bundle 'https://github.com/ervandew/supertab.git'
-"Bundle 'SuperTab'
-"Plugin 'SirVer/ultisnips'
+Bundle "http://www.vim.org/scripts/download_script.php?src_id=21056"
+Bundle 'CSApprox'
+Bundle 'Handlebars'
 Bundle 'Syntastic'
 Bundle 'Tagbar'
 Bundle 'The-NERD-Commenter'
@@ -26,9 +23,7 @@ Bundle 'ctrlp.vim'
 Bundle 'fugitive.vim'
 Bundle 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
 Bundle 'https://github.com/chriskempson/vim-tomorrow-theme'
-"Bundle 'https://github.com/davidhalter/jedi-vim.git'
 Bundle 'https://github.com/mattn/emmet-vim.git'
-"Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
 Bundle 'https://github.com/uguu-org/vim-matrix-screensaver.git'
 Bundle 'less-syntax'
 Bundle 'mako.vim'
@@ -41,8 +36,29 @@ Bundle 'vim-flake8'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'https://github.com/mbriggs/vim-themes.git'
 Bundle 'https://github.com/FuDesign2008/codeschool.vim.git'
-Plugin 'simple-pairs'
-"Bundle 'Conque-Shell'
+"Bundle 'simple-pairs'
+Bundle 'https://github.com/saltstack/salt-vim.git'
+Bundle 'https://github.com/JessicaKMcIntosh/Vim.git'
+Bundle 'wombat256.vim'
+Bundle 'https://github.com/csexton/trailertrash.vim.git'
+Bundle 'Solarized'
+Bundle 'LustyExplorer'
+Bundle 'https://github.com/morhetz/gruvbox.git'
+Bundle 'https://github.com/zeis/vim-kolor.git'
+Bundle 'badwolf'
+Bundle 'https://github.com/amiorin/vim-project.git'
+
+" Set up vim-project
+"set rtp+=~/.vim/bundle/vim-project/
+" custom starting path
+call project#rc("~/Projects")
+
+let g:project_use_nerdtree = 1
+
+Project "cdm_solr_input"
+Project "redpig-process"
+Project "deploiement_auto_UD"
+Project "minidoor"
 
 set hidden
 set antialias
@@ -53,9 +69,8 @@ set nu
 set ai
 set si
 syntax on
-set hlsearch
 set cursorline
-filetype on
+"filetype on
 filetype indent on
 filetype plugin on
 set tabstop=4
@@ -63,40 +78,53 @@ set shiftwidth=4
 set expandtab
 set smarttab
 set shiftround
-set guifont=Monaco\ for\ Powerline\ 10
-set relativenumber
-"set omnifunc=jedi#completions
-colorscheme Tomorrow-Night-Bright
-"colorscheme flatland
+let mapleader=","
+"set guifont=Source\ Code\ Pro\ 10
+set guifont=Inconsolata-g\ 10
+colorscheme badwolf
+set ic  "Insensitive case
+set colorcolumn=+1
+set colorcolumn=120
+set background=dark
+
+" -- normal mode mapping
 map <Tab> :bp!<CR>
 map <BS> :bn!<CR>
+map E :NERDTreeToggle<CR>
 map <C-b> :NERDTreeToggle<CR>
 map <C-F12> :TagbarToggle<CR>
+map T :TagbarToggle<CR>
 map <C-n> :TagbarToggle<CR>
 map <F6> :SyntasticCheck<CR>
-"map <c-p> :CtrlPCurWD<CR>
-set ic  "Insensitive case
+map <C-A-p> :Welcome<CR>
 noremap <C-h> :set hlsearch! hlsearch?<CR>
 map <c-d> :bd!<CR>
 map <C-f> :Ack<space>
-set colorcolumn=+1
-set colorcolumn=120
+nmap mm '
 
-let mapleader=","
+" -- Insert mode mapping
+imap ii <Esc>
+imap ;; <Esc>
+
+" -- Search
+set incsearch
+set hlsearch
+
+" -- Beep
+set novisualbell
+set noerrorbells
 
 "Supprime le maximum de chose dans l'interface
 set guioptions=Acem
 let NERDTreeIgnore = ['\.pyc$']
 
-"Lint configuration
+"Linter configuration
 let g:syntastic_debug = 0
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args= '--max-line-length=119'
 let g:flake8_max_line_length=119
 
 "Jedi
-"let g:jedi#auto_initialization = 1
-"let g:jedi#completions_command = "<C-n>"
 let g:jedi#popup_on_dot = 1
 let g:jedi#use_tabs_not_buffers = 1
 
@@ -104,7 +132,6 @@ let g:jedi#use_tabs_not_buffers = 1
 let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
 
 "Ultisnip
-"let g:UltiSnipsExpandTrigger="<C-p>" 
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -130,3 +157,9 @@ let g:multi_cursor_start_key='<C-m>'
 let g:user_emmet_mode='a'
 let g:user_emmet_leader_key = '<leader>'
 "let g:user_emmet_expandabbr_key = '<leader>e'
+
+" Salt configuration files syntax is yaml files
+au BufNewFile,BufRead *.sls set filetype=sls
+
+" YouCompleteMe configuration
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
