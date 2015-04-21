@@ -9,8 +9,6 @@ call vundle#rc()
 
 
 Bundle "honza/vim-snippets"
-"Bundle "https://github.com/vim-scripts/python.vim--Vasiliev.git"
-Bundle "http://www.vim.org/scripts/download_script.php?src_id=21056"
 Bundle 'CSApprox'
 Bundle 'Handlebars'
 Bundle 'Syntastic'
@@ -35,7 +33,6 @@ Bundle 'surround.vim'
 Bundle 'vim-flake8'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'https://github.com/mbriggs/vim-themes.git'
-Bundle 'https://github.com/FuDesign2008/codeschool.vim.git'
 "Bundle 'simple-pairs'
 Bundle 'https://github.com/saltstack/salt-vim.git'
 Bundle 'https://github.com/JessicaKMcIntosh/Vim.git'
@@ -47,6 +44,10 @@ Bundle 'https://github.com/morhetz/gruvbox.git'
 Bundle 'https://github.com/zeis/vim-kolor.git'
 Bundle 'badwolf'
 Bundle 'https://github.com/amiorin/vim-project.git'
+Bundle 'https://github.com/mitsuhiko/vim-rst.git'
+Bundle 'https://github.com/flazz/vim-colorschemes.git'
+Bundle 'https://github.com/notpratheek/Pychimp-vim.git'
+Bundle 'https://github.com/pfdevilliers/Pretty-Vim-Python.git'
 
 " Set up vim-project
 "set rtp+=~/.vim/bundle/vim-project/
@@ -59,6 +60,7 @@ Project "cdm_solr_input"
 Project "redpig-process"
 Project "deploiement_auto_UD"
 Project "minidoor"
+Project "papaye"
 
 set hidden
 set antialias
@@ -79,9 +81,12 @@ set expandtab
 set smarttab
 set shiftround
 let mapleader=","
-"set guifont=Source\ Code\ Pro\ 10
-set guifont=Inconsolata-g\ 10
-colorscheme badwolf
+set guifont=Source\ Code\ Pro\ 10
+"set guifont=Inconsolata-g\ 10
+"colorscheme badwolf
+"colorscheme desertEx
+"colorscheme busybee
+colorscheme mustang
 set ic  "Insensitive case
 set colorcolumn=+1
 set colorcolumn=120
@@ -89,7 +94,9 @@ set background=dark
 
 " -- normal mode mapping
 map <Tab> :bp!<CR>
+nmap <A-h> :bp!<CR>
 map <BS> :bn!<CR>
+nmap <A-l> :bn!<CR>
 map E :NERDTreeToggle<CR>
 map <C-b> :NERDTreeToggle<CR>
 map <C-F12> :TagbarToggle<CR>
@@ -109,6 +116,7 @@ imap ;; <Esc>
 " -- Search
 set incsearch
 set hlsearch
+set smartcase
 
 " -- Beep
 set novisualbell
