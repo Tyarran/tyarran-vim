@@ -108,6 +108,7 @@ noremap <C-h> :set hlsearch! hlsearch?<CR>
 map <c-d> :bd!<CR>
 map <C-f> :Ack<space>
 nmap mm '
+vmap <F9> :'<,'>sort<CR>
 
 " -- Insert mode mapping
 imap ii <Esc>
