@@ -48,6 +48,7 @@ Bundle 'https://github.com/mitsuhiko/vim-rst.git'
 Bundle 'https://github.com/flazz/vim-colorschemes.git'
 Bundle 'https://github.com/notpratheek/Pychimp-vim.git'
 Bundle 'https://github.com/pfdevilliers/Pretty-Vim-Python.git'
+Bundle 'Puppet-Syntax-Highlighting'
 
 " Set up vim-project
 "set rtp+=~/.vim/bundle/vim-project/
@@ -61,6 +62,8 @@ Project "redpig-process"
 Project "deploiement_auto_UD"
 Project "minidoor"
 Project "papaye"
+Project "puppet"
+Project "data-salt"
 
 set hidden
 set antialias
@@ -167,8 +170,10 @@ let g:user_emmet_mode='a'
 let g:user_emmet_leader_key = '<leader>'
 "let g:user_emmet_expandabbr_key = '<leader>e'
 
-" Salt configuration files syntax is yaml files
-au BufNewFile,BufRead *.sls set filetype=sls
 
 " YouCompleteMe configuration
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
+
+" Syntaxes
+autocmd BufNewFile,BufRead *.pp   set syntax=puppet
+au BufNewFile,BufRead *.sls set filetype=sls
