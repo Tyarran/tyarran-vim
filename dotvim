@@ -8,16 +8,14 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 
-Bundle "honza/vim-snippets"
 Bundle 'CSApprox'
 Bundle 'Handlebars'
 Bundle 'Syntastic'
 Bundle 'Tagbar'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
-Bundle 'UltiSnips'
+"Bundle 'SirVer/ultisnips'
 Bundle 'ctrlp.vim'
-"Bundle 'flatland'
 Bundle 'fugitive.vim'
 Bundle 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
 Bundle 'https://github.com/chriskempson/vim-tomorrow-theme'
@@ -31,29 +29,49 @@ Bundle 'minibufexplorerpp'
 Bundle 'sudo.vim'
 Bundle 'surround.vim'
 Bundle 'vim-flake8'
-Bundle 'Valloric/YouCompleteMe'
-"Bundle 'https://github.com/mbriggs/vim-themes.git'
-"Bundle 'simple-pairs'
+""Bundle 'Valloric/YouCompleteMe'
+Bundle 'https://github.com/mbriggs/vim-themes.git'
+Bundle 'simple-pairs'
 Bundle 'https://github.com/saltstack/salt-vim.git'
 Bundle 'https://github.com/JessicaKMcIntosh/Vim.git'
-Bundle 'wombat256.vim'
-Bundle 'https://github.com/csexton/trailertrash.vim.git'
-Bundle 'Solarized'
+"Bundle 'wombat256.vim'
+"Bundle 'https://github.com/csexton/trailertrash.vim.git'
+"Bundle 'Solarized'
 Bundle 'LustyExplorer'
-Bundle 'https://github.com/morhetz/gruvbox.git'
+"Bundle 'https://github.com/morhetz/gruvbox.git'
 Bundle 'https://github.com/zeis/vim-kolor.git'
 Bundle 'badwolf'
 "Bundle 'https://github.com/amiorin/vim-project.git'
 Bundle 'https://github.com/mitsuhiko/vim-rst.git'
-Bundle 'https://github.com/flazz/vim-colorschemes.git'
-Bundle 'https://github.com/notpratheek/Pychimp-vim.git'
-Bundle 'https://github.com/pfdevilliers/Pretty-Vim-Python.git'
+"Bundle 'https://github.com/flazz/vim-colorschemes.git'
+"Bundle 'https://github.com/notpratheek/Pychimp-vim.git'
+"Bundle 'https://github.com/pfdevilliers/Pretty-Vim-Python.git'
 Bundle 'Puppet-Syntax-Highlighting'
 Bundle 'https://github.com/mhinz/vim-startify.git'
-Bundle 'https://github.com/xolox/vim-misc.git'
-Bundle 'https://github.com/xolox/vim-session.git'
+""Bundle 'https://github.com/xolox/vim-misc.git'
+""Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/tomasr/molokai.git'
-Bundle 'https://github.com/jonathanfilip/vim-lucius.git'
+"Bundle 'https://github.com/ervandew/supertab.git'
+""Bundle 'https://github.com/jonathanfilip/vim-lucius.git'
+"Bundle 'honza/vim-snippets'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'garbas/vim-snipmate'
+"Plugin 'https://github.com/Shougo/neocomplete.vim.git'
+"Plugin 'https://github.com/davidhalter/jedi-vim.git'
+
+"Optional:
+"Plugin 'honza/vim-snippets'
+"Bundle 'Lokaltog/powerline'
+"Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+Plugin 'https://github.com/bling/vim-airline.git'
+Plugin 'Shougo/neocomplete'
+
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+
+
+
 
 " Set up vim-project
 "set rtp+=~/.vim/bundle/vim-project/
@@ -62,9 +80,10 @@ Bundle 'https://github.com/jonathanfilip/vim-lucius.git'
 
 "let g:project_use_nerdtree = 1
 
+set laststatus=2
 set hidden
 set antialias
-set paste
+"set paste
 set t_Co=256
 set nocompatible
 set nu
@@ -85,21 +104,21 @@ let mapleader=","
 set guifont=Inconsolata-g\ 11
 "set guifont=Monaco\ for\ Powerline\ 10
 "colorscheme Tomorrow-Night
-colorscheme Tomorrow-Night-Bright
+colorscheme molokai
 set ic  "Insensitive case
 set colorcolumn=+1
 set colorcolumn=120
 "set background=dark
 
 " -- normal mode mapping
-map <Tab> :bp!<CR>
+"nmap <Tab> :bp!<C>
 nmap <A-h> :bp!<CR>
-map <BS> :bn!<CR>
+"map <BS> :bn!<CR>
 nmap <A-l> :bn!<CR>
 map E :NERDTreeToggle<CR>
 map <C-b> :NERDTreeToggle<CR>
 map <C-F12> :TagbarToggle<CR>
-map T :TagbarToggle<CR>
+"map T :TagbarToggle<CR>
 map <C-n> :TagbarToggle<CR>
 map <F6> :SyntasticCheck<CR>
 map <C-A-p> :Welcome<CR>
@@ -117,7 +136,7 @@ vmap <leader>y "+y
 
 
 " -- Insert mode mapping
-imap ii <Esc>
+"imap ii <Esc>
 imap ;; <Esc>
 
 " -- Search
@@ -140,17 +159,35 @@ let g:syntastic_python_flake8_args= '--max-line-length=119'
 let g:flake8_max_line_length=119
 
 "Jedi
-let g:jedi#popup_on_dot = 1
-let g:jedi#use_tabs_not_buffers = 1
+"let g:jedi#popup_on_dot = 1
+"let g:jedi#use_tabs_not_buffers = 1
+
+"let g:jedi#goto_command = "<leader>d"
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_definitions_command = ""
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-Space>"
+"let g:jedi#rename_command = "<leader>r"
 
 
-let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
+"let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
 
-"Ultisnip
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<C-j>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
+
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsExpandTrigger="<C-j>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsEditSplit="vertical"
 
 "Git
 nnoremap <Leader>gs :Gstatus<CR>
@@ -160,7 +197,7 @@ nnoremap <Leader>gbr :Gbrowse<CR>
 nnoremap <Leader>gdiff :Gdiff<CR>
 
 "Multiple cursors
-let g:multi_cursor_start_key='<C-m>'
+"let g:multi_cursor_start_key='<C-m>'
 
 "FIXME
 "Align comments
@@ -175,7 +212,7 @@ let g:user_emmet_leader_key = '<leader>'
 
 
 " YouCompleteMe configuration
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
+"nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 " Syntaxes
 autocmd BufNewFile,BufRead *.pp   set syntax=puppet
@@ -184,3 +221,22 @@ au BufNewFile,BufRead *.sls set filetype=sls
 " vim-session
 let g:session_autoload='no'
 let g:session_autosave='yes'
+
+" NeoComplete
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+
+" SuperTab like snippets behavior.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<TAB>" : "\<Plug>(neosnippet_expand_or_jump)"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
