@@ -103,8 +103,7 @@ let mapleader=","
 set guifont=Inconsolata-g\ 11
 "set guifont=Monaco\ for\ Powerline\ 10
 "colorscheme Tomorrow-Night
-"colorscheme molokai
-colorscheme badwolf
+colorscheme molokai
 set ic  "Insensitive case
 set colorcolumn=+1
 set colorcolumn=120
@@ -159,13 +158,25 @@ let g:syntastic_python_flake8_args= '--max-line-length=119'
 let g:flake8_max_line_length=119
 
 
+"Neocomplete
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+
+
 "Jedi
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#completions_enabled = 1
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#smart_auto_mappings = 0
-let g:neocomplete#force_omni_input_patterns.python =
-\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+"let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 " alternative pattern: '\h\w*\|[^. \t]\.\w*'
 
 "let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
