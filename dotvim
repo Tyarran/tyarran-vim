@@ -1,75 +1,55 @@
-set nocompatible               " be iMproved
-filetype on                   " required!
-
 let $PATH=$PATH . ':' . $HOME . '/.local/bin'
 let $PATH=$PATH . ':' . $HOME . '/bin'
+let $TERM='terminator'
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call plug#begin('~/.vim/plugged')
 
+"Syntax
+Plug 'Handlebars'
+Plug 'Puppet-Syntax-Highlighting'
+Plug 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
+Plug 'https://github.com/ivoputzer/vim-colors-flatland.git'
+Plug 'https://github.com/mattn/emmet-vim.git'
+Plug 'https://github.com/mitsuhiko/vim-rst.git'
+Plug 'https://github.com/pfdevilliers/Pretty-Vim-Python.git'
+Plug 'https://github.com/saltstack/salt-vim.git'
+Plug 'less-syntax'
+Plug 'mako.vim'
 
-Bundle 'CSApprox'
-Bundle 'Handlebars'
-Bundle 'Syntastic'
-Bundle 'Tagbar'
-Bundle 'The-NERD-Commenter'
-Bundle 'The-NERD-tree'
-"Bundle 'SirVer/ultisnips'
-Bundle 'ctrlp.vim'
-Bundle 'fugitive.vim'
-Bundle 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
-Bundle 'https://github.com/chriskempson/vim-tomorrow-theme'
-Bundle 'https://github.com/mattn/emmet-vim.git'
-Bundle 'https://github.com/uguu-org/vim-matrix-screensaver.git'
-Bundle 'less-syntax'
-Bundle 'mako.vim'
-Bundle 'matchit.zip'
-Bundle 'mileszs/ack.vim'
-Bundle 'minibufexplorerpp'
-Bundle 'sudo.vim'
-Bundle 'surround.vim'
-Bundle 'vim-flake8'
-Bundle 'https://github.com/mbriggs/vim-themes.git'
-Bundle 'simple-pairs'
-Bundle 'https://github.com/saltstack/salt-vim.git'
-Bundle 'https://github.com/JessicaKMcIntosh/Vim.git'
-"Bundle 'wombat256.vim'
-"Bundle 'https://github.com/csexton/trailertrash.vim.git'
-"Bundle 'Solarized'
-Bundle 'LustyExplorer'
-"Bundle 'https://github.com/morhetz/gruvbox.git'
-Bundle 'https://github.com/zeis/vim-kolor.git'
-Bundle 'badwolf'
-"Bundle 'https://github.com/amiorin/vim-project.git'
-Bundle 'https://github.com/mitsuhiko/vim-rst.git'
-"Bundle 'https://github.com/flazz/vim-colorschemes.git'
-"Bundle 'https://github.com/notpratheek/Pychimp-vim.git'
-"Bundle 'https://github.com/pfdevilliers/Pretty-Vim-Python.git'
-Bundle 'Puppet-Syntax-Highlighting'
-Bundle 'https://github.com/mhinz/vim-startify.git'
-""Bundle 'https://github.com/xolox/vim-misc.git'
-""Bundle 'https://github.com/xolox/vim-session.git'
-Bundle 'https://github.com/tomasr/molokai.git'
-"Bundle 'https://github.com/ervandew/supertab.git'
-""Bundle 'https://github.com/jonathanfilip/vim-lucius.git'
-"Bundle 'honza/vim-snippets'
-"Plugin 'MarcWeber/vim-addon-mw-utils'
-"Plugin 'tomtom/tlib_vim'
-"Plugin 'garbas/vim-snipmate'
-"Plugin 'https://github.com/Shougo/neocomplete.vim.git'
-Plugin 'https://github.com/davidhalter/jedi-vim.git'
+"Colorschemes
+Plug 'badwolf'
+Plug 'https://github.com/chriskempson/vim-tomorrow-theme'
+Plug 'https://github.com/flazz/vim-colorschemes.git'
+Plug 'https://github.com/jordwalke/flatlandia.git'
+Plug 'https://github.com/mbriggs/vim-themes.git'
 
-"Optional:
-"Plugin 'honza/vim-snippets'
-"Bundle 'Lokaltog/powerline'
-"Bundle 'https://github.com/Lokaltog/vim-powerline.git'
-Plugin 'https://github.com/bling/vim-airline.git'
-Plugin 'Shougo/neocomplete'
+"Autocompletion
+Plug 'Shougo/neocomplete'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'https://github.com/davidhalter/jedi-vim.git'
 
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
+"Tools
+Plug 'Syntastic'
+Plug 'Tagbar'
+Plug 'The-NERD-Commenter'
+Plug 'The-NERD-tree'
+Plug 'fugitive.vim'
+Plug 'https://github.com/JessicaKMcIntosh/Vim.git'
+Plug 'https://github.com/bling/vim-airline.git'
+Plug 'https://github.com/ervandew/supertab.git'
+Plug 'https://github.com/mhinz/vim-startify.git'
+Plug 'matchit.zip'
+Plug 'mileszs/ack.vim'
+Plug 'minibufexplorerpp'
+Plug 'simple-pairs'
+Plug 'sudo.vim'
+Plug 'surround.vim'
+Plug 'vim-flake8'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-
+call plug#end()
 
 
 " Set up vim-project
@@ -77,13 +57,12 @@ Plugin 'Shougo/neosnippet-snippets'
 " custom starting path
 "call project#rc("~/Projects")
 
-"let g:project_use_nerdtree = 1
+let g:project_use_nerdtree = 1
 
+filetype on                   " required!
 set laststatus=2
 set hidden
 set antialias
-"set paste
-set t_Co=256
 set nocompatible
 set nu
 set ai
@@ -99,25 +78,17 @@ set expandtab
 set smarttab
 set shiftround
 let mapleader=","
-"set guifont=Source\ Code\ Pro\ 10
-set guifont=Inconsolata-g\ 11
-"set guifont=Monaco\ for\ Powerline\ 10
-"colorscheme Tomorrow-Night
-colorscheme molokai
+colorscheme flatlandia
 set ic  "Insensitive case
 set colorcolumn=+1
 set colorcolumn=120
-"set background=dark
 
 " -- normal mode mapping
-"nmap <Tab> :bp!<C>
 nmap <A-h> :bp!<CR>
-"map <BS> :bn!<CR>
 nmap <A-l> :bn!<CR>
 map E :NERDTreeToggle<CR>
-map <C-b> :NERDTreeToggle<CR>
+map <C-k><C-b> :NERDTreeToggle<CR>
 map <C-F12> :TagbarToggle<CR>
-"map T :TagbarToggle<CR>
 map <C-n> :TagbarToggle<CR>
 map <F6> :SyntasticCheck<CR>
 map <C-A-p> :Welcome<CR>
@@ -126,16 +97,15 @@ map <c-d> :bd!<CR>
 map <C-f> :Ack<space>
 nmap mm '
 vmap <F9> :'<,'>sort<CR>
-"nmap <C-o> :NERDTreeToggle<CR>:NERDTreeToggle<CR>
 nmap <C-o> :NERDTree<CR>
 nmap <C-A-p> :OpenSession<space>
 nmap <C-S> :w<CR>
 nmap <leader>p "+gP
 vmap <leader>y "+y
+map <C-p> :FZF<CR>
 
 
 " -- Insert mode mapping
-"imap ii <Esc>
 imap ;; <Esc>
 
 " -- Search
@@ -176,26 +146,6 @@ autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#completions_enabled = 1
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#smart_auto_mappings = 0
-"let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-" alternative pattern: '\h\w*\|[^. \t]\.\w*'
-
-"let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<C-j>"
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"" If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit="vertical"
-
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"let g:UltiSnipsExpandTrigger="<C-j>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"let g:UltiSnipsEditSplit="vertical"
 
 "Git
 nnoremap <Leader>gs :Gstatus<CR>
@@ -204,23 +154,12 @@ nnoremap <Leader>gbl :Gblame<CR>
 nnoremap <Leader>gbr :Gbrowse<CR>
 nnoremap <Leader>gdiff :Gdiff<CR>
 
-"Multiple cursors
-"let g:multi_cursor_start_key='<C-m>'
-
-"FIXME
-"Align comments
-"nnoremap <Leader>cb <leader>c<SPACE>
-
-"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*/build/*
 
 "Emmet
 let g:user_emmet_mode='a'
 let g:user_emmet_leader_key = '<leader>'
 "let g:user_emmet_expandabbr_key = '<leader>e'
 
-
-" YouCompleteMe configuration
-"nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 " Syntaxes
 autocmd BufNewFile,BufRead *.pp   set syntax=puppet
@@ -237,10 +176,6 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 
 " SuperTab like snippets behavior.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<TAB>" : "\<Plug>(neosnippet_expand_or_jump)"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
