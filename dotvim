@@ -2,74 +2,81 @@ let $PATH=$PATH . ':' . $HOME . '/.local/bin'
 let $PATH=$PATH . ':' . $HOME . '/bin'
 let $TERM='terminator'
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
-"Syntax
-Plug 'Handlebars'
+""Syntax
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'Puppet-Syntax-Highlighting'
-Plug 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
-Plug 'https://github.com/ivoputzer/vim-colors-flatland.git'
-Plug 'https://github.com/mattn/emmet-vim.git'
-Plug 'https://github.com/mitsuhiko/vim-rst.git'
-Plug 'https://github.com/pfdevilliers/Pretty-Vim-Python.git'
-Plug 'https://github.com/saltstack/salt-vim.git'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'ivoputzer/vim-colors-flatland'
+Plug 'mattn/emmet-vim'
+Plug 'mitsuhiko/vim-rst'
+Plug 'pfdevilliers/Pretty-Vim-Python'
+Plug 'saltstack/salt-vim'
 Plug 'less-syntax'
 Plug 'mako.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
 
-"Colorschemes
+""Colorschemes
 Plug 'badwolf'
-Plug 'https://github.com/chriskempson/vim-tomorrow-theme'
-Plug 'https://github.com/flazz/vim-colorschemes.git'
-Plug 'https://github.com/jordwalke/flatlandia.git'
-Plug 'https://github.com/mbriggs/vim-themes.git'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'flazz/vim-colorschemes'
+Plug 'jordwalke/flatlandia'
+Plug 'mbriggs/vim-themes'
+Plug 'sickill/vim-monokai'
+Plug 'trusktr/seti.vim'
+Plug 'godlygeek/csapprox'
+Plug 'w0ng/vim-hybrid'
+Plug 'zenorocha/dracula-theme',{'rtp': 'vim/'}
 
-"Autocompletion
+
+""Autocompletion
 Plug 'Shougo/neocomplete'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'https://github.com/davidhalter/jedi-vim.git'
+Plug 'davidhalter/jedi-vim.git'
 
-"Tools
-Plug 'Syntastic'
-Plug 'Tagbar'
-Plug 'The-NERD-Commenter'
-Plug 'The-NERD-tree'
-Plug 'fugitive.vim'
-Plug 'https://github.com/JessicaKMcIntosh/Vim.git'
-Plug 'https://github.com/bling/vim-airline.git'
-Plug 'https://github.com/ervandew/supertab.git'
-Plug 'https://github.com/mhinz/vim-startify.git'
-Plug 'matchit.zip'
+""Tools
+Plug 'scrooloose/syntastic'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdcommenter'
+
+Plug 'scrooloose/nerdtree'
+Plug 'https://github.com/scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'JessicaKMcIntosh/Vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ervandew/supertab'
+Plug 'mhinz/vim-startify'
+Plug 'edsono/vim-matchit'
 Plug 'mileszs/ack.vim'
 Plug 'minibufexplorerpp'
-Plug 'simple-pairs'
 Plug 'sudo.vim'
 Plug 'surround.vim'
-Plug 'vim-flake8'
+"Plug 'vim-flake8'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
 
-" Set up vim-project
-"set rtp+=~/.vim/bundle/vim-project/
-" custom starting path
-"call project#rc("~/Projects")
+"" Set up vim-project
+""set rtp+=~/.vim/bundle/vim-project/
+"" custom starting path
+""call project#rc("~/Projects")
 
-let g:project_use_nerdtree = 1
+"let g:project_use_nerdtree = 1
 
-filetype on                   " required!
-set laststatus=2
+filetype on
 set hidden
 set antialias
-set nocompatible
 set nu
 set ai
 set si
 syntax on
 set cursorline
-"filetype on
 filetype indent on
 filetype plugin on
 set tabstop=4
@@ -78,54 +85,62 @@ set expandtab
 set smarttab
 set shiftround
 let mapleader=","
-colorscheme flatlandia
+set background=dark
+colorscheme dracula
 set ic  "Insensitive case
 set colorcolumn=+1
-set colorcolumn=120
+set colorcolumn=80
 
-" -- normal mode mapping
-nmap <A-h> :bp!<CR>
-nmap <A-l> :bn!<CR>
-map E :NERDTreeToggle<CR>
-map <C-k><C-b> :NERDTreeToggle<CR>
-map <C-F12> :TagbarToggle<CR>
-map <C-n> :TagbarToggle<CR>
-map <F6> :SyntasticCheck<CR>
-map <C-A-p> :Welcome<CR>
-noremap <C-h> :set hlsearch! hlsearch?<CR>
-map <c-d> :bd!<CR>
-map <C-f> :Ack<space>
-nmap mm '
-vmap <F9> :'<,'>sort<CR>
-nmap <C-o> :NERDTree<CR>
-nmap <C-A-p> :OpenSession<space>
-nmap <C-S> :w<CR>
-nmap <leader>p "+gP
-vmap <leader>y "+y
-map <C-p> :FZF<CR>
+"" -- normal mode mapping
+"nmap <A-h> :bp!<CR>
+"nmap <A-l> :bn!<CR>
+"map E :NERDTreeToggle<CR>
+"map <C-k><C-b> :NERDTreeToggle<CR>
+"map <C-F12> :TagbarToggle<CR>
+"map <C-n> :TagbarToggle<CR>
+"map <F6> :SyntasticCheck<CR>
+"map <C-A-p> :Welcome<CR>
+"noremap <C-h> :set hlsearch! hlsearch?<CR>
+"map <c-d> :bd!<CR>
+"map <C-f> :Ack<space>
+"nmap mm '
+"vmap <F9> :'<,'>sort<CR>
+"nmap <C-o> :NERDTree<CR>
+"nmap <C-A-p> :OpenSession<space>
+"nmap <C-S> :w<CR>
+"nmap <leader>p "+gP
+"vmap <leader>y <right>"+y
+"map <C-p> :FZF<CR>
 
 
-" -- Insert mode mapping
-imap ;; <Esc>
+"" -- Insert mode mapping
+"imap ;; <Esc>
 
-" -- Search
+"" -- Search
 set incsearch
 set hlsearch
 set smartcase
 
-" -- Beep
+"" -- Beep
 set novisualbell
 set noerrorbells
 
-"Supprime le maximum de chose dans l'interface
+""Supprime le maximum de chose dans l'interface
 set guioptions=Ace
+
+" NERDTree configuration
 let NERDTreeIgnore = ['\.pyc$']
 
-"Linter configuration
+""Linter configuration
 let g:syntastic_debug = 0
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args= '--max-line-length=119'
-let g:flake8_max_line_length=119
+"let g:syntastic_python_flake8_args= '--max-line-length=119'
+let g:syntastic_javascript_checkers = ['eslint']
+"let g:flake8_max_line_length=119
+let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 
 "Neocomplete
@@ -141,13 +156,13 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 
 
-"Jedi
+""Jedi
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#completions_enabled = 1
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#smart_auto_mappings = 0
 
-"Git
+""Git
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gbl :Gblame<CR>
@@ -155,31 +170,40 @@ nnoremap <Leader>gbr :Gbrowse<CR>
 nnoremap <Leader>gdiff :Gdiff<CR>
 
 
-"Emmet
+
+nnoremap <cr> :noh<CR><CR>:<backspace>
+
+""Emmet
 let g:user_emmet_mode='a'
 let g:user_emmet_leader_key = '<leader>'
 "let g:user_emmet_expandabbr_key = '<leader>e'
 
 
-" Syntaxes
+"" Syntaxes
 autocmd BufNewFile,BufRead *.pp   set syntax=puppet
 au BufNewFile,BufRead *.sls set filetype=sls
 
-" vim-session
-let g:session_autoload='no'
-let g:session_autosave='yes'
+"" vim-session
+"let g:session_autoload='no'
+"let g:session_autosave='yes'
 
-" NeoComplete
+"" NeoComplete
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 
-" SuperTab like snippets behavior.
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"" SuperTab like snippets behavior.
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+"" For conceal markers.
+"if has('conceal')
+  "set conceallevel=2 concealcursor=niv
+"endif
+
+"neovim-qt
+" Neovim-qt Guifont command
+command -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
+" Set the font to DejaVu Sans Mono:h13
+Guifont DejaVu Sans Mono:h13
