@@ -17,6 +17,7 @@ Plug 'less-syntax'
 Plug 'mako.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
+Plug 'aaronj1335/underscore-templates.vim'
 
 ""Colorschemes
 Plug 'badwolf'
@@ -35,12 +36,13 @@ Plug 'zenorocha/dracula-theme',{'rtp': 'vim/'}
 Plug 'Shougo/neocomplete'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'davidhalter/jedi-vim.git'
+Plug 'davidhalter/jedi-vim'
 
 ""Tools
 Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
+Plug 'kien/ctrlp.vim'
 
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/scrooloose/nerdtree'
@@ -56,8 +58,8 @@ Plug 'minibufexplorerpp'
 Plug 'sudo.vim'
 Plug 'surround.vim'
 "Plug 'vim-flake8'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -71,7 +73,7 @@ call plug#end()
 
 filetype on
 set hidden
-set antialias
+"set antialias
 set nu
 set ai
 set si
@@ -86,35 +88,38 @@ set smarttab
 set shiftround
 let mapleader=","
 set background=dark
-colorscheme dracula
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+colorscheme hybrid
 set ic  "Insensitive case
 set colorcolumn=+1
 set colorcolumn=80
+set guifont=Monaco\ for\ Powerline:h16
 
 "" -- normal mode mapping
-"nmap <A-h> :bp!<CR>
-"nmap <A-l> :bn!<CR>
-"map E :NERDTreeToggle<CR>
-"map <C-k><C-b> :NERDTreeToggle<CR>
-"map <C-F12> :TagbarToggle<CR>
-"map <C-n> :TagbarToggle<CR>
-"map <F6> :SyntasticCheck<CR>
-"map <C-A-p> :Welcome<CR>
-"noremap <C-h> :set hlsearch! hlsearch?<CR>
-"map <c-d> :bd!<CR>
-"map <C-f> :Ack<space>
-"nmap mm '
-"vmap <F9> :'<,'>sort<CR>
-"nmap <C-o> :NERDTree<CR>
-"nmap <C-A-p> :OpenSession<space>
-"nmap <C-S> :w<CR>
-"nmap <leader>p "+gP
-"vmap <leader>y <right>"+y
-"map <C-p> :FZF<CR>
+nmap <A-h> :bp!<CR>
+nmap <A-l> :bn!<CR>
+map E :NERDTreeToggle<CR>
+map <C-k><C-b> :NERDTreeToggle<CR>
+map <C-F12> :TagbarToggle<CR>
+map <C-n> :TagbarToggle<CR>
+map <F6> :SyntasticCheck<CR>
+map <C-A-p> :Welcome<CR>
+noremap <C-h> :set hlsearch! hlsearch?<CR>
+map <c-d> :bd!<CR>
+map <C-f> :Ack<space>
+nmap mm '
+vmap <F9> :'<,'>sort<CR>
+nmap <C-o> :NERDTree<CR>
+nmap <C-A-p> :OpenSession<space>
+nmap <C-S> :w<CR>
+nmap <leader>p "+gP
+vmap <leader>y <right>"+y
+map <C-p> :FZF<CR>
 
 
 "" -- Insert mode mapping
-"imap ;; <Esc>
+imap ;; <Esc>
 
 "" -- Search
 set incsearch
@@ -201,9 +206,3 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 "if has('conceal')
   "set conceallevel=2 concealcursor=niv
 "endif
-
-"neovim-qt
-" Neovim-qt Guifont command
-command -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
-" Set the font to DejaVu Sans Mono:h13
-Guifont DejaVu Sans Mono:h13
