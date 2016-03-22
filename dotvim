@@ -54,9 +54,10 @@ Plug 'ervandew/supertab'
 Plug 'mhinz/vim-startify'
 Plug 'edsono/vim-matchit'
 Plug 'mileszs/ack.vim'
-Plug 'minibufexplorerpp'
+"Plug 'minibufexplorerpp'
 Plug 'sudo.vim'
 Plug 'surround.vim'
+Plug 'jlanzarotta/bufexplorer'
 "Plug 'vim-flake8'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
@@ -94,7 +95,7 @@ colorscheme hybrid
 set ic  "Insensitive case
 set colorcolumn=+1
 set colorcolumn=80
-set guifont=Monaco\ for\ Powerline:h16
+set guifont=Monaco\ for\ Powerline\ 10
 
 "" -- normal mode mapping
 nmap <A-h> :bp!<CR>
@@ -116,6 +117,8 @@ nmap <C-S> :w<CR>
 nmap <leader>p "+gP
 vmap <leader>y <right>"+y
 map <C-p> :FZF<CR>
+nmap <C-b> :BufExplorer<CR>
+nmap <C-w>b :BufExplorer<CR>
 
 
 "" -- Insert mode mapping
@@ -206,3 +209,8 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 "if has('conceal')
   "set conceallevel=2 concealcursor=niv
 "endif
+
+set clipboard=unnamedplus
+
+"Ignore files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/jspm_packages/*,*/__pycache__/*
