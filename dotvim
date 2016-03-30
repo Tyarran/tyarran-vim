@@ -80,7 +80,7 @@ call plug#end()
 
 filetype on
 set hidden
-"set antialias
+"set antialias "useless with neovim
 set nu
 set ai
 set si
@@ -125,7 +125,7 @@ vmap <leader>y <right>"+y
 map <C-p> :FZF<CR>
 nmap <C-b> :BufExplorer<CR>
 nmap <C-w>b :BufExplorer<CR>
-
+ 
 
 "" -- Insert mode mapping
 imap ;; <Esc>
@@ -193,9 +193,9 @@ let g:user_emmet_leader_key = '<leader>'
 "let g:user_emmet_expandabbr_key = '<leader>e'
 
 
-"" Syntaxes
+"" Force syntaxes
 autocmd BufNewFile,BufRead *.pp   set syntax=puppet
-au BufNewFile,BufRead *.sls set filetype=sls
+autocmd BufNewFile,BufRead *.sls set filetype=sls
 
 "" vim-session
 "let g:session_autoload='no'
@@ -218,7 +218,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 set clipboard=unnamedplus
 
-"Ignore files
+"Ignore files with CtrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/jspm_packages/*,*/__pycache__/*
 set clipboard+=unnamedplus
 
