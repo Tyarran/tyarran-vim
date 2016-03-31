@@ -238,3 +238,8 @@ endfunction
 
 "echo system('npm-which eslint')
 "let b:syntastic_javascript_eslint_exec = StrTrim(system('npm-which eslint'))
+
+"Comments
+let g:NERDCustomDelimiters = {
+    \ 'javascript': { 'left': '// ', 'right': '' }
+\ }
