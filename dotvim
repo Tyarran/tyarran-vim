@@ -12,7 +12,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'ivoputzer/vim-colors-flatland'
 Plug 'mattn/emmet-vim'
 Plug 'mitsuhiko/vim-rst'
-Plug 'pfdevilliers/Pretty-Vim-Python'
+"Plug 'pfdevilliers/Pretty-Vim-Python'
 Plug 'saltstack/salt-vim'
 Plug 'less-syntax'
 Plug 'mako.vim'
@@ -22,6 +22,7 @@ Plug 'aaronj1335/underscore-templates.vim'
 Plug 'ekalinin/Dockerfile.vim' 
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/yajs.vim'
+Plug 'klen/python-mode'
 
 ""Colorschemes
 Plug 'badwolf'
@@ -122,7 +123,7 @@ nmap <C-A-p> :OpenSession<space>
 nmap <C-S> :w<CR>
 nmap <leader>p "+gP
 vmap <leader>y <right>"+y
-map <C-p> :FZF<CR>
+"map <C-p> :FZF<CR>
 nmap <C-b> :BufExplorer<CR>
 nmap <C-w>b :BufExplorer<CR>
  
@@ -155,6 +156,11 @@ let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+"Python
+let g:pymode_folding = 0
+let g:pymode_virtualenv = 0
+let g:pymode_rope = 0
 
 
 "Neocomplete
