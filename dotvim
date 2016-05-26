@@ -27,15 +27,16 @@ Plug 'klen/python-mode'
 ""Colorschemes
 Plug 'badwolf'
 Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'flazz/vim-colorschemes'
+"Plug 'flazz/vim-colorschemes'
 Plug 'jordwalke/flatlandia'
-Plug 'mbriggs/vim-themes'
+"Plug 'mbriggs/vim-themes'
 Plug 'sickill/vim-monokai'
 Plug 'trusktr/seti.vim'
 Plug 'godlygeek/csapprox'
 Plug 'w0ng/vim-hybrid'
 Plug 'zenorocha/dracula-theme',{'rtp': 'vim/'}
-
+Plug 'matthewtodd/vim-twilight'
+Plug 'cocopon/iceberg.vim'
 
 ""Autocompletion
 Plug 'Shougo/neocomplete'
@@ -47,7 +48,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'scrooloose/nerdtree'
 Plug 'https://github.com/scrooloose/nerdtree'
@@ -68,6 +69,7 @@ Plug 'tpope/vim-speeddating'
 "Plug 'vim-flake8'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -99,10 +101,14 @@ set background=dark
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
+"colorscheme iceberg
+"colorscheme twilight
 set ic  "Insensitive case
 set colorcolumn=+1
 set colorcolumn=80
 set guifont=Monaco\ for\ Powerline:h14
+set lazyredraw          " Wait to redraw
+set scrolljump=18        " Scroll 8 lines at a time at bottom/top
 
 "" -- normal mode mapping
 nmap <A-h> :bp!<CR>
@@ -161,6 +167,12 @@ let g:syntastic_check_on_wq = 0
 let g:pymode_folding = 0
 let g:pymode_virtualenv = 0
 let g:pymode_rope = 0
+let g:pymode_lint = 0
+let g:pymode_lint_on_write = 0
+
+
+"airline
+let g:airline_powerline_fonts = 1
 
 
 "Neocomplete
@@ -226,7 +238,7 @@ set clipboard=unnamedplus
 
 "Ignore files with CtrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/jspm_packages/*,*/__pycache__/*
-set clipboard+=unnamedplus
+"set clipboard+=unnamedplus
 
 function! Reloadconfig()
     source $HOME/.vimrc
@@ -243,3 +255,30 @@ endfunction
 let g:NERDCustomDelimiters = {
     \ 'javascript': { 'left': '// ', 'right': '' }
 \ }
+
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
+
+autocmd VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
