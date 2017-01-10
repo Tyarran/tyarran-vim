@@ -1,89 +1,83 @@
 let $PATH=$PATH . ':' . $HOME . '/.local/bin'
 let $PATH=$PATH . ':' . $HOME . '/bin'
-let $PATH=$PATH . ':' . $HOME . '/Library/Python/3.5/bin'
 let $TERM='terminator'
 
 call plug#begin('~/.config/nvim/plugged')
 
-""Syntax
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'Puppet-Syntax-Highlighting'
+"Syntaxes
 Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'ivoputzer/vim-colors-flatland'
-Plug 'mattn/emmet-vim'
-Plug 'mitsuhiko/vim-rst'
-"Plug 'pfdevilliers/Pretty-Vim-Python'
-Plug 'saltstack/salt-vim'
-Plug 'less-syntax'
-Plug 'mako.vim'
-"Plug 'pangloss/vim-javascript'
-Plug 'elzr/vim-json'
+Plug 'IN3D/vim-raml'
+Plug 'Puppet-Syntax-Highlighting'
 Plug 'aaronj1335/underscore-templates.vim'
 Plug 'ekalinin/Dockerfile.vim' 
+Plug 'elzr/vim-json'
+Plug 'klen/python-mode'
+Plug 'less-syntax'
+Plug 'mako.vim'
+Plug 'mattn/emmet-vim'
+Plug 'mitsuhiko/vim-rst'
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/yajs.vim'
-Plug 'klen/python-mode'
+Plug 'saltstack/salt-vim'
 
 ""Colorschemes
+Plug 'arcticicestudio/nord-vim'
 Plug 'badwolf'
 Plug 'chriskempson/vim-tomorrow-theme'
-"Plug 'flazz/vim-colorschemes'
+Plug 'cocopon/iceberg.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'ivoputzer/vim-colors-flatland'
 Plug 'jordwalke/flatlandia'
-"Plug 'mbriggs/vim-themes'
+"Plug 'kamwitsta/nordisk'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'matthewtodd/vim-twilight'
 Plug 'sickill/vim-monokai'
 Plug 'trusktr/seti.vim'
-Plug 'godlygeek/csapprox'
 Plug 'w0ng/vim-hybrid'
 Plug 'zenorocha/dracula-theme',{'rtp': 'vim/'}
-Plug 'matthewtodd/vim-twilight'
-Plug 'cocopon/iceberg.vim'
 
 ""Autocompletion
-Plug 'Shougo/neocomplete'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'davidhalter/jedi-vim'
+Plug 'zchee/deoplete-jedi'
 
 ""Tools
 Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
-
 Plug 'scrooloose/nerdtree'
-Plug 'https://github.com/scrooloose/nerdtree'
+"Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 "Plug 'JessicaKMcIntosh/Vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ervandew/supertab'
-Plug 'mhinz/vim-startify'
+"Plug 'ervandew/supertab'
+"Plug 'mhinz/vim-startify'
 Plug 'edsono/vim-matchit'
 Plug 'mileszs/ack.vim'
 "Plug 'minibufexplorerpp'
 Plug 'sudo.vim'
 Plug 'surround.vim'
-Plug 'jlanzarotta/bufexplorer'
+"Plug 'jlanzarotta/bufexplorer'
 Plug 'jceb/vim-orgmode'
-Plug 'tpope/vim-speeddating'
+"Plug 'tpope/vim-speeddating'
 "Plug 'vim-flake8'
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
-Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'Shougo/denite.nvim'
+Plug 'mhinz/vim-signify'
 
 call plug#end()
 
 
-"" Set up vim-project
-""set rtp+=~/.vim/bundle/vim-project/
-"" custom starting path
-""call project#rc("~/Projects")
-
-"let g:project_use_nerdtree = 1
-
+set t_Co=256
 filetype on
 set hidden
-"set antialias "useless with neovim
 set nu
 set ai
 set si
@@ -91,48 +85,44 @@ syntax on
 set cursorline
 filetype indent on
 filetype plugin on
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set smarttab
-set shiftround
 let mapleader=","
+"let g:hybrid_custom_term_colors = 1
+"let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+"colorscheme hybrid
 set background=dark
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-colorscheme hybrid
-"colorscheme iceberg
-"colorscheme twilight
+colorscheme Tomorrow-Night
 set ic  "Insensitive case
-set colorcolumn=+1
-set colorcolumn=80
-set guifont=Monaco\ for\ Powerline:h14
-set lazyredraw          " Wait to redraw
-set scrolljump=18        " Scroll 8 lines at a time at bottom/top
+"set colorcolumn=+1
+set guifont=Monaco:h14
+"set lazyredraw          " Wait to redraw
+"set scrolljump=18        " Scroll 8 lines at a time at bottom/top
 
 "" -- normal mode mapping
-nmap <A-h> :bp!<CR>
-nmap <A-l> :bn!<CR>
-map E :NERDTreeToggle<CR>
-map <C-k><C-b> :NERDTreeToggle<CR>
-map <C-F12> :TagbarToggle<CR>
-map <C-n> :TagbarToggle<CR>
+"nmap <A-h> :bp!<CR>
+"nmap <A-l> :bn!<CR>
+"map <C-n> :TagbarToggle<CR>
+nmap <F12> :TagbarToggle<CR>
 map <F6> :SyntasticCheck<CR>
-map <C-A-p> :Welcome<CR>
-noremap <C-h> :set hlsearch! hlsearch?<CR>
-map <c-d> :bd!<CR>
-map <C-f> :Ack<space>
+"map <C-A-p> :Welcome<CR>
+nmap <C-;> :set hlsearch! hlsearch?<CR>
+map <C-;> :Ack<space>
 nmap mm '
 vmap <F9> :'<,'>sort<CR>
 nmap <C-o> :NERDTree<CR>
-nmap <C-A-p> :OpenSession<space>
-nmap <C-S> :w<CR>
-nmap <leader>p "+gP
-vmap <leader>y <right>"+y
+"nmap <C-A-p> :OpenSession<space>
+"nmap <C-S> :w<CR>
+"nmap <leader>p "+gP
+"vmap <leader>y <right>"+y
 "map <C-p> :FZF<CR>
-nmap <C-b> :BufExplorer<CR>
-nmap <C-w>b :BufExplorer<CR>
- 
+nmap <tab> :bp!<CR>
+nmap <backspace> :bn!<CR>
+
+"FuzzyFinding
+nmap <C-b> :Denite buffer<CR>
+"nmap <C-p> :Denite file_rec<CR>
+
+nmap <C-space> :CtrlSpace<CR>
+nmap E :call NerdTreeToggleResize()<CR>
 
 "" -- Insert mode mapping
 imap ;; <Esc>
@@ -154,45 +144,18 @@ let NERDTreeIgnore = ['\.pyc$']
 
 ""Linter configuration
 let g:syntastic_debug = 0
-let g:syntastic_python_checkers = ['flake8']
-"let g:syntastic_python_flake8_args= '--max-line-length=119'
-let g:syntastic_javascript_checkers = ['eslint']
-"let g:flake8_max_line_length=119
 let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-"Python
-let g:pymode_folding = 0
-let g:pymode_virtualenv = 0
-let g:pymode_rope = 0
-let g:pymode_lint = 0
-let g:pymode_lint_on_write = 0
-
-
 "airline
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
+"Deoplete
+let g:deoplete#enable_at_startup = 1
 
-"Neocomplete
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-
-
-""Jedi
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#completions_enabled = 1
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
 
 ""Git
 nnoremap <Leader>gs :Gstatus<CR>
@@ -201,84 +164,106 @@ nnoremap <Leader>gbl :Gblame<CR>
 nnoremap <Leader>gbr :Gbrowse<CR>
 nnoremap <Leader>gdiff :Gdiff<CR>
 
-
-
-nnoremap <cr> :noh<CR><CR>:<backspace>
-
 ""Emmet
 let g:user_emmet_mode='a'
 let g:user_emmet_leader_key = '<leader>'
-"let g:user_emmet_expandabbr_key = '<leader>e'
-
 
 "" Force syntaxes
 autocmd BufNewFile,BufRead *.pp   set syntax=puppet
 autocmd BufNewFile,BufRead *.sls set filetype=sls
 
-"" vim-session
-"let g:session_autoload='no'
-"let g:session_autosave='yes'
-
 "" NeoComplete
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 
-"" SuperTab like snippets behavior.
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-"" For conceal markers.
-"if has('conceal')
-  "set conceallevel=2 concealcursor=niv
-"endif
-
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 "Ignore files with CtrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/jspm_packages/*,*/__pycache__/*
-"set clipboard+=unnamedplus
 
-function! Reloadconfig()
-    source $HOME/.vimrc
+function! s:reloadconfig()
+    source $HOME/.config/nvim/init.vim
 endfunction
 
-function! StrTrim(txt)
-  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-endfunction
+command! Reload :source $HOME/.config/nvim/init.vim
 
-"echo system('npm-which eslint')
-"let b:syntastic_javascript_eslint_exec = StrTrim(system('npm-which eslint'))
 
 "Comments
-let g:NERDCustomDelimiters = {
-    \ 'javascript': { 'left': '// ', 'right': '' }
-\ }
+"let g:NERDCustomDelimiters = {
+"    \ 'javascript': { 'left': '// ', 'right': '' }
+"\ }
 
 " NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+"function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+"exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+"exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+"endfunction
+
+"call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+"call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+"call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+"call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+"call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+"call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
+"call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
+"call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
+"call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
+"call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
+
+"autocmd VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+
+"let g:denite_ignore_source_files = ['*/tmp/*', '*.so', '*.swp', '*.zip', '*/node_modules/*', '*/jspm_packages/*', '*/__pycache__/*', 'packages_sav/*']
+call denite#custom#var('grep', 'command', ['ack'])
+
+
+function! NerdTreeToggleResize()
+    execute ':NERDTreeToggle'
+    execute ':vertical resize ' . g:NERDTreeWinSize
 endfunction
 
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
+function! CloseBuffer()
+    let isOpen = g:NERDTree.IsOpen()
+    if isOpen
+        call  NerdTreeToggleResize()
+    endif
+    execute ':bd!'
+    if isOpen
+        call  NerdTreeToggleResize()
+    endif
+endfunction
 
-autocmd VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+command! CB call CloseBuffer()
+map <C-d> :CB<CR>
+
+nnoremap <leader>gd :<C-u>Denite
+call denite#custom#source(
+\ 'file_rec', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+    \ [
+    \ '.git/', '.ropeproject/', '__pycache__/',
+    \ 'venv/',
+    \ 'images/',
+    \ '*.min.*',
+    \ '*.so',
+    \ '*.swp',
+    \ '*.pyc',
+    \ '*packages*',
+    \ '*repository*',
+    \ '*cache*',
+    \ 'img/', 'fonts/', '.tox/', '*/tmp/*', '*node_modules*', '*jspm_packages*'],)
+
+"*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/jspm_packages/*,*/__pycache__/*
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+command! NTF execute ':NERDTreeFind'
