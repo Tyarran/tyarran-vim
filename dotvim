@@ -86,9 +86,8 @@ set cursorline
 filetype indent on
 filetype plugin on
 let mapleader=","
-"let g:hybrid_custom_term_colors = 1
-"let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-"colorscheme hybrid
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 set background=dark
 colorscheme Tomorrow-Night
 set ic  "Insensitive case
@@ -105,7 +104,7 @@ nmap <F12> :TagbarToggle<CR>
 map <F6> :SyntasticCheck<CR>
 "map <C-A-p> :Welcome<CR>
 nmap <C-;> :set hlsearch! hlsearch?<CR>
-map <C-;> :Ack<space>
+map <C-f> :Ack!<space>
 nmap mm '
 vmap <F9> :'<,'>sort<CR>
 nmap <C-o> :NERDTree<CR>
@@ -173,9 +172,9 @@ autocmd BufNewFile,BufRead *.pp   set syntax=puppet
 autocmd BufNewFile,BufRead *.sls set filetype=sls
 
 "" NeoComplete
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 
 set clipboard+=unnamedplus
@@ -226,9 +225,17 @@ command! Reload :source $HOME/.config/nvim/init.vim
 call denite#custom#var('grep', 'command', ['ack'])
 
 
+" ACK/AG
+let g:ackprg = 'ag --nogroup --nocolor --column'
+"let g:ackprg = 'ag --vimgrep'
+
+
 function! NerdTreeToggleResize()
     execute ':NERDTreeToggle'
-    execute ':vertical resize ' . g:NERDTreeWinSize
+    let isOpen = g:NERDTree.IsOpen()
+    if isOpen
+	execute ':vertical resize ' . g:NERDTreeWinSize
+    endif
 endfunction
 
 function! CloseBuffer()
