@@ -70,7 +70,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'ryanoasis/vim-devicons'
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'Shougo/denite.nvim'
+Plug 'ozelentok/denite-gtags'
 Plug 'mhinz/vim-signify'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'fholgado/minibufexpl.vim'
 
 call plug#end()
 
@@ -154,6 +157,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 "Deoplete
 let g:deoplete#enable_at_startup = 1
+let g:jedi#completions_enabled = 0
 
 
 ""Git
@@ -175,6 +179,9 @@ autocmd BufNewFile,BufRead *.sls set filetype=sls
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+""pymode
+let g:pymode_rope = 0
 
 
 set clipboard+=unnamedplus
