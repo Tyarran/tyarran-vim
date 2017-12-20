@@ -27,13 +27,14 @@ Plug 'cocopon/iceberg.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'ivoputzer/vim-colors-flatland'
 Plug 'jordwalke/flatlandia'
-"Plug 'kamwitsta/nordisk'
+Plug 'kamwitsta/nordisk'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'matthewtodd/vim-twilight'
 Plug 'sickill/vim-monokai'
 Plug 'trusktr/seti.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'zenorocha/dracula-theme',{'rtp': 'vim/'}
+Plug 'jdkanani/vim-material-theme'
 
 ""Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -49,7 +50,6 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-"Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 "Plug 'JessicaKMcIntosh/Vim'
 Plug 'vim-airline/vim-airline'
@@ -74,6 +74,7 @@ Plug 'ozelentok/denite-gtags'
 Plug 'mhinz/vim-signify'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'fholgado/minibufexpl.vim'
+Plug 'jmcantrell/vim-virtualenv'
 
 call plug#end()
 
@@ -93,6 +94,7 @@ let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 set background=dark
 colorscheme Tomorrow-Night
+"colorscheme nord
 set ic  "Insensitive case
 "set colorcolumn=+1
 set guifont=Monaco:h14
@@ -100,28 +102,18 @@ set guifont=Monaco:h14
 "set scrolljump=18        " Scroll 8 lines at a time at bottom/top
 
 "" -- normal mode mapping
-"nmap <A-h> :bp!<CR>
-"nmap <A-l> :bn!<CR>
-"map <C-n> :TagbarToggle<CR>
 nmap <F12> :TagbarToggle<CR>
 map <F6> :SyntasticCheck<CR>
-"map <C-A-p> :Welcome<CR>
 nmap <C-;> :set hlsearch! hlsearch?<CR>
 map <C-f> :Ack!<space>
 nmap mm '
 vmap <F9> :'<,'>sort<CR>
 nmap <C-o> :NERDTree<CR>
-"nmap <C-A-p> :OpenSession<space>
-"nmap <C-S> :w<CR>
-"nmap <leader>p "+gP
-"vmap <leader>y <right>"+y
-"map <C-p> :FZF<CR>
-nmap <tab> :bp!<CR>
-nmap <backspace> :bn!<CR>
+nmap <tab> :MBEbp<CR>
+nmap <backspace> :MBEbn<CR>
 
 "FuzzyFinding
 nmap <C-b> :Denite buffer<CR>
-"nmap <C-p> :Denite file_rec<CR>
 
 nmap <C-space> :CtrlSpace<CR>
 nmap E :call NerdTreeToggleResize()<CR>
@@ -153,7 +145,7 @@ let g:syntastic_check_on_wq = 0
 
 "airline
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 
 "Deoplete
 let g:deoplete#enable_at_startup = 1
@@ -182,6 +174,9 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 ""pymode
 let g:pymode_rope = 0
+
+""vim-jedi
+let g:jedi#completions_enabled = 0
 
 
 set clipboard+=unnamedplus
@@ -279,5 +274,4 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
 "*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/jspm_packages/*,*/__pycache__/*
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 command! NTF execute ':NERDTreeFind'
