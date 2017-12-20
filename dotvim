@@ -18,6 +18,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/yajs.vim'
 Plug 'saltstack/salt-vim'
+Plug 'pearofducks/ansible-vim'
 
 ""Colorschemes
 Plug 'arcticicestudio/nord-vim'
@@ -56,7 +57,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'ervandew/supertab'
 "Plug 'mhinz/vim-startify'
-Plug 'edsono/vim-matchit'
+Plug 'tmhedberg/matchit'
 Plug 'mileszs/ack.vim'
 "Plug 'minibufexplorerpp'
 Plug 'vim-scripts/sudo.vim'
@@ -68,13 +69,17 @@ Plug 'jceb/vim-orgmode'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ryanoasis/vim-devicons'
-"Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'Shougo/denite.nvim'
 Plug 'ozelentok/denite-gtags'
 Plug 'mhinz/vim-signify'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'jmcantrell/vim-virtualenv'
+Plug 'tyru/open-browser.vim'
+Plug 'tyru/open-browser-github.vim'
+Plug 'codeindulgence/vim-tig'
+Plug 'NBUT-Developers/extra-instant-markdown' 
+
 
 call plug#end()
 
@@ -150,6 +155,7 @@ let g:airline#extensions#tabline#enabled = 0
 "Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 0
+let g:loaded_python_provider = 1
 
 
 ""Git
@@ -174,6 +180,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 ""pymode
 let g:pymode_rope = 0
+let g:pymode_folding = 0
 
 ""vim-jedi
 let g:jedi#completions_enabled = 0
