@@ -79,7 +79,8 @@ Plug 'tyru/open-browser.vim'
 Plug 'tyru/open-browser-github.vim'
 Plug 'codeindulgence/vim-tig'
 Plug 'NBUT-Developers/extra-instant-markdown' 
-
+Plug 'romgrk/winteract.vim'
+Plug 'ap/vim-buftabline'
 
 call plug#end()
 
@@ -106,6 +107,7 @@ set guifont=Monaco:h14
 "set lazyredraw          " Wait to redraw
 "set scrolljump=18        " Scroll 8 lines at a time at bottom/top
 
+
 "" -- normal mode mapping
 nmap <F12> :TagbarToggle<CR>
 map <F6> :SyntasticCheck<CR>
@@ -116,6 +118,7 @@ vmap <F9> :'<,'>sort<CR>
 nmap <C-o> :NERDTree<CR>
 nmap <tab> :MBEbp<CR>
 nmap <backspace> :MBEbn<CR>
+nmap <F5> :Refresh
 
 "FuzzyFinding
 nmap <C-b> :Denite buffer<CR>
@@ -196,6 +199,7 @@ function! s:reloadconfig()
 endfunction
 
 command! Reload :source $HOME/.config/nvim/init.vim
+command! Refresh :e!
 
 
 "Comments
@@ -282,3 +286,6 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 command! NTF execute ':NERDTreeFind'
+
+" MinibufExpl
+let g:miniBufExplorerAutoStart = 0
