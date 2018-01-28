@@ -68,7 +68,7 @@ Plug 'jceb/vim-orgmode'
 "Plug 'vim-flake8'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 Plug 'Shougo/denite.nvim'
 Plug 'ozelentok/denite-gtags'
 Plug 'mhinz/vim-signify'
@@ -81,6 +81,7 @@ Plug 'codeindulgence/vim-tig'
 Plug 'NBUT-Developers/extra-instant-markdown' 
 Plug 'romgrk/winteract.vim'
 Plug 'ap/vim-buftabline'
+Plug 'roxma/nvim-yarp'
 
 call plug#end()
 
@@ -142,7 +143,7 @@ set noerrorbells
 set guioptions=Ace
 
 " NERDTree configuration
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
 
 ""Linter configuration
 let g:syntastic_debug = 0
@@ -150,6 +151,7 @@ let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['flake8',]
 
 "airline
 let g:airline_powerline_fonts = 1
@@ -184,6 +186,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 ""pymode
 let g:pymode_rope = 0
 let g:pymode_folding = 0
+let g:pymode_lint = 0
 
 ""vim-jedi
 let g:jedi#completions_enabled = 0
@@ -192,7 +195,7 @@ let g:jedi#completions_enabled = 0
 set clipboard+=unnamedplus
 
 "Ignore files with CtrlP
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/jspm_packages/*,*/__pycache__/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/jspm_packages/*,*/__pycache__/*,*/dist/*
 
 function! s:reloadconfig()
     source $HOME/.config/nvim/init.vim
@@ -208,31 +211,31 @@ command! Refresh :e!
 "\ }
 
 " NERDTress File highlighting
-"function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-"exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-"exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-"endfunction
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+	exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+	exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
 
-"call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-"call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-"call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-"call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-"call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-"call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-"call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-"call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-"call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
-"call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
-"call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
-"call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
-"call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
+call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
 
-"autocmd VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
 
 "let g:denite_ignore_source_files = ['*/tmp/*', '*.so', '*.swp', '*.zip', '*/node_modules/*', '*/jspm_packages/*', '*/__pycache__/*', 'packages_sav/*']
 call denite#custom#var('grep', 'command', ['ack'])
@@ -247,6 +250,8 @@ function! NerdTreeToggleResize()
     execute ':NERDTreeToggle'
     let isOpen = g:NERDTree.IsOpen()
     if isOpen
+	execute ':NERDTreeClose'
+	execute ':NERDTreeFind'
 	execute ':vertical resize ' . g:NERDTreeWinSize
     endif
 endfunction
@@ -256,14 +261,14 @@ function! CloseBuffer()
     if isOpen
         call  NerdTreeToggleResize()
     endif
-    execute ':bd!'
+    execute ':MBEbd!'
     if isOpen
         call  NerdTreeToggleResize()
     endif
 endfunction
 
 command! CB call CloseBuffer()
-map <C-d> :CB<CR>
+map <C-d> :MBEbd<CR>
 
 nnoremap <leader>gd :<C-u>Denite
 call denite#custom#source(
