@@ -79,6 +79,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'oblitum/rainbow'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'jiangmiao/auto-pairs'
+Plug 'nathanaelkane/vim-indent-guides'
 
 call plug#end()
 
@@ -117,6 +118,8 @@ nmap <C-o> :NERDTree<CR>
 nmap <tab> :MBEbp<CR>
 nmap <backspace> :MBEbn<CR>
 nmap <F5> :Refresh
+nmap <C-i> :IndentGuidesToggle<CR>
+nmap <tab> :MBEbp<CR>
 
 nmap ' :MBEbn<CR>
 
@@ -312,3 +315,7 @@ let g:rainbow_load_separately = [
 "let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
 "let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 
+" Visual ident
+let g:indent_guides_auto_colors = 1
+hi IndentGuidesOdd  guibg=red   ctermbg=3
+hi IndentGuidesEven guibg=green ctermbg=4
