@@ -1,6 +1,6 @@
 let $PATH=$PATH . ':' . $HOME . '/.local/bin'
 let $PATH=$PATH . ':' . $HOME . '/bin'
-let $TERM='terminator'
+let $PATH=$PATH . ':' . $HOME . '/use/local/bin'
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -11,14 +11,16 @@ Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'aaronj1335/underscore-templates.vim'
 Plug 'ekalinin/Dockerfile.vim' 
 Plug 'elzr/vim-json'
-Plug 'klen/python-mode'
+"Plug 'klen/python-mode'
 Plug 'mattn/emmet-vim'
 Plug 'mitsuhiko/vim-rst'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'othree/es.next.syntax.vim'
-Plug 'othree/yajs.vim'
+"Plug 'othree/es.next.syntax.vim'
+"Plug 'othree/yajs.vim'
 Plug 'saltstack/salt-vim'
 Plug 'pearofducks/ansible-vim'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 
 ""Colorschemes
 Plug 'arcticicestudio/nord-vim'
@@ -36,22 +38,30 @@ Plug 'trusktr/seti.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'zenorocha/dracula-theme',{'rtp': 'vim/'}
 Plug 'jdkanani/vim-material-theme'
-
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'mhartington/oceanic-next'
+"
 ""Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'zchee/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'
+"Plug 'zchee/deoplete-jedi'
+"Plug 'davidhalter/jedi-vim'
+Plug 'autozimu/LanguageClient-neovim'
 
 
 ""Tools
-Plug 'scrooloose/syntastic'
+Plug 'miyakogi/conoline.vim'
+Plug 'w0rp/ale'
+"Plug 'vim-syntastic/syntastic'
+Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
+Plug 'tommcdo/vim-fubitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tmhedberg/matchit'
@@ -73,43 +83,66 @@ Plug 'codeindulgence/vim-tig'
 Plug 'NBUT-Developers/extra-instant-markdown' 
 Plug 'romgrk/winteract.vim'
 Plug 'ap/vim-buftabline'
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'roxma/nvim-yarp'
+"Plug 'roxma/vim-hug-neovim-rpc'
+"Plug 'roxma/nvim-yarp'
 Plug 'oblitum/rainbow'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'embear/vim-localvimrc'
+Plug 'osyo-manga/vim-over'
+Plug 'sbdchd/neoformat'
+
+"Plug 'prabirshrestha/async.vim'
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'ryanolsonx/vim-lsp-python'
+
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 call plug#end()
 
 
-set t_Co=256
+"set t_Co=256
+set nocursorline
 filetype on
 set hidden
 set nu
 set ai
 set si
 syntax on
-set cursorline
+"set cursorline
 filetype indent on
 filetype plugin on
 let mapleader=","
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+"let g:hybrid_custom_term_colors = 1
+"let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 set background=dark
-colorscheme Tomorrow-Night
+"colorscheme PaperColor
+"colorscheme Tomorrow-Night
+"colorscheme 
 "colorscheme nord
+colorscheme OceanicNext
 set ic  "Insensitive case
 "set colorcolumn=+1
-set guifont=Monaco:h14
+"set guifont=Monaco:h14
 "set lazyredraw          " Wait to redraw
 "set scrolljump=18        " Scroll 8 lines at a time at bottom/top
 
 
 "" -- normal mode mapping
 nmap <F12> :TagbarToggle<CR>
-map <F6> :SyntasticCheck<CR>
+"map <F6> :SyntasticCheck<CR>
 nmap <C-;> :set hlsearch! hlsearch?<CR>
 map <C-f> :Ack!<space>
 nmap mm '
@@ -144,33 +177,51 @@ set noerrorbells
 ""Supprime le maximum de chose dans l'interface
 set guioptions=Ace
 
+set wrap
+set mouse=a
+
 " NERDTree configuration
 let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
 
+"" JSX
+let g:jsx_ext_required = 0 
+
 ""Linter configuration
-let g:syntastic_debug = 0
-let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['flake8',]
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_debug = 0
+"let g:syntastic_always_populate_loc_list = 1
+""let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_python_checkers = ['flake8',]
+"let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_eslint_exec = ['/usr/local/bin/eslint']
+"let g:syntastic_javascript_eslint_exec = [$PWD . '/papaye/static/node_modules/.bin/eslint']
+"let g:syntastic_javascript_eslint_exec = ['eslint_d']
+"let b:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+
+let g:ale_completion_enabled = 1
 
 "airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#ale#enabled = 1
 
 "Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 0
 let g:loaded_python_provider = 1
-
+call deoplete#custom#option('complete_method', 'omnifunc')
 
 ""Git
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gbl :Gblame<CR>
-nnoremap <Leader>gbr :Gbrowse<CR>
-nnoremap <Leader>gdiff :Gdiff<CR>
+"nnoremap <Leader>gs :Gstatus<CR>
+"nnoremap <Leader>gc :Gcommit<CR>
+"nnoremap <Leader>gbl :Gblame<CR>
+"nnoremap <Leader>gbr :Gbrowse<CR>
+"nnoremap <Leader>gdiff :Gdiff<CR>
 
 ""Emmet
 let g:user_emmet_mode='a'
@@ -185,19 +236,11 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-""pymode
-let g:pymode_rope = 0
-let g:pymode_folding = 0
-let g:pymode_lint = 0
-
-""vim-jedi
-let g:jedi#completions_enabled = 0
-
 
 set clipboard+=unnamedplus
 
 "Ignore files with CtrlP
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/jspm_packages/*,*/__pycache__/*,*/dist/*,*/lambda_dist/*
+"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/jspm_packages/*,*/__pycache__/*,*/dist/*,*/lambda_dist/*
 
 function! s:reloadconfig()
     source $HOME/.config/nvim/init.vim
@@ -212,32 +255,7 @@ command! Refresh :e!
 "    \ 'javascript': { 'left': '// ', 'right': '' }
 "\ }
 
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-	exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-	exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
-
-autocmd VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+"autocmd VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
 
 "let g:denite_ignore_source_files = ['*/tmp/*', '*.so', '*.swp', '*.zip', '*/node_modules/*', '*/jspm_packages/*', '*/__pycache__/*', 'packages_sav/*']
 call denite#custom#var('grep', 'command', ['ack'])
@@ -245,7 +263,6 @@ call denite#custom#var('grep', 'command', ['ack'])
 
 " ACK/AG
 let g:ackprg = 'ag --nogroup --nocolor --column'
-"let g:ackprg = 'ag --vimgrep'
 
 
 function! NerdTreeToggleResize()
@@ -253,7 +270,7 @@ function! NerdTreeToggleResize()
     let isOpen = g:NERDTree.IsOpen()
     if isOpen
 	execute ':NERDTreeClose'
-	execute ':NERDTree'
+	"execute ':NERDTree'
 	execute ':NERDTreeFind'
 	execute ':vertical resize ' . g:NERDTreeWinSize
     endif
@@ -319,3 +336,64 @@ let g:rainbow_load_separately = [
 let g:indent_guides_auto_colors = 1
 hi IndentGuidesOdd  guibg=red   ctermbg=3
 hi IndentGuidesEven guibg=green ctermbg=4
+
+"if (has("nvim"))
+"  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+"  "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"endif
+
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+"if (has("termguicolors"))
+  "set termguicolors
+"endif
+""
+"set termguicolors
+" Italics for my favorite color scheme
+"let g:palenight_terminal_italics=1
+
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" Local VIM configurations
+"let g:local_vimrc = ['.config', '_vimrc_local.vim']
+"call lh#local_vimrc#munge('whitelist', $HOME.'/Projects')
+let g:localvimrc_ask=0
+
+
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['pyls'],
+    \ }
+
+
+"nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+"" Or map each action separately
+""nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <leader>R :call LanguageClient#textDocument_rename()<CR>
+nnoremap <leader>d :call LanguageClient#textDocument_definition()<CR>
+"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+""nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+"nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+"set completefunc=LanguageClient#complete
+"let g:deoplete#complete_method="omnifunc"
+"autocmd FileType python setlocal omnifunc=LanguageClient#complete
+let g:LanguageClient_diagnosticsEnable=0
+
+let g:conoline_auto_enable = 1
+" For Neovim 0.1.3 and 0.1.4
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+" Or if you have Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" Theme
+syntax enable
+colorscheme OceanicNext
