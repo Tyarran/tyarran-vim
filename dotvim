@@ -266,7 +266,7 @@ function! NerdTreeToggleResize()
     let isOpen = g:NERDTree.IsOpen()
     if isOpen
 	execute ':NERDTreeClose'
-	"execute ':NERDTree'
+	execute ':NERDTree'
 	execute ':NERDTreeFind'
 	execute ':vertical resize ' . g:NERDTreeWinSize
     endif
