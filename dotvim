@@ -11,7 +11,7 @@ Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'aaronj1335/underscore-templates.vim'
 Plug 'ekalinin/Dockerfile.vim' 
 Plug 'elzr/vim-json'
-"Plug 'klen/python-mode'
+Plug 'klen/python-mode'
 Plug 'mattn/emmet-vim'
 Plug 'mitsuhiko/vim-rst'
 Plug 'mustache/vim-mustache-handlebars'
@@ -21,6 +21,8 @@ Plug 'saltstack/salt-vim'
 Plug 'pearofducks/ansible-vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
+Plug 'cespare/vim-toml'
+Plug 'hdima/python-syntax'
 
 ""Colorschemes
 Plug 'arcticicestudio/nord-vim'
@@ -41,6 +43,7 @@ Plug 'jdkanani/vim-material-theme'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhartington/oceanic-next'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 "
 ""Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -57,7 +60,7 @@ Plug 'w0rp/ale'
 "Plug 'vim-syntastic/syntastic'
 Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdcommenter'
+"Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
@@ -75,8 +78,9 @@ Plug 'Shougo/denite.nvim'
 Plug 'ozelentok/denite-gtags'
 Plug 'mhinz/vim-signify'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'fholgado/minibufexpl.vim'
-Plug 'jmcantrell/vim-virtualenv'
+"Plug 'fholgado/minibufexpl.vim'
+"Plug 'jmcantrell/vim-virtualenv'
+Plug 'plytophogy/vim-virtualenv'
 Plug 'tyru/open-browser.vim'
 Plug 'tyru/open-browser-github.vim'
 Plug 'codeindulgence/vim-tig'
@@ -92,10 +96,15 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'embear/vim-localvimrc'
 Plug 'osyo-manga/vim-over'
 Plug 'sbdchd/neoformat'
+Plug 'ambv/black'
+Plug 'fisadev/vim-isort'
+Plug 'tpope/vim-commentary'
 
 "Plug 'prabirshrestha/async.vim'
 "Plug 'prabirshrestha/vim-lsp'
 "Plug 'ryanolsonx/vim-lsp-python'
+"
+
 
 
 if has('nvim')
@@ -113,15 +122,12 @@ Plug 'autozimu/LanguageClient-neovim', {
 call plug#end()
 
 
-"set t_Co=256
 set nocursorline
 filetype on
 set hidden
 set nu
 set ai
 set si
-syntax on
-"set cursorline
 filetype indent on
 filetype plugin on
 let mapleader=","
@@ -132,7 +138,11 @@ set background=dark
 "colorscheme Tomorrow-Night
 "colorscheme 
 "colorscheme nord
-colorscheme OceanicNext
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+"colorscheme OceanicNext
+"colorscheme material-theme
+colorscheme palenight
 set ic  "Insensitive case
 "set colorcolumn=+1
 "set guifont=Monaco:h14
@@ -148,11 +158,13 @@ map <C-f> :Ack!<space>
 nmap mm '
 vmap <F9> :'<,'>sort<CR>
 nmap <C-o> :NERDTree<CR>
-nmap <tab> :MBEbp<CR>
-nmap <backspace> :MBEbn<CR>
+"nmap <tab> :MBEbp<CR>
+"nmap <backspace> :MBEbn<CR>
 nmap <F5> :Refresh
 nmap <C-i> :IndentGuidesToggle<CR>
-nmap <tab> :MBEbp<CR>
+"nmap <tab> :MBEbp<CR>
+nnoremap <tab> :bnext<CR>
+nnoremap <backspace> :bprev<CR>
 
 nmap ' :MBEbn<CR>
 
@@ -186,22 +198,6 @@ let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
 "" JSX
 let g:jsx_ext_required = 0 
 
-""Linter configuration
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_debug = 0
-"let g:syntastic_always_populate_loc_list = 1
-""let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_python_checkers = ['flake8',]
-"let g:syntastic_javascript_checkers = ['eslint']
-"let g:syntastic_javascript_eslint_exec = ['/usr/local/bin/eslint']
-"let g:syntastic_javascript_eslint_exec = [$PWD . '/papaye/static/node_modules/.bin/eslint']
-"let g:syntastic_javascript_eslint_exec = ['eslint_d']
-"let b:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
 let g:ale_completion_enabled = 1
 
@@ -386,7 +382,7 @@ nnoremap <leader>d :call LanguageClient#textDocument_definition()<CR>
 let g:LanguageClient_diagnosticsEnable=0
 
 let g:conoline_auto_enable = 1
-" For Neovim 0.1.3 and 0.1.4
+" For Neovim 0.1.3 and 0.1.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " Or if you have Neovim >= 0.1.5
@@ -394,6 +390,20 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-" Theme
-syntax enable
-colorscheme OceanicNext
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+
+noremap <C-_> :Commentary<CR>
+
+
+"NeoVIm
+let g:python3_host_prog = '/home/romain/.local/share/virtualenvs/pyenv/bin/python'
+
+let python_highlight_all = 1
+let g:palenight_terminal_italics=1
+
+syntax on
