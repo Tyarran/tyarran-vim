@@ -397,9 +397,6 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 
-noremap <C-_> :Commentary<CR>
-
-
 "NeoVIm
 let g:python3_host_prog = $HOME.'/.local/share/virtualenvs/pyenv/bin/python'
 
@@ -407,3 +404,8 @@ let python_highlight_all = 1
 let g:palenight_terminal_italics=1
 
 syntax on
+
+nnoremap <C-_> :Commentary<CR>
+vnoremap <C-_> :Commentary<CR>
+
+
