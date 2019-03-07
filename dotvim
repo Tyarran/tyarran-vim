@@ -401,7 +401,7 @@ noremap <C-_> :Commentary<CR>
 
 
 "NeoVIm
-let g:python3_host_prog = '/home/romain/.local/share/virtualenvs/pyenv/bin/python'
+let g:python3_host_prog = $HOME.'/.local/share/virtualenvs/pyenv/bin/python'
 
 let python_highlight_all = 1
 let g:palenight_terminal_italics=1
