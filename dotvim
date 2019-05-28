@@ -163,10 +163,10 @@ nmap <C-o> :NERDTree<CR>
 nmap <F5> :Refresh
 nmap <C-i> :IndentGuidesToggle<CR>
 "nmap <tab> :MBEbp<CR>
-nnoremap <tab> :bnext<CR>
-nnoremap <backspace> :bprev<CR>
+nnoremap <tab> :bprev<CR>
+nnoremap <backspace> :bnext<CR>
 
-nmap ' :MBEbn<CR>
+nmap ' :bprev<CR>
 
 "FuzzyFinding
 nmap <C-b> :Buffers<CR>
@@ -398,7 +398,7 @@ nnoremap <C-H> <C-W><C-H>
 
 
 "NeoVIm
-let g:python3_host_prog = $HOME.'/.local/share/virtualenvs/pyenv/bin/python'
+let g:python3_host_prog = $HOME.'/.local/share/virtualenvs/vim/bin/python'
 
 let python_highlight_all = 1
 let g:palenight_terminal_italics=1
@@ -408,4 +408,5 @@ syntax on
 nnoremap <C-_> :Commentary<CR>
 vnoremap <C-_> :Commentary<CR>
 
-
+"Black
+let g:black_virtualenv = $HOME.'/.local/share/virtualenvs/vim/'
