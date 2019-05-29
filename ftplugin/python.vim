@@ -8,7 +8,7 @@ setlocal colorcolumn=100
 "let $PATH=$PATH . ':' . $HOME . '/Library/Python/3.5/bin'
 
 "Linter
-let b:ale_linters = {'python': ['flake8']}
+let b:ale_linters = {'python': ['pyls', 'flake8']}
 
 "PyMode
 let g:pymode_folding = 0
