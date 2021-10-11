@@ -5,37 +5,39 @@ let $PATH=$PATH . ':' . $HOME . '/usr/local/bin'
 call plug#begin('~/.config/nvim/plugged')
 
 "Syntaxes
-Plug 'Glench/Vim-Jinja2-Syntax'
+" Plug 'Glench/Vim-Jinja2-Syntax'
 " Plug 'reasonml-editor/vim-reason-plus'
-Plug 'rescript-lang/vim-rescript'
+" Plug 'rescript-lang/vim-rescript'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/0.x'
-  \ }
-Plug 'sheerun/vim-polyglot'
+Plug 'jordwalke/vim-reasonml'
+" Plug 'prettier/vim-prettier', {
+"   \ 'do': 'yarn install',
+"   \ 'branch': 'release/0.x'
+"   \ }
+" Plug 'sheerun/vim-polyglot'
 " Plug 'vim-python/python-syntax'
 " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug 'reasonml-editor/vim-reason-plus'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" Plug 'reasonml-editor/vim-reason-plus'
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 
 ""Colorschemes
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
 " Plug 'ghifarit53/tokyonight-vim'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim'}
-Plug 'Brettm12345/moonlight.vim'
-Plug 'gugsrs/vim-moonlight2'
+" Plug 'Brettm12345/moonlight.vim'
+" Plug 'gugsrs/vim-moonlight2'
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'dracula/vim'
+" Plug 'dracula/vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'chriskempson/base16-vim'
-Plug 'rakr/vim-one'
+" Plug 'rakr/vim-one'
 Plug 'folke/tokyonight.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'nvim-treesitter/playground'
 " Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
@@ -44,6 +46,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'codota/tabnine-vim'
 
 ""Tools
 " Plug 'w0rp/ale'
@@ -52,29 +55,33 @@ Plug 'tommcdo/vim-fubitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tmhedberg/matchit'
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'ojroques/nvim-lspfuzzy'
+Plug 'gfanto/fzf-lsp.nvim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'fholgado/minibufexpl.vim'
 Plug 'romgrk/winteract.vim'
-Plug 'oblitum/rainbow'
-Plug 'embear/vim-localvimrc'
+Plug 'frazrepo/vim-rainbow'
+" Plug 'embear/vim-localvimrc'
 Plug 'osyo-manga/vim-over'
-Plug 'uguu-org/vim-matrix-screensaver'
+" Plug 'uguu-org/vim-matrix-screensaver'
 Plug 'tpope/vim-rhubarb'
-Plug 'djoshea/vim-autoread'
+" Plug 'djoshea/vim-autoread'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'preservim/nerdtree'
 " Plug 'Shougo/denite.nvim'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+" Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
 Plug 'liuchengxu/vista.vim'
 
 Plug 'vbe0201/vimdiscord'
+" Plug 'ocaml/merlin', {'rtp': 'vim/merlin'}
 
 call plug#end()
 
@@ -144,6 +151,7 @@ let NERDTreeIgnore=['.bs.js$', '__pycache__$']
 " nnoremap <Leader>gt :BTags<CR>
 " nnoremap <Leader>t :CocList tags<CR>
 " let g:fzf_tags_command = 'ctags -R'
+ nnoremap <Leader>gf :GitFiles<CR>
 
 " Coc
 nnoremap <leader>d :CocList diagnostics<CR>
@@ -240,6 +248,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> grr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -347,13 +356,17 @@ au BufReadPost *.inc set syntax=php
 let g:miniBufExplorerAutoStart = 1
 let g:miniBufExplBuffersNeeded = 0
 
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = { "javascript" }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "c", "rust" },  -- list of language that will be disabled
-  },
-}
-EOF
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+"   ignore_install = { "javascript" }, -- List of parsers to ignore installing
+"   highlight = {
+"    enable = true,              -- false will disable the whole extension
+"    disable = { "c", "rust" },  -- list of language that will be disabled
+"   },
+" }
+" EOF
+
+noremap <C-8> <C-\><C-n>
+
+lua require('lspfuzzy').setup {}
