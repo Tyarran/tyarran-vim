@@ -1,0 +1,49 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "json",
+    "python",
+    "reason",
+    "rescript"
+  ],
+  "pyright": {
+    "disableDiagnostics": true
+  },
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod"
+      ],
+      "trace.server": "verbose",
+      "filetypes": [
+        "go"
+      ]
+    },
+    "python": {
+      "command": "pyls",
+      "trace.server": "verbose",
+      "filetypes": [
+        "python"
+      ],
+      "linting": {
+        "mypyEnabled": true
+      }
+    },
+    "ocaml-lsp": {
+      "command": "esy",
+      "args": [
+        "sh",
+        "-c",
+        "ocamllsp"
+      ],
+      "filetypes": [
+        "ocaml",
+        "reason"
+      ]
+    }
+  },
+  "python.formatting.provider": "black",
+  "python.linting.mypyEnabled": "true",
+  "pyright.organizeimports.provider": "isort",
+  "python.pythonPath": "/home/romain/.local/share/virtualenvs/8b01e3b6d406e0/bin/python"
+}
