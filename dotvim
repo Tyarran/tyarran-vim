@@ -5,47 +5,24 @@ let $PATH=$PATH . ':' . $HOME . '/usr/local/bin'
 call plug#begin('~/.config/nvim/plugged')
 
 "Syntaxes
-" Plug 'Glench/Vim-Jinja2-Syntax'
-" Plug 'reasonml-editor/vim-reason-plus'
-" Plug 'rescript-lang/vim-rescript'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'jordwalke/vim-reasonml'
-" Plug 'prettier/vim-prettier', {
-"   \ 'do': 'yarn install',
-"   \ 'branch': 'release/0.x'
-"   \ }
-" Plug 'sheerun/vim-polyglot'
-" Plug 'vim-python/python-syntax'
-" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-" Plug 'reasonml-editor/vim-reason-plus'
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
 
 ""Colorschemes
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-" Plug 'joshdick/onedark.vim'
-" Plug 'ghifarit53/tokyonight-vim'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim'}
-" Plug 'Brettm12345/moonlight.vim'
-" Plug 'gugsrs/vim-moonlight2'
 Plug 'drewtempelmeyer/palenight.vim'
-" Plug 'dracula/vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'chriskempson/base16-vim'
-" Plug 'rakr/vim-one'
 Plug 'folke/tokyonight.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Plug 'nvim-treesitter/playground'
-" Plug 'nvim-treesitter/nvim-treesitter'
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 ""Autocompletion
-" Plug 'sirver/UltiSnips'
-"Plug 'honza/vim-snippets'
+ Plug 'sirver/UltiSnips'
+Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'antoinemadec/coc-fzf'
 " Plug 'codota/tabnine-vim'
 
 ""Tools
@@ -55,7 +32,6 @@ Plug 'tommcdo/vim-fubitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tmhedberg/matchit'
-" Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -63,25 +39,18 @@ Plug 'junegunn/fzf.vim'
 Plug 'ojroques/nvim-lspfuzzy'
 Plug 'gfanto/fzf-lsp.nvim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'fholgado/minibufexpl.vim'
+Plug 'jlanzarotta/bufexplorer'
 Plug 'romgrk/winteract.vim'
 Plug 'frazrepo/vim-rainbow'
-" Plug 'embear/vim-localvimrc'
 Plug 'osyo-manga/vim-over'
-" Plug 'uguu-org/vim-matrix-screensaver'
 Plug 'tpope/vim-rhubarb'
-" Plug 'djoshea/vim-autoread'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'preservim/nerdtree'
-" Plug 'Shougo/denite.nvim'
 " Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
-Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
 Plug 'liuchengxu/vista.vim'
-
 Plug 'vbe0201/vimdiscord'
-" Plug 'ocaml/merlin', {'rtp': 'vim/merlin'}
 
 call plug#end()
 
@@ -100,23 +69,13 @@ let mapleader=","
 set background=dark
 set showcmd
 set t_Co=256
-" colorscheme onedark
-" colorscheme Tomorrow-Night
-" colorscheme moonlight2
-" colorscheme palenight
-" colorscheme dracula
-" colorscheme onehalfdark
-" colorscheme base16-tomorrow-night
-" colorscheme base16-material-palenight
-" colorscheme base16-material-darker
-" colorscheme base16-tomorrow-night-eighties
-" colorscheme base16-oceanicnext
-" let g:tokyonight_style = "night"
+let g:tokyonight_style = "night"
+let g:tokyonight_colors = {
+  \ 'hint': 'orange',
+  \ 'error': '#ff0000'
+\ }
 colorscheme tokyonight
 set termguicolors
-
-" let g:lightline.colorscheme = 'moonlight'
-" let g:moonlight_terminal_italics = 1
 
 "" -- normal mode mapping
 nmap <leader>tb :Vista<CR>
@@ -125,8 +84,8 @@ nnoremap <tab> :bprevious<CR>
 nnoremap <backspace> :bnext<CR>
 
 "FuzzyFinding
-nmap <leader>b :Clap buffers<CR>
-nmap <C-p> :Files<CR>
+" nmap <leader>b :Clap buffers<CR>
+nmap <C-p> :GitFiles<CR>
 
 nmap <leader>e :NERDTreeFind<CR>
 
@@ -139,7 +98,6 @@ set wrap
 set mouse=a
 
 " NERDTree configuration
-" let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 20
@@ -148,7 +106,8 @@ let NERDTreeIgnore=['.bs.js$', '__pycache__$']
 
 
 "FZF
-" nnoremap <Leader>gt :BTags<CR>
+nnoremap <Leader>t :Vista finder fzf:coc <CR>
+nnoremap <Leader>gt :CocFzfList symbols<CR>
 " nnoremap <Leader>t :CocList tags<CR>
 " let g:fzf_tags_command = 'ctags -R'
  nnoremap <Leader>gf :GitFiles<CR>
@@ -157,10 +116,12 @@ let NERDTreeIgnore=['.bs.js$', '__pycache__$']
 nnoremap <leader>d :CocList diagnostics<CR>
 
 " Clap
-nnoremap <Leader>t :Clap proj_tags<CR>
-nnoremap <Leader>gt :Clap tags<CR>
-nnoremap <Leader>gf :Clap gfiles<CR>
-nnoremap <Leader>f :Clap files<CR>
+" nnoremap <Leader>t :Clap proj_tags<CR>
+" nnoremap <Leader>gt :Clap tags<CR>
+" nnoremap <Leader>t :CocList symbols<CR>
+" nnoremap <Leader>gt :CocList outline<CR>
+" nnoremap <Leader>gf :Clap gfiles<CR>
+" nnoremap <Leader>f :Clap files<CR>
 let g:clap_layout = { 'relative': 'editor' }
 
 set clipboard+=unnamedplus
@@ -326,7 +287,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -356,16 +317,14 @@ au BufReadPost *.inc set syntax=php
 let g:miniBufExplorerAutoStart = 1
 let g:miniBufExplBuffersNeeded = 0
 
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-"   ignore_install = { "javascript" }, -- List of parsers to ignore installing
-"   highlight = {
-"    enable = true,              -- false will disable the whole extension
-"    disable = { "c", "rust" },  -- list of language that will be disabled
-"   },
-" }
-" EOF
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+   enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
 
 noremap <C-8> <C-\><C-n>
 
