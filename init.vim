@@ -86,6 +86,8 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'gbrlsnchs/telescope-lsp-handlers.nvim'
 " Plug 'weilbith/nvim-lsp-smag'
+Plug 'folke/trouble.nvim'
+Plug 'folke/lsp-colors.nvim'
 
 
 call plug#end()
@@ -430,3 +432,4 @@ lua require("nvim-tree-config")
 lua require("tree-config")
 lua require("treesitter-config")
 lua require("telescope-config")
+lua require("trouble-config")
