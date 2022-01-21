@@ -100,6 +100,7 @@ nmap <leader>w :InteractiveWindow<CR>
 nnoremap <leader>d :Telescope lsp_dynamic_workspace_symbols<CR>
 nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
+nnoremap K :lua vim.lsp.buf.signature_help()<CR>
 
 
 "FuzzyFinding
