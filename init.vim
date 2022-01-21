@@ -100,7 +100,8 @@ nmap <leader>w :InteractiveWindow<CR>
 nnoremap <leader>d :Telescope lsp_dynamic_workspace_symbols<CR>
 nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
-nnoremap K :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>s :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>H :lua vim.lsp.buf.hover()<CR>
 
 
 "FuzzyFinding
@@ -131,7 +132,7 @@ lua require("lualine-config")
 lua require("nvim-cmp-config")
 lua require("nvim-tree-config")
 lua require("tree-config")
-lua require("treesitter-config")
+" lua require("treesitter-config")
 lua require("telescope-config")
 lua require("trouble-config")
 lua require("nvim-comment-config")
@@ -224,3 +225,7 @@ set termguicolors " this variable must be enabled for colors to be applied prope
 " a list of groups can be found at `:help nvim_tree_highlight`
 highlight NvimTreeFolderIcon guibg=blue
 
+
+autocmd CursorHold * lua vim.lsp.buf.hover()
+autocmd CursorHoldI * lua vim.lsp.buf.signature_help()
+set updatetime=500
