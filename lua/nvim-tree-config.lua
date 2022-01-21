@@ -1,3 +1,5 @@
+-- following options are the default
+-- each of these are documented in `:help nvim-tree.OPTION_NAME`
 require'nvim-tree'.setup {
   disable_netrw       = true,
   hijack_netrw        = true,
@@ -12,7 +14,7 @@ require'nvim-tree'.setup {
     auto_open = true,
   },
   diagnostics = {
-    enable = false,
+    enable = true,
     icons = {
       hint = "",
       info = "",
