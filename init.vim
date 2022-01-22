@@ -132,7 +132,7 @@ lua require("lualine-config")
 lua require("nvim-cmp-config")
 lua require("nvim-tree-config")
 lua require("tree-config")
-" lua require("treesitter-config")
+lua require("treesitter-config")
 lua require("telescope-config")
 lua require("trouble-config")
 lua require("nvim-comment-config")
@@ -226,6 +226,21 @@ set termguicolors " this variable must be enabled for colors to be applied prope
 highlight NvimTreeFolderIcon guibg=blue
 
 
-autocmd CursorHold * lua vim.lsp.buf.hover()
 autocmd CursorHoldI * lua vim.lsp.buf.signature_help()
 set updatetime=500
+
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
+lua << EOF
+hover = function()
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+	  vim.lsp.handlers.hover, { focusable = false }
+	)
+	vim.lsp.buf.hover()
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+	  vim.lsp.handlers.hover, { focusable = true }
+	)
+end
+EOF
+autocmd CursorHold * lua hover()
