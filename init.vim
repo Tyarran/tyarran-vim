@@ -36,7 +36,7 @@ Plug 'akinsho/toggleterm.nvim'
 Plug 'rcarriga/nvim-notify'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 " Plug 'liuchengxu/vim-clap'
-" Plug 'liuchengxu/vista.vim'
+Plug 'liuchengxu/vista.vim'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
 Plug 'gfanto/fzf-lsp.nvim'
@@ -64,27 +64,28 @@ Plug 'gbrlsnchs/telescope-lsp-handlers.nvim'
 
 call plug#end()
 
-set cursorline
-set mouse=a
-filetype on
-set hidden
-set nu
-set ai
-set si
-set ic  "Insensitive case
-syn on
-filetype indent on
-filetype plugin on
-let mapleader=","
-set background=dark
-set t_Co=256
-let g:tokyonight_style = "night"
 colorscheme tokyonight
-set incsearch
-set inccommand=nosplit
-set hlsearch
-set smartcase
+filetype indent on
+filetype on
+filetype plugin on
+let g:tokyonight_style = "night"
+let mapleader=","
+set ai
+set background=dark
 set clipboard+=unnamedplus
+set cursorline
+set hidden
+set hlsearch
+set ic  "Insensitive case
+set inccommand=nosplit
+set incsearch
+set mouse=a
+set nu
+set si
+set smartcase
+set t_Co=256
+set wrap
+syn on
 syntax on
 
 "Keybindings
@@ -100,20 +101,14 @@ nnoremap <Leader>b :Telescope buffers<CR>
 nnoremap <Leader>p :Telescope<CR>
 nmap <leader>w :InteractiveWindow<CR>
 nnoremap <leader>d :Telescope lsp_dynamic_workspace_symbols<CR>
-nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>s :lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>h :lua vim.lsp.buf.hover()<CR>
-
-
-"FuzzyFinding
+nnoremap <c-f> :Telescope live_grep<CR>
+nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
 
 
 au BufReadPost *.inc set syntax=php
-
-" set wrap
-" set mouse=a
-
 
 
 let g:dashboard_default_executive ='telescope'
@@ -152,7 +147,7 @@ lua << EOF
 require('numb').setup{}
 EOF
 
-let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
+let g:nvim_tree_quit_on_open = 0 "0 by default, closes the tree when you open a file
 let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
 let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
@@ -245,5 +240,4 @@ hover = function()
 	)
 end
 EOF
-
 autocmd BufWritePre *.re lua vim.lsp.buf.formatting_sync()
