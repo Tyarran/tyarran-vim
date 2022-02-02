@@ -89,9 +89,11 @@ syntax on
 
 "Keybindings
 nmap <C-y> :set hlsearch! hlsearch?<CR>
-nnoremap <tab> :bprevious<CR>
-nnoremap <backspace> :bnext<CR>
-tnoremap <Esc> <C-\><C-n>
+nnoremap <tab> :BufferPrevious<CR>
+nnoremap <backspace> :BufferNext<CR>
+nnoremap <C-d> :BufferClose<CR>
+" tnoremap <Esc> <C-\><C-n>
+tnoremap <C-m><C-n> <C-\><C-n>
 nmap <C-p> :Telescope find_files<CR>
 nnoremap <Leader>gf :Telescope git_files<CR>
 nnoremap <Leader>b :Telescope buffers<CR>
@@ -101,7 +103,7 @@ nnoremap <leader>d :Telescope lsp_dynamic_workspace_symbols<CR>
 nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>s :lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>H :lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>h :lua vim.lsp.buf.hover()<CR>
 
 
 "FuzzyFinding
@@ -226,8 +228,8 @@ set termguicolors " this variable must be enabled for colors to be applied prope
 highlight NvimTreeFolderIcon guibg=blue
 
 
-autocmd CursorHoldI * lua vim.lsp.buf.signature_help()
-set updatetime=500
+" autocmd CursorHoldI * lua vim.lsp.buf.signature_help()
+" set updatetime=500
 
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
@@ -243,4 +245,5 @@ hover = function()
 	)
 end
 EOF
-autocmd CursorHold * lua hover()
+
+autocmd BufWritePre *.re lua vim.lsp.buf.formatting_sync()
