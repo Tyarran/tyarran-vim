@@ -64,7 +64,8 @@ Plug 'gbrlsnchs/telescope-lsp-handlers.nvim'
 
 call plug#end()
 
-colorscheme tokyonight
+colorscheme base16-default-dark
+" colorscheme tokyonight
 filetype indent on
 filetype on
 filetype plugin on
