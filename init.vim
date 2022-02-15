@@ -64,8 +64,8 @@ Plug 'gbrlsnchs/telescope-lsp-handlers.nvim'
 
 call plug#end()
 
-colorscheme base16-default-dark
 " colorscheme tokyonight
+colorscheme base16-tomorrow-night
 filetype indent on
 filetype on
 filetype plugin on
@@ -107,6 +107,13 @@ nnoremap <leader>s :lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>h :lua vim.lsp.buf.hover()<CR>
 nnoremap <c-f> :Telescope live_grep<CR>
 nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>r :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>t :lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <leader>gt :Telescope lsp_dynamic_workspace_symbols<CR>
+nmap m [m
+nmap M ]m
+vmap m [m
+vmap M ]m
 
 
 au BufReadPost *.inc set syntax=php
@@ -136,6 +143,9 @@ lua require("trouble-config")
 lua require("nvim-comment-config")
 " lua require("nlsp-settings-config")
 lua require("nvim-lsp-installer-config")
+lua << EOF
+require("luasnip.loaders.from_vscode").load()
+EOF
 
 lua << EOF
 require('nvim-autopairs').setup{}
@@ -214,7 +224,7 @@ let g:nvim_tree_icons = {
     \ }
 
 nnoremap <C-n> :lua tree.toggle()<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>rr :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 " NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, and NvimTreeResize are also available if you need them
 
