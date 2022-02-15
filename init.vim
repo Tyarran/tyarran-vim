@@ -113,6 +113,7 @@ nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>r :lua vim.lsp.buf.references()<CR>
 nnoremap <leader>t :lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <leader>gt :Telescope lsp_dynamic_workspace_symbols<CR>
+vnoremap <leader>f :lua vim.lsp.buf.range_formatting()<CR>
 nmap m [m
 nmap M ]m
 vmap m [m
@@ -180,3 +181,5 @@ end
 EOF
 autocmd BufWritePre *.re lua vim.lsp.buf.formatting_sync()
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()
+autocmd BufWritePre *.exs lua vim.lsp.buf.formatting_sync()
+autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync()
