@@ -5,11 +5,13 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'jordwalke/vim-reasonml'
 Plug 'prettier/vim-prettier'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'elixir-editors/vim-elixir'
 
 ""Colorschemes
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'folke/tokyonight.nvim'
+Plug 'chriskempson/vim-tomorrow-theme'
 
 ""Tools
 Plug 'andymass/vim-matchup'
