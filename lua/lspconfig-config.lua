@@ -44,3 +44,11 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+-- require"lspconfig".pylsp.setup {
+--     filetypes = {"python"},
+--     settings = {
+--         configurationSources = {"flake8"},
+-- 	formatCommand = {"black"}
+--     }
+-- }
