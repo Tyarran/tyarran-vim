@@ -12,6 +12,7 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'folke/tokyonight.nvim'
 Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'EdenEast/nightfox.nvim'
 
 ""Tools
 Plug 'andymass/vim-matchup'
@@ -69,7 +70,8 @@ call plug#end()
 
 set completeopt=menu,menuone,noselect
 
-colorscheme tokyonight
+" colorscheme tokyonight
+colorscheme nightfox
 " colorscheme base16-tomorrow-night
 filetype indent on
 filetype on
