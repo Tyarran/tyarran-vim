@@ -5,6 +5,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'jordwalke/vim-reasonml'
 Plug 'prettier/vim-prettier'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
 Plug 'elixir-editors/vim-elixir'
 
 ""Colorschemes
@@ -13,6 +15,8 @@ Plug 'chriskempson/base16-vim'
 Plug 'folke/tokyonight.nvim'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'EdenEast/nightfox.nvim'
+Plug 'navarasu/onedark.nvim'
+Plug 'LunarVim/onedarker.nvim'
 
 ""Tools
 Plug 'andymass/vim-matchup'
@@ -24,7 +28,7 @@ Plug 'tpope/vim-repeat'
 Plug 'romgrk/winteract.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'romgrk/barbar.nvim'
-Plug 'nvim-lualine/lualine.nvim'
+" Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-telescope/telescope.nvim'
@@ -44,6 +48,9 @@ Plug 'liuchengxu/vista.vim'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
 Plug 'gfanto/fzf-lsp.nvim'
+Plug 'klen/nvim-test'
+Plug 'APZelos/blamer.nvim'
+Plug 'TimUntersberger/neogit'
 
 "Completion + LSP
 Plug 'neovim/nvim-lspconfig'
@@ -54,7 +61,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
-" Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'github/copilot.vim'
 Plug 'folke/trouble.nvim'
 Plug 'folke/lsp-colors.nvim'
@@ -70,13 +77,21 @@ call plug#end()
 
 set completeopt=menu,menuone,noselect
 
-" colorscheme tokyonight
-colorscheme nightfox
-" colorscheme base16-tomorrow-night
+colorscheme tokyonight
+" colorscheme duskfox
+" colorscheme nightfox
+" " colorscheme base16-tomorrow-night
+" colorscheme base16-material-darker
+" let g:onedark_config = {
+"     \ 'style': 'darker',
+" \}
+" colorscheme onedark
+set termguicolors
 filetype indent on
 filetype on
 filetype plugin on
-let g:tokyonight_style = "night"
+" let g:tokyonight_style = "night"
+
 let mapleader=","
 set ai
 set background=dark
@@ -102,7 +117,7 @@ nnoremap <tab> :BufferPrevious<CR>
 nnoremap <backspace> :BufferNext<CR>
 nnoremap <C-d> :BufferClose<CR>
 " tnoremap <Esc> <C-\><C-n>
-tnoremap <C-m><C-n> <C-\><C-n>
+tnoremap <C-n><C-n> <C-\><C-n>
 nmap <C-p> :Telescope find_files<CR>
 nnoremap <Leader>gf :Telescope git_files<CR>
 nnoremap <Leader>b :Telescope buffers<CR>
@@ -117,11 +132,16 @@ nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>r :lua vim.lsp.buf.references()<CR>
 nnoremap <leader>t :lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <leader>gt :Telescope lsp_dynamic_workspace_symbols<CR>
+nnoremap <leader>f :lua vim.lsp.buf.formatting_sync()<CR>
 vnoremap <leader>f :lua vim.lsp.buf.range_formatting()<CR>
+nnoremap <leader>xx :TroubleToggle<CR>
 nmap m [m
 nmap M ]m
 vmap m [m
 vmap M ]m
+
+" aliases
+command! TT :ToggleTerm direction=float
 
 
 au BufReadPost *.inc set syntax=php
@@ -140,7 +160,7 @@ lua require("gitsigns-config")
 " lua require("lsp-handlers-config")
 lua require("lspconfig-config")
 " lua require("lspkind-config")
-lua require("lualine-config")
+" lua require("lualine-config")
 " lua require("null-ls-config")
 lua require("nvim-cmp-config")
 lua require("nvim-tree-config")
@@ -151,6 +171,7 @@ lua require("trouble-config")
 lua require("nvim-comment-config")
 " lua require("nlsp-settings-config")
 lua require("nvim-lsp-installer-config")
+lua require("dashboard-config")
 lua << EOF
 require("luasnip.loaders.from_vscode").load()
 EOF
@@ -165,6 +186,11 @@ EOF
 lua << EOF
 require('numb').setup{}
 EOF
+
+lua << EOF
+require("nvim-test").setup{}
+EOF
+
 
 " autocmd CursorHoldI * lua vim.lsp.buf.signature_help()
 " set updatetime=500
