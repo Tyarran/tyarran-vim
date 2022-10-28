@@ -6,6 +6,8 @@ Plug 'jordwalke/vim-reasonml'
 Plug 'prettier/vim-prettier'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'nkrkv/nvim-treesitter-rescript'
+Plug 'danielo515/nvim-treesitter-reason'
 
 Plug 'elixir-editors/vim-elixir'
 
@@ -28,12 +30,13 @@ Plug 'tpope/vim-repeat'
 Plug 'romgrk/winteract.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'romgrk/barbar.nvim'
-" Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'glepnir/dashboard-nvim'
-Plug 'frazrepo/vim-rainbow'
+" Plug 'frazrepo/vim-rainbow'
+Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-rhubarb'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'terrortylor/nvim-comment'
@@ -51,6 +54,8 @@ Plug 'gfanto/fzf-lsp.nvim'
 Plug 'klen/nvim-test'
 Plug 'APZelos/blamer.nvim'
 Plug 'TimUntersberger/neogit'
+Plug 'wfxr/minimap.vim'
+
 
 "Completion + LSP
 Plug 'neovim/nvim-lspconfig'
@@ -77,9 +82,14 @@ call plug#end()
 
 set completeopt=menu,menuone,noselect
 
-colorscheme tokyonight
+" colorscheme tokyonight
+" colorscheme tokyonight-night
+" colorscheme base16-material-darker
 " colorscheme duskfox
 " colorscheme nightfox
+" colorscheme tokyonight
+" colorscheme terafox
+colorscheme onedarker
 " " colorscheme base16-tomorrow-night
 " colorscheme base16-material-darker
 " let g:onedark_config = {
@@ -90,7 +100,6 @@ set termguicolors
 filetype indent on
 filetype on
 filetype plugin on
-" let g:tokyonight_style = "night"
 
 let mapleader=","
 set ai
@@ -139,15 +148,26 @@ nmap m [m
 nmap M ]m
 vmap m [m
 vmap M ]m
+nnoremap <leader>l :NvimTreeToggle<CR>
+nnoremap <leader>m :MinimapToggle<CR>
+nnoremap <C-w>n :split<CR>
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
 
 " aliases
 command! TT :ToggleTerm direction=float
 
 
-au BufReadPost *.inc set syntax=php
+let g:rainbow_active = 1
+
+
+" au BufReadPost *.inc set syntax=php
 
 
 let g:dashboard_default_executive ='telescope'
+" let g:minimap_auto_start = 1
+"
+let g:blamer_enabled = 1
 
 " Vista
 let g:vista_executive_for = {
@@ -160,7 +180,7 @@ lua require("gitsigns-config")
 " lua require("lsp-handlers-config")
 lua require("lspconfig-config")
 " lua require("lspkind-config")
-" lua require("lualine-config")
+lua require("lualine-config")
 " lua require("null-ls-config")
 lua require("nvim-cmp-config")
 lua require("nvim-tree-config")
@@ -191,13 +211,6 @@ lua << EOF
 require("nvim-test").setup{}
 EOF
 
-
-" autocmd CursorHoldI * lua vim.lsp.buf.signature_help()
-" set updatetime=500
-
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
-
 lua << EOF
 hover = function()
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
@@ -209,7 +222,9 @@ hover = function()
 	)
 end
 EOF
-autocmd BufWritePre *.re lua vim.lsp.buf.formatting_sync()
-autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()
-autocmd BufWritePre *.exs lua vim.lsp.buf.formatting_sync()
-autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync()
+" autocmd BufWritePre *.re lua vim.lsp.buf.formatting_sync()
+" autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()
+" autocmd BufWritePre *.exs lua vim.lsp.buf.formatting_sync()
+" autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync()
+" autocmd BufWritePre *.res lua vim.lsp.buf.formatting_sync()
+autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
