@@ -11,50 +11,46 @@ Plug 'danielo515/nvim-treesitter-reason'
 
 Plug 'elixir-editors/vim-elixir'
 
-""Colorschemes
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'chriskempson/base16-vim'
-Plug 'folke/tokyonight.nvim'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'EdenEast/nightfox.nvim'
-Plug 'navarasu/onedark.nvim'
-Plug 'LunarVim/onedarker.nvim'
+"
+"Tools
+Plug 'nvim-lua/plenary.nvim'
 
-""Tools
-Plug 'andymass/vim-matchup'
+"Colorscheme
+Plug 'cocopon/iceberg.vim'
+
+"Code tools
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'andymass/vim-matchup'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
-"Plug 'tommcdo/vim-fubitive'
-Plug 'tpope/vim-repeat'
-Plug 'romgrk/winteract.vim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'romgrk/barbar.nvim'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'glepnir/dashboard-nvim'
-" Plug 'frazrepo/vim-rainbow'
 Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-rhubarb'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'terrortylor/nvim-comment'
-Plug 'nacro90/numb.nvim'
 Plug 'windwp/nvim-autopairs'
-Plug 'folke/which-key.nvim'
+Plug 'liuchengxu/vista.vim'
+Plug 'APZelos/blamer.nvim'
+Plug 'klen/nvim-test'
+Plug 'TimUntersberger/neogit'
+
+"Interface
+Plug 'romgrk/winteract.vim'
+Plug 'romgrk/barbar.nvim'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'glepnir/dashboard-nvim'
+Plug 'folke/trouble.nvim'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'rcarriga/nvim-notify'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-" Plug 'liuchengxu/vim-clap'
-Plug 'liuchengxu/vista.vim'
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
-Plug 'gfanto/fzf-lsp.nvim'
-Plug 'klen/nvim-test'
-Plug 'APZelos/blamer.nvim'
-Plug 'TimUntersberger/neogit'
+Plug 'nacro90/numb.nvim'
+Plug 'folke/which-key.nvim'
 Plug 'wfxr/minimap.vim'
+" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
+" Plug 'gfanto/fzf-lsp.nvim'
 
 
 "Completion + LSP
@@ -68,7 +64,6 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'github/copilot.vim'
-Plug 'folke/trouble.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
@@ -76,6 +71,7 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'nvim-lua/popup.nvim'
 Plug 'gbrlsnchs/telescope-lsp-handlers.nvim'
 " Plug 'tamago324/nlsp-settings.nvim'
+Plug 'norcalli/nvim-colorizer.lua'
 
 
 call plug#end()
@@ -89,8 +85,12 @@ set completeopt=menu,menuone,noselect
 " colorscheme nightfox
 " colorscheme tokyonight
 " colorscheme terafox
-colorscheme onedarker
-" " colorscheme base16-tomorrow-night
+" colorscheme onedarker
+" colorscheme base16-tomorrow-night
+" colorscheme moonlight
+colorscheme iceberg
+
+" colorscheme tundra
 " colorscheme base16-material-darker
 " let g:onedark_config = {
 "     \ 'style': 'darker',
