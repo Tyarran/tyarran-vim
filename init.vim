@@ -2,13 +2,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 "Syntaxes
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'jordwalke/vim-reasonml'
-Plug 'prettier/vim-prettier'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'nkrkv/nvim-treesitter-rescript'
 Plug 'danielo515/nvim-treesitter-reason'
-
 Plug 'elixir-editors/vim-elixir'
 
 "
@@ -17,6 +13,7 @@ Plug 'nvim-lua/plenary.nvim'
 
 "Colorscheme
 Plug 'cocopon/iceberg.vim'
+Plug 'EdenEast/nightfox.nvim'
 
 "Code tools
 Plug 'tpope/vim-surround'
@@ -33,29 +30,30 @@ Plug 'liuchengxu/vista.vim'
 Plug 'APZelos/blamer.nvim'
 Plug 'klen/nvim-test'
 Plug 'TimUntersberger/neogit'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'mfussenegger/nvim-dap'
 
 "Interface
 Plug 'romgrk/winteract.vim'
-Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'glepnir/dashboard-nvim'
 Plug 'folke/trouble.nvim'
 Plug 'akinsho/toggleterm.nvim'
+Plug 'folke/noice.nvim'
 Plug 'rcarriga/nvim-notify'
+Plug 'MunifTanjim/nui.nvim'
 Plug 'nacro90/numb.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'wfxr/minimap.vim'
-" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-
-" Plug 'gfanto/fzf-lsp.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 
 
 "Completion + LSP
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'onsails/lspkind-nvim'
 Plug 'hrsh7th/cmp-buffer'
@@ -70,7 +68,6 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'nvim-lua/popup.nvim'
 Plug 'gbrlsnchs/telescope-lsp-handlers.nvim'
-" Plug 'tamago324/nlsp-settings.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 
 
@@ -78,24 +75,8 @@ call plug#end()
 
 set completeopt=menu,menuone,noselect
 
-" colorscheme tokyonight
-" colorscheme tokyonight-night
-" colorscheme base16-material-darker
-" colorscheme duskfox
-" colorscheme nightfox
-" colorscheme tokyonight
-" colorscheme terafox
-" colorscheme onedarker
-" colorscheme base16-tomorrow-night
-" colorscheme moonlight
 colorscheme iceberg
 
-" colorscheme tundra
-" colorscheme base16-material-darker
-" let g:onedark_config = {
-"     \ 'style': 'darker',
-" \}
-" colorscheme onedark
 set termguicolors
 filetype indent on
 filetype on
@@ -122,10 +103,11 @@ syntax on
 
 "Keybindings
 nmap <C-y> :set hlsearch! hlsearch?<CR>
-nnoremap <tab> :BufferPrevious<CR>
-nnoremap <backspace> :BufferNext<CR>
+nnoremap <tab> :BufferLineCyclePrev<CR>
+nnoremap <backspace> :BufferLineCycleNext<CR>
 nnoremap <C-d> :BufferClose<CR>
-" tnoremap <Esc> <C-\><C-n>
+nnoremap <M-h> :tabprevious<CR>
+nnoremap <M-l> :tabnext<CR>
 tnoremap <C-n><C-n> <C-\><C-n>
 nmap <C-p> :Telescope find_files<CR>
 nnoremap <Leader>gf :Telescope git_files<CR>
@@ -148,7 +130,7 @@ nmap m [m
 nmap M ]m
 vmap m [m
 vmap M ]m
-nnoremap <leader>l :NvimTreeToggle<CR>
+nnoremap <leader>l :NeoTreeShowToggle<CR>
 nnoremap <leader>m :MinimapToggle<CR>
 nnoremap <C-w>n :split<CR>
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
@@ -161,25 +143,82 @@ command! TT :ToggleTerm direction=float
 let g:rainbow_active = 1
 
 
-" au BufReadPost *.inc set syntax=php
-
-
-let g:dashboard_default_executive ='telescope'
-" let g:minimap_auto_start = 1
-"
 let g:blamer_enabled = 1
+let g:matchup_delim_stopline = 5000
 
-" Vista
-let g:vista_executive_for = {
-  \ 'cpp': 'vim_lsp',
-  \ 'php': 'vim_lsp',
-  \ 'python': 'vim_lsp',
-  \ }
+lua << EOF
+require("mason").setup()
+require("mason-lspconfig").setup()
+require("mason-lspconfig").setup_handlers {
+-- The first entry (without a key) will be the default handler
+-- and will be called for each installed server that doesn't have
+-- a dedicated handler.
+function (server_name) -- default handler (optional)
+	require("lspconfig")[server_name].setup {}
+end,
+-- Next, you can provide a dedicated handler for specific servers.
+-- For example, a handler override for the `rust_analyzer`:
+["rust_analyzer"] = function ()
+	require("rust-tools").setup {}
+end
+}
+EOF
+
+lua << EOF
+require('lspkind').init({
+    -- DEPRECATED (use mode instead): enables text annotations
+    --
+    -- default: true
+    -- with_text = true,
+
+    -- defines how annotations are shown
+    -- default: symbol
+    -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+    mode = 'symbol_text',
+
+    -- default symbol map
+    -- can be either 'default' (requires nerd-fonts font) or
+    -- 'codicons' for codicon preset (requires vscode-codicons font)
+    --
+    -- default: 'default'
+    preset = 'codicons',
+
+    -- override preset symbols
+    --
+    -- default: {}
+    symbol_map = {
+      Text = "",
+      Method = "",
+      Function = "",
+      Constructor = "",
+      Field = "ﰠ",
+      Variable = "",
+      Class = "ﴯ",
+      Interface = "",
+      Module = "",
+      Property = "ﰠ",
+      Unit = "塞",
+      Value = "",
+      Enum = "",
+      Keyword = "",
+      Snippet = "",
+      Color = "",
+      File = "",
+      Reference = "",
+      Folder = "",
+      EnumMember = "",
+      Constant = "",
+      Struct = "פּ",
+      Event = "",
+      Operator = "",
+      TypeParameter = ""
+    },
+})
+EOF
 
 lua require("gitsigns-config")
-" lua require("lsp-handlers-config")
-lua require("lspconfig-config")
-" lua require("lspkind-config")
+" lua require("lspconfig-config")
+lua require("lspkind-config")
 lua require("lualine-config")
 " lua require("null-ls-config")
 lua require("nvim-cmp-config")
@@ -189,9 +228,29 @@ lua require("treesitter-config")
 lua require("telescope-config")
 lua require("trouble-config")
 lua require("nvim-comment-config")
-" lua require("nlsp-settings-config")
-lua require("nvim-lsp-installer-config")
-lua require("dashboard-config")
+" lua require("dashboard-config")
+" lua require("barbar-config")
+lua << EOF
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
+})
+EOF
+
 lua << EOF
 require("luasnip.loaders.from_vscode").load()
 EOF
@@ -222,9 +281,11 @@ hover = function()
 	)
 end
 EOF
+
+autocmd BufReadPost *.re set filetype=reason
 " autocmd BufWritePre *.re lua vim.lsp.buf.formatting_sync()
 " autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()
 " autocmd BufWritePre *.exs lua vim.lsp.buf.formatting_sync()
 " autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync()
 " autocmd BufWritePre *.res lua vim.lsp.buf.formatting_sync()
-autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+autocmd BufWritePre * lua vim.lsp.buf.format()
