@@ -10,6 +10,7 @@ Plug 'elixir-editors/vim-elixir'
 "
 "Tools
 Plug 'nvim-lua/plenary.nvim'
+Plug 'dstein64/vim-startuptime'
 
 "Colorscheme
 Plug 'cocopon/iceberg.vim'
@@ -36,7 +37,7 @@ Plug 'mfussenegger/nvim-dap'
 
 "Interface
 Plug 'romgrk/winteract.vim'
-Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -130,7 +131,7 @@ nmap m [m
 nmap M ]m
 vmap m [m
 vmap M ]m
-nnoremap <leader>l :NeoTreeShowToggle<CR>
+nnoremap <leader>l :NeoTreeFocusToggle<CR>
 nnoremap <leader>m :MinimapToggle<CR>
 nnoremap <C-w>n :split<CR>
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
@@ -217,19 +218,14 @@ require('lspkind').init({
 EOF
 
 lua require("gitsigns-config")
-" lua require("lspconfig-config")
 lua require("lspkind-config")
 lua require("lualine-config")
 " lua require("null-ls-config")
 lua require("nvim-cmp-config")
-lua require("nvim-tree-config")
-lua require("tree-config")
 lua require("treesitter-config")
 lua require("telescope-config")
 lua require("trouble-config")
 lua require("nvim-comment-config")
-" lua require("dashboard-config")
-" lua require("barbar-config")
 lua << EOF
 require("noice").setup({
   lsp = {
@@ -280,6 +276,10 @@ hover = function()
 	  vim.lsp.handlers.hover, { focusable = true }
 	)
 end
+EOF
+
+lua << EOF
+require("bufferline").setup{}
 EOF
 
 autocmd BufReadPost *.re set filetype=reason
