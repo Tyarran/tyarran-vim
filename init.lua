@@ -1,0 +1,293 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+
+vim.opt.rtp:prepend(lazypath)
+
+plugins = {
+	-- syntaxes
+	"nvim-treesitter/nvim-treesitter",
+	{
+		"nkrkv/nvim-treesitter-rescript",
+		ft = "rescript"
+	},
+	{
+		"danielo515/nvim-treesitter-reason",
+		ft = "reason"
+	},
+	{
+		"reasonml-editor/vim-reason-plus",
+		ft = "reason"
+	},
+	{
+		"elixir-editors/vim-elixir",
+		ft = "elixir"
+	},
+	-- "reasonml-editor/vim-reason-plus",
+	"simrat39/rust-tools.nvim",
+
+	-- colorscheme
+	{
+		"catppuccin/nvim",
+		-- cmd = {
+		-- 	"colorscheme catppuccin",
+		-- 	"colorscheme catppuccin-latte",
+		-- 	"colorscheme catppuccin-macchiato",
+		-- 	"colorscheme catppuccin-mocha",
+		-- }
+	},
+	{
+		"cocopon/iceberg.vim",
+		-- cmd = "colorscheme iceberg"
+	},
+	{
+		"EdenEast/nightfox.nvim",
+		-- cmd = { "colorscheme dayfox",
+		-- 	"colorscheme dawnfox",
+		-- 	"colorscheme nightfox",
+		-- 	"colorscheme dustfox",
+		-- 	"colorscheme nordfox",
+		-- 	"colorscheme terafox",
+		-- 	"colorscheme carbonfox",
+		-- },
+	},
+
+	-- code tools
+	{
+		"kylechui/nvim-surround",
+		config = function()
+			require("nvim-surround").setup({})
+		end
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end
+	},
+	{
+		"terrortylor/nvim-comment",
+		config = function()
+			require("nvim_comment").setup()
+		end
+	},
+	"windwp/nvim-autopairs",
+	"liuchengxu/vista.vim",
+	{
+		"klen/nvim-test",
+		config = function()
+			require("nvim-test").setup()
+		end
+	},
+	{
+		"TimUntersberger/neogit",
+		config = function()
+			require("neogit").setup({})
+		end
+	},
+	"mfussenegger/nvim-dap",
+
+	-- interface
+	{
+		"glepnir/dashboard-nvim",
+		event = 'VimEnter',
+		config = function()
+			require('dashboard').setup {
+				-- config
+			}
+		end,
+		dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+	},
+	"romgrk/winteract.vim",
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = {
+			"kyazdani42/nvim-tree.lua"
+		}
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"gbrlsnchs/telescope-lsp-handlers.nvim"
+		},
+		config = function()
+			require("telescope-config")
+		end
+	},
+	{
+		"folke/trouble.nvim",
+		dependencies = {
+			"kyazdani42/nvim-tree.lua"
+		},
+		config = function()
+			require("trouble").setup({})
+		end
+	},
+	"akinsho/toggleterm.nvim",
+	{
+		"folke/noice.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify"
+		},
+		config = function()
+			require("noice").setup({})
+		end
+	},
+	{
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	},
+	{ "nvim-neo-tree/neo-tree.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
+		config = function()
+			require("neo-tree").setup()
+		end
+	},
+	{
+		"akinsho/bufferline.nvim",
+		config = function()
+			require("bufferline").setup()
+		end
+	},
+
+	-- LSP
+	{
+		"williamboman/mason.nvim",
+		dependencies = {
+			{
+				"williamboman/mason-lspconfig.nvim",
+				dependencies = { "neovim/nvim-lspconfig" }
+			},
+			{ "simrat39/rust-tools.nvim" } },
+		config = function()
+			require("mason").setup()
+			require("mason-lspconfig").setup()
+			require("mason-lspconfig").setup_handlers {
+				-- The first entry (without a key) will be the default handler
+				-- and will be called for each installed server that doesn't have
+				-- a dedicated handler.
+				function(server_name) -- default handler (optional)
+					require("lspconfig")[server_name].setup {}
+				end,
+				-- Next, you can provide a dedicated handler for specific servers.
+				-- For example, a handler override for the `rust_analyzer`:
+				["rust_analyzer"] = function()
+					require("rust-tools").setup {}
+				end
+			}
+		end },
+
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-buffer',
+			'hrsh7th/cmp-path',
+			'hrsh7th/cmp-cmdline',
+			'hrsh7th/nvim-cmp',
+		},
+		config = function()
+			require("nvim-cmp-config")
+		end
+	}
+}
+
+require("lazy").setup(plugins, opts)
+vim.g.maploader = ","
+
+vim.cmd([[
+
+set completeopt=menu,menuone,noselect
+
+colorscheme carbonfox
+
+set termguicolors
+filetype indent on
+filetype on
+filetype plugin on
+
+let mapleader=","
+set ai
+set background=dark
+set clipboard+=unnamedplus
+set cursorline
+set hidden
+set hlsearch
+set ic  "Insensitive case
+set inccommand=nosplit
+set incsearch
+set mouse=a
+set nu
+set si
+set smartcase
+set t_Co=256
+set wrap
+syn on
+syntax on
+
+"Keybindings
+nmap <C-y> :set hlsearch! hlsearch?<CR>
+nnoremap <tab> :BufferLineCyclePrev<CR>
+nnoremap <backspace> :BufferLineCycleNext<CR>
+nnoremap <C-d> :BufferClose<CR>
+nnoremap <M-h> :tabprevious<CR>
+nnoremap <M-l> :tabnext<CR>
+tnoremap <C-n><C-n> <C-\><C-n>
+nmap <C-p> :Telescope find_files<CR>
+nnoremap <Leader>gf :Telescope git_files<CR>
+nnoremap <Leader>b :Telescope buffers<CR>
+nnoremap <Leader>p :Telescope<CR>
+nmap <leader>w :InteractiveWindow<CR>
+nnoremap <leader>d :Telescope lsp_dynamic_workspace_symbols<CR>
+nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>s :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>h :lua vim.lsp.buf.hover()<CR>
+nnoremap <c-f> :Telescope live_grep<CR>
+nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>r :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>t :lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <leader>gt :Telescope lsp_dynamic_workspace_symbols<CR>
+nnoremap <leader>f :lua vim.lsp.buf.formatting_sync()<CR>
+vnoremap <leader>f :lua vim.lsp.buf.range_formatting()<CR>
+nnoremap <leader>xx :TroubleToggle<CR>
+nmap m [m
+nmap M ]m
+vmap m [m
+vmap M ]m
+nnoremap <leader>l :NeoTreeFocusToggle<CR>
+nnoremap <leader>m :MinimapToggle<CR>
+nnoremap <C-w>n :split<CR>
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
+" aliases
+command! TT :ToggleTerm direction=float
+
+autocmd BufReadPost *.re set filetype=reason
+" autocmd BufWritePre *.re lua vim.lsp.buf.formatting_sync()
+" autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()
+" autocmd BufWritePre *.exs lua vim.lsp.buf.formatting_sync()
+" autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync()
+" autocmd BufWritePre *.res lua vim.lsp.buf.formatting_sync()
+autocmd BufWritePre * lua vim.lsp.buf.format()
+]])
