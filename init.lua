@@ -1,3 +1,6 @@
+vim.g.mapleader = ","
+
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -44,10 +47,6 @@ plugins = {
 		"simrat39/rust-tools.nvim",
 		ft = "rust"
 	},
-	-- { "mhanberg/elixir.nvim",
-	-- 	dependencies = { "nvim-lua/plenary.nvim" }, ft = "elixir", config = function()
-	-- 	require("elixir").setup({ enableTestLenses = true })
-	-- end },
 
 	-- colorscheme
 	"catppuccin/nvim",
@@ -118,7 +117,10 @@ plugins = {
 	},
 	{
 		"romgrk/winteract.vim",
-		cmd = "InteractiveWindow"
+		-- cmd = "InteractiveWindow",
+		config = function()
+			vim.keymap.set("n", "<Leader>w", "<cmd>InteractiveWindow<cr>", { silent = true })
+		end
 	},
 	{
 		"nvim-lualine/lualine.nvim",
@@ -137,8 +139,17 @@ plugins = {
 		},
 		config = function()
 			require("telescope-config")
-		end,
-		cmd = "Telescope"
+			vim.keymap.set("n", "<Leader>gf", "<cmd>Telescope find_files<cr>", { silent = true })
+			vim.keymap.set("n", "<C-p>", "<cmd>Telescope git_files<cr>", { noremap = true, silent = true })
+			vim.keymap.set("n", "<Leader>p", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+				{ noremap = true, silent = true })
+			vim.keymap.set("n", "<Leader>b", "<cmd>Telescope buffers<cr>", { noremap = true, silent = true })
+			vim.keymap.set("n", "<Leader>d", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+				{ noremap = true, silent = true })
+			vim.keymap.set("n", "C-f", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+				{ noremap = true, silent = true })
+		end
 	},
 	{
 		"folke/trouble.nvim",
@@ -147,6 +158,7 @@ plugins = {
 		-- },
 		config = function()
 			require("trouble").setup({})
+			vim.keymap.set("n", "<Leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
 		end,
 		cmd = { "TroubleToggle", "Trouble" },
 	},
@@ -175,7 +187,6 @@ plugins = {
 				-- refer to the configuration section below
 			})
 		end,
-		cmd = "WhichKey"
 	},
 	{ "nvim-neo-tree/neo-tree.nvim",
 		dependencies = {
@@ -191,6 +202,9 @@ plugins = {
 		"akinsho/bufferline.nvim",
 		config = function()
 			require("bufferline").setup()
+			vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCyclePrev<cr>", { noremap = true })
+			vim.keymap.set("n", "<backspace>", "<cmd>BufferLineCycleNext<cr>",
+				{ noremap = true })
 		end
 	},
 
@@ -219,6 +233,15 @@ plugins = {
 					require("rust-tools").setup {}
 				end
 			}
+			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover,
+				{ noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>s", vim.lsp.buf.signature_help, { noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true })
+			vim.keymap.set({ "n", "v" }, "<leader>r", vim.lsp.buf.references,
+				{ noremap = true, silent = true, buffer = true })
+			vim.keymap.set("n", "<leader>t", vim.lsp.buf.document_symbol, { noremap = true, silent = true })
+			vim.keymap.set({ "n", "v" }, "<leader>f", vim.lsp.buf.format, { noremap = true, silent = true })
 		end },
 
 	{
@@ -244,7 +267,7 @@ plugins = {
 }
 
 require("lazy").setup(plugins, opts)
-vim.g.maploader = ","
+-- vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, { noremap = true, silent = true })
 
 vim.cmd([[
 
@@ -257,7 +280,6 @@ filetype indent on
 filetype on
 filetype plugin on
 
-let mapleader=","
 set ai
 set background=dark
 set clipboard+=unnamedplus
@@ -273,40 +295,15 @@ set si
 set smartcase
 set t_Co=256
 set wrap
-syn on
-syntax on
 
 "Keybindings
 nmap <C-y> :set hlsearch! hlsearch?<CR>
-nnoremap <tab> :BufferLineCyclePrev<CR>
-nnoremap <backspace> :BufferLineCycleNext<CR>
 nnoremap <C-d> :BufferClose<CR>
-nnoremap <M-h> :tabprevious<CR>
-nnoremap <M-l> :tabnext<CR>
 tnoremap <C-n><C-n> <C-\><C-n>
-nmap <C-p> :Telescope find_files<CR>
-nnoremap <Leader>gf :Telescope git_files<CR>
-nnoremap <Leader>b :Telescope buffers<CR>
-nnoremap <Leader>p :Telescope<CR>
-nmap <leader>w :InteractiveWindow<CR>
-nnoremap <leader>d :Telescope lsp_dynamic_workspace_symbols<CR>
-nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>s :lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>h :lua vim.lsp.buf.hover()<CR>
-nnoremap <c-f> :Telescope live_grep<CR>
-nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>r :lua vim.lsp.buf.references()<CR>
-nnoremap <leader>t :lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <leader>gt :Telescope lsp_dynamic_workspace_symbols<CR>
-nnoremap <leader>f :lua vim.lsp.buf.formatting_sync()<CR>
-vnoremap <leader>f :lua vim.lsp.buf.range_formatting()<CR>
-nnoremap <leader>xx :TroubleToggle<CR>
 nmap m [m
 nmap M ]m
 vmap m [m
 vmap M ]m
-nnoremap <leader>l :NeoTreeFocusToggle<CR>
-nnoremap <leader>m :MinimapToggle<CR>
 nnoremap <C-w>n :split<CR>
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
@@ -315,10 +312,5 @@ let g:copilot_no_tab_map = v:true
 command! TT :ToggleTerm direction=float
 
 autocmd BufReadPost *.re set filetype=reason
-" autocmd BufWritePre *.re lua vim.lsp.buf.formatting_sync()
-" autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()
-" autocmd BufWritePre *.exs lua vim.lsp.buf.formatting_sync()
-" autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync()
-" autocmd BufWritePre *.res lua vim.lsp.buf.formatting_sync()
 autocmd BufWritePre * lua vim.lsp.buf.format()
 ]])
