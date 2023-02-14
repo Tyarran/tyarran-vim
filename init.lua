@@ -31,34 +31,16 @@ plugins = {
 		"elixir-editors/vim-elixir",
 		ft = "elixir"
 	},
-	-- "reasonml-editor/vim-reason-plus",
+	-- { "mhanberg/elixir.nvim",
+	-- 	dependencies = { "nvim-lua/plenary.nvim" }, ft = "elixir", config = function()
+	-- 	-- require("elixir").setup({ enableTestLenses = true })
+	-- end },
 	"simrat39/rust-tools.nvim",
 
 	-- colorscheme
-	{
-		"catppuccin/nvim",
-		-- cmd = {
-		-- 	"colorscheme catppuccin",
-		-- 	"colorscheme catppuccin-latte",
-		-- 	"colorscheme catppuccin-macchiato",
-		-- 	"colorscheme catppuccin-mocha",
-		-- }
-	},
-	{
-		"cocopon/iceberg.vim",
-		-- cmd = "colorscheme iceberg"
-	},
-	{
-		"EdenEast/nightfox.nvim",
-		-- cmd = { "colorscheme dayfox",
-		-- 	"colorscheme dawnfox",
-		-- 	"colorscheme nightfox",
-		-- 	"colorscheme dustfox",
-		-- 	"colorscheme nordfox",
-		-- 	"colorscheme terafox",
-		-- 	"colorscheme carbonfox",
-		-- },
-	},
+	"catppuccin/nvim",
+	"cocopon/iceberg.vim",
+	"EdenEast/nightfox.nvim",
 
 	-- code tools
 	{
@@ -93,7 +75,8 @@ plugins = {
 			require("neogit").setup({})
 		end
 	},
-	"mfussenegger/nvim-dap",
+	"wakatime/vim-wakatime",
+	"github/copilot.vim",
 
 	-- interface
 	{
@@ -174,11 +157,11 @@ plugins = {
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
-			{
-				"williamboman/mason-lspconfig.nvim",
-				dependencies = { "neovim/nvim-lspconfig" }
-			},
-			{ "simrat39/rust-tools.nvim" } },
+			"mfussenegger/nvim-dap",
+			"mhartington/formatter.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"neovim/nvim-lspconfig"
+		},
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup()
@@ -200,16 +183,20 @@ plugins = {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
+			"neovim/nvim-lspconfig",
 			'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-buffer',
+			"hrsh7th/cmp-emoji",
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-cmdline',
-			'hrsh7th/nvim-cmp',
+			"onsails/lspkind.nvim",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip"
 		},
 		config = function()
 			require("nvim-cmp-config")
 		end
-	}
+	},
 }
 
 require("lazy").setup(plugins, opts)
@@ -219,7 +206,7 @@ vim.cmd([[
 
 set completeopt=menu,menuone,noselect
 
-colorscheme carbonfox
+colorscheme iceberg
 
 set termguicolors
 filetype indent on
