@@ -14,7 +14,15 @@ vim.opt.rtp:prepend(lazypath)
 
 plugins = {
 	-- syntaxes
-	"nvim-treesitter/nvim-treesitter",
+	{
+		"nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = "all"
+			})
+		end,
+		event = "BufRead",
+	},
 	{
 		"nkrkv/nvim-treesitter-rescript",
 		ft = "rescript"
@@ -27,15 +35,18 @@ plugins = {
 		"reasonml-editor/vim-reason-plus",
 		ft = "reason"
 	},
+	-- {
+	-- 	"elixir-editors/vim-elixir",
+	-- 	ft = "elixir"
+	-- },
 	{
-		"elixir-editors/vim-elixir",
-		ft = "elixir"
+		"simrat39/rust-tools.nvim",
+		ft = "rust"
 	},
 	-- { "mhanberg/elixir.nvim",
 	-- 	dependencies = { "nvim-lua/plenary.nvim" }, ft = "elixir", config = function()
 	-- 	-- require("elixir").setup({ enableTestLenses = true })
 	-- end },
-	"simrat39/rust-tools.nvim",
 
 	-- colorscheme
 	"catppuccin/nvim",
@@ -46,75 +57,101 @@ plugins = {
 	{
 		"kylechui/nvim-surround",
 		config = function()
-			require("nvim-surround").setup({})
-		end
+			require("nvim-surround").setup({
+				current_ligne_blame = true
+			})
+		end,
+		event = "BufRead",
 	},
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			require("gitsigns").setup()
-		end
+		end,
+		event = "BufRead",
 	},
 	{
 		"terrortylor/nvim-comment",
 		config = function()
 			require("nvim_comment").setup()
-		end
+		end,
+		event = "BufRead",
 	},
-	"windwp/nvim-autopairs",
-	"liuchengxu/vista.vim",
 	{
-		"klen/nvim-test",
-		config = function()
-			require("nvim-test").setup()
-		end
+		"windwp/nvim-autopairs",
+		event = "BufRead",
 	},
+	{
+		"liuchengxu/vista.vim",
+		cmd = { "Vista" },
+	},
+	-- {
+	-- 	"klen/nvim-test",
+	-- 	config = function()
+	-- 		require("nvim-test").setup()
+	-- 	end,
+	-- 	event = "BufRead",
+	-- },
 	{
 		"TimUntersberger/neogit",
 		config = function()
 			require("neogit").setup({})
-		end
+		end,
+		cmd = { "Neogit" },
 	},
 	"wakatime/vim-wakatime",
-	"github/copilot.vim",
+	{
+		"github/copilot.vim",
+		event = "BufRead",
+
+	},
 
 	-- interface
 	{
 		"glepnir/dashboard-nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = 'VimEnter',
 		config = function()
-			require('dashboard').setup {
-				-- config
-			}
-		end,
-		dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+			require("dashboard-config")
+		end
 	},
-	"romgrk/winteract.vim",
+	{
+		"romgrk/winteract.vim",
+		cmd = "InteractiveWindow"
+	},
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = {
-			"kyazdani42/nvim-tree.lua"
-		}
+		config = function()
+			require("lualine").setup()
+		end
 	},
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
-			"gbrlsnchs/telescope-lsp-handlers.nvim"
+			{ "gbrlsnchs/telescope-lsp-handlers.nvim",
+				config = function()
+					require('telescope').load_extension('lsp_handlers')
+				end
+			}
 		},
 		config = function()
 			require("telescope-config")
-		end
+		end,
+		cmd = "Telescope"
 	},
 	{
 		"folke/trouble.nvim",
-		dependencies = {
-			"kyazdani42/nvim-tree.lua"
-		},
+		-- dependencies = {
+		-- 	"kyazdani42/nvim-tree.lua"
+		-- },
 		config = function()
 			require("trouble").setup({})
-		end
+		end,
+		cmd = { "TroubleToggle", "Trouble" },
 	},
-	"akinsho/toggleterm.nvim",
+	{
+		"akinsho/toggleterm.nvim",
+	},
 	{
 		"folke/noice.nvim",
 		dependencies = {
@@ -123,7 +160,8 @@ plugins = {
 		},
 		config = function()
 			require("noice").setup({})
-		end
+		end,
+		-- cmd = { "NoiceToggle", "Noice" },
 	},
 	{
 		"folke/which-key.nvim",
@@ -136,6 +174,7 @@ plugins = {
 				-- refer to the configuration section below
 			})
 		end,
+		cmd = "WhichKey"
 	},
 	{ "nvim-neo-tree/neo-tree.nvim",
 		dependencies = {
@@ -144,7 +183,8 @@ plugins = {
 		},
 		config = function()
 			require("neo-tree").setup()
-		end
+		end,
+		cmd = { "NeoTreeToggle", "NeoTreeFocusToggle" },
 	},
 	{
 		"akinsho/bufferline.nvim",
@@ -191,11 +231,14 @@ plugins = {
 			'hrsh7th/cmp-cmdline',
 			"onsails/lspkind.nvim",
 			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip"
+			"saadparwaiz1/cmp_luasnip",
+			-- "molleweide/LuaSnip-snippets.nvim",
+			"rafamadriz/friendly-snippets",
 		},
 		config = function()
 			require("nvim-cmp-config")
-		end
+		end,
+		event = "InsertEnter"
 	},
 }
 
