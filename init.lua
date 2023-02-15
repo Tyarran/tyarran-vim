@@ -85,13 +85,6 @@ plugins = {
 		"liuchengxu/vista.vim",
 		cmd = { "Vista" },
 	},
-	-- {
-	-- 	"klen/nvim-test",
-	-- 	config = function()
-	-- 		require("nvim-test").setup()
-	-- 	end,
-	-- 	event = "BufRead",
-	-- },
 	{
 		"TimUntersberger/neogit",
 		config = function()
@@ -104,6 +97,30 @@ plugins = {
 		"github/copilot.vim",
 		event = "BufRead",
 
+	},
+	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"jfpedroza/neotest-elixir",
+		},
+		config = function()
+			require("neotest").setup({
+				adapters = {
+					require("neotest-elixir")
+				}
+			})
+			vim.keymap.set("n", "<Leader>rt", require("neotest").run.run)
+			vim.keymap.set("n", "<Leader>rft", function()
+				require("neotest").run.run(vim.fn.expand("%"))
+			end)
+			vim.keymap.set("n", "<Leader>to", function()
+				require("neotest").output.open({ enter = true })
+			end)
+		end,
+		ft = "elixir",
 	},
 
 	-- interface
@@ -268,33 +285,42 @@ plugins = {
 
 require("lazy").setup(plugins, opts)
 -- vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ft", ":NeoTreeFocusToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { noremap = true, silent = true })
+
+local options = {
+}
+
+-- vim.opt = { table.unpack(vim.opt or {}), tale.unpack(options) }
+-- vim.opt = options
+vim.opt.ai = true
+vim.opt.background = "dark"
+-- vim.opt.clipboard=unnamedplus
+vim.opt.cursorline = true
+vim.opt.hidden = true
+vim.opt.hlsearch = true
+vim.opt.ic = true
+-- vim.opt.Insensitive case
+vim.opt.inccommand = "nosplit"
+vim.opt.incsearch = true
+vim.opt.mouse = "a"
+vim.opt.nu = true
+vim.opt.si = true
+vim.opt.smartcase = true
+-- vim.opt.t_Co = 256
+vim.opt.wrap = true
+vim.opt.termguicolors = true
 
 vim.cmd([[
 
 set completeopt=menu,menuone,noselect
 
-colorscheme iceberg
+colorscheme carbonfox
 
-set termguicolors
 filetype indent on
 filetype on
 filetype plugin on
 
-set ai
-set background=dark
-set clipboard+=unnamedplus
-set cursorline
-set hidden
-set hlsearch
-set ic  "Insensitive case
-set inccommand=nosplit
-set incsearch
-set mouse=a
-set nu
-set si
-set smartcase
-set t_Co=256
-set wrap
 
 "Keybindings
 nmap <C-y> :set hlsearch! hlsearch?<CR>
