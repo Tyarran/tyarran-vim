@@ -52,6 +52,27 @@ plugins = {
 	"catppuccin/nvim",
 	"cocopon/iceberg.vim",
 	"EdenEast/nightfox.nvim",
+	{
+		"EdenEast/nightfox.nvim",
+		config = function()
+			require('nightfox').setup({
+				options = {
+					styles = {
+						comments = "italic",
+						keywords = "bold",
+						types = "italic,bold",
+					}
+				}
+			})
+		end
+	},
+	{
+		"giusgad/pets.nvim",
+		dependencies = { "MunifTanjim/nui.nvim", "edluffy/hologram.nvim" },
+		config = function()
+			require("pets").setup()
+		end
+	},
 
 	-- code tools
 	{
@@ -61,7 +82,7 @@ plugins = {
 				current_ligne_blame = true
 			})
 		end,
-		event = "BufRead",
+		event = "insertEnter",
 	},
 	{
 		"lewis6991/gitsigns.nvim",
@@ -107,17 +128,25 @@ plugins = {
 			"jfpedroza/neotest-elixir",
 		},
 		config = function()
-			require("neotest").setup({
+			local neotest = require("neotest")
+			neotest.setup({
 				adapters = {
 					require("neotest-elixir")
 				}
 			})
-			vim.keymap.set("n", "<Leader>rt", require("neotest").run.run)
+			vim.keymap.set("n", "<Leader>rt", function()
+				neotest.run.run()
+				neotest.summary.open()
+			end)
 			vim.keymap.set("n", "<Leader>rft", function()
-				require("neotest").run.run(vim.fn.expand("%"))
+				neotest.run.run(vim.fn.expand("%"))
+				neotest.summary.open()
 			end)
 			vim.keymap.set("n", "<Leader>to", function()
-				require("neotest").output.open({ enter = true })
+				neotest.output.open({ enter = true })
+			end)
+			vim.keymap.set("n", "<Leader>tsc", function()
+				neotest.summary.close()
 			end)
 		end,
 		ft = "elixir",
@@ -163,7 +192,7 @@ plugins = {
 			vim.keymap.set("n", "<Leader>b", "<cmd>Telescope buffers<cr>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<Leader>d", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 				{ noremap = true, silent = true })
-			vim.keymap.set("n", "C-f", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
+			vim.keymap.set("n", "<C-f>", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 				{ noremap = true, silent = true })
 		end
@@ -181,6 +210,10 @@ plugins = {
 	},
 	{
 		"akinsho/toggleterm.nvim",
+		config = function()
+			require("toggleterm").setup()
+			vim.keymap.set("n", "<Leader>tt", "<cmd>ToggleTerm<cr>", { silent = true, noremap = true })
+		end
 	},
 	{
 		"folke/noice.nvim",
@@ -222,6 +255,14 @@ plugins = {
 			vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCyclePrev<cr>", { noremap = true })
 			vim.keymap.set("n", "<backspace>", "<cmd>BufferLineCycleNext<cr>",
 				{ noremap = true })
+		end
+	},
+	{
+		"edluffy/hologram.nvim",
+		config = function()
+			require('hologram').setup {
+				auto_display = false -- WIP automatic markdown image display, may be prone to breaking
+			}
 		end
 	},
 
@@ -279,7 +320,7 @@ plugins = {
 		config = function()
 			require("nvim-cmp-config")
 		end,
-		event = "InsertEnter"
+		event = "BufRead"
 	},
 }
 
