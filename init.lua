@@ -351,6 +351,7 @@ vim.opt.smartcase = true
 -- vim.opt.t_Co = 256
 vim.opt.wrap = true
 vim.opt.termguicolors = true
+vim.opt.relativenumber = true
 
 vim.cmd([[
 
