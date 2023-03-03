@@ -39,10 +39,10 @@ plugins = {
 		"reasonml-editor/vim-reason-plus",
 		ft = "reason"
 	},
-	{
-		"elixir-editors/vim-elixir",
-		ft = "elixir"
-	},
+	-- {
+	-- 	"elixir-editors/vim-elixir",
+	-- 	ft = "elixir"
+	-- },
 	{
 		"simrat39/rust-tools.nvim",
 		ft = "rust"
@@ -52,6 +52,7 @@ plugins = {
 	"catppuccin/nvim",
 	"cocopon/iceberg.vim",
 	"EdenEast/nightfox.nvim",
+	"navarasu/onedark.nvim",
 	{
 		"EdenEast/nightfox.nvim",
 		config = function()
@@ -136,14 +137,16 @@ plugins = {
 			})
 			vim.keymap.set("n", "<Leader>rt", function()
 				neotest.run.run()
-				neotest.summary.open()
 			end)
 			vim.keymap.set("n", "<Leader>rft", function()
 				neotest.run.run(vim.fn.expand("%"))
-				neotest.summary.open()
 			end)
 			vim.keymap.set("n", "<Leader>to", function()
 				neotest.output.open({ enter = true })
+			end)
+			vim.keymap.set("n", "<Leader>so", function()
+				neotest.output.open({ enter = true })
+				neotest.summary.open()
 			end)
 			vim.keymap.set("n", "<Leader>tsc", function()
 				neotest.summary.close()
@@ -194,6 +197,8 @@ plugins = {
 				{ noremap = true, silent = true })
 			vim.keymap.set("n", "<C-f>", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+				{ noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>",
 				{ noremap = true, silent = true })
 		end
 	},
@@ -345,8 +350,8 @@ vim.opt.ic = true
 vim.opt.inccommand = "nosplit"
 vim.opt.incsearch = true
 vim.opt.mouse = "a"
-vim.opt.nu = true
-vim.opt.si = true
+vim.opt.number = true
+vim.opt.smartindent = true
 vim.opt.smartcase = true
 -- vim.opt.t_Co = 256
 vim.opt.wrap = true
@@ -355,9 +360,10 @@ vim.opt.relativenumber = true
 
 vim.cmd([[
 
+set clipboard+=unnamedplus
 set completeopt=menu,menuone,noselect
 
-colorscheme carbonfox
+colorscheme onedark
 
 filetype indent on
 filetype on
