@@ -16,17 +16,15 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 plugins = {
-	-- syntaxes
+	-- essentials
 	{
 		"nvim-treesitter/nvim-treesitter",
+		dependencies = { "HiPhish/nvim-ts-rainbow2" },
 		config = function()
-			require("treesitter")
-			-- require("nvim-treesitter.configs").setup({
-			-- 	ensure_installed = "all"
-			-- })
-		end,
-		event = "BufRead",
+			require("treesitter-config")
+		end
 	},
+	-- syntaxes
 	{
 		"nkrkv/nvim-treesitter-rescript",
 		ft = "rescript"
@@ -220,17 +218,17 @@ plugins = {
 			vim.keymap.set("n", "<Leader>tt", "<cmd>ToggleTerm<cr>", { silent = true, noremap = true })
 		end
 	},
-	{
-		"folke/noice.nvim",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify"
-		},
-		config = function()
-			require("noice").setup({})
-		end,
-		-- cmd = { "NoiceToggle", "Noice" },
-	},
+	-- {
+	-- 	"folke/noice.nvim",
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"rcarriga/nvim-notify"
+	-- 	},
+	-- 	config = function()
+	-- 		require("noice").setup({})
+	-- 	end,
+	-- 	-- cmd = { "NoiceToggle", "Noice" },
+	-- },
 	{
 		"folke/which-key.nvim",
 		config = function()
@@ -358,16 +356,17 @@ vim.opt.wrap = true
 vim.opt.termguicolors = true
 vim.opt.relativenumber = true
 
+-- filetype indent on
+-- filetype on
+-- filetype plugin on
+--
 vim.cmd([[
 
 set clipboard+=unnamedplus
 set completeopt=menu,menuone,noselect
 
-colorscheme onedark
+colorscheme catppuccin
 
-filetype indent on
-filetype on
-filetype plugin on
 
 
 "Keybindings
