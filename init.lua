@@ -187,7 +187,7 @@ plugins = {
 		config = function()
 			require("telescope-config")
 			vim.keymap.set("n", "<Leader>gf", "<cmd>Telescope find_files<cr>", { silent = true })
-			vim.keymap.set("n", "<C-p>", "<cmd>Telescope git_files<cr>", { noremap = true, silent = true })
+			-- vim.keymap.set("n", "<C-p>", "<cmd>Telescope git_files<cr>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<Leader>p", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 				{ noremap = true, silent = true })
 			vim.keymap.set("n", "<Leader>b", "<cmd>Telescope buffers<cr>", { noremap = true, silent = true })
@@ -196,7 +196,7 @@ plugins = {
 			vim.keymap.set("n", "<C-f>", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 				{ noremap = true, silent = true })
-			vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>",
+			vim.keymap.set("n", "<C-p>", "<cmd>Telescope find_files<cr>",
 				{ noremap = true, silent = true })
 		end
 	},
