@@ -280,7 +280,9 @@ plugins = {
 		},
 		config = function()
 			require("mason").setup()
-			require("mason-lspconfig").setup()
+			require("mason-lspconfig").setup{
+				ensure_installed = {"elixirls", "ocamllsp", "yamlls", "bashls", "pyright", "dockerls", "docker_compose_language_service", "cssls", "html", "jsonls", "vimls",  "jsonls"}
+			}
 			require("mason-lspconfig").setup_handlers {
 				-- The first entry (without a key) will be the default handler
 				-- and will be called for each installed server that doesn't have
