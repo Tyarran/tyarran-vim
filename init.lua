@@ -116,7 +116,6 @@ plugins = {
 	{
 		"github/copilot.vim",
 		event = "BufRead",
-
 	},
 	{
 		"nvim-neotest/neotest",
@@ -154,12 +153,18 @@ plugins = {
 	},
 
 	-- interface
+	-- {
+	-- 	"glepnir/dashboard-nvim",
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- 	event = 'VimEnter',
+	-- 	config = function()
+	-- 		require("dashboard-config")
+	-- 	end
+	-- },
 	{
-		"glepnir/dashboard-nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = 'VimEnter',
+		"eandrju/cellular-automaton.nvim",
 		config = function()
-			require("dashboard-config")
+			require("cellular-automation-config")
 		end
 	},
 	{
@@ -178,7 +183,8 @@ plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
-			{ "gbrlsnchs/telescope-lsp-handlers.nvim",
+			{
+				"gbrlsnchs/telescope-lsp-handlers.nvim",
 				config = function()
 					require('telescope').load_extension('lsp_handlers')
 				end
@@ -241,7 +247,8 @@ plugins = {
 			})
 		end,
 	},
-	{ "nvim-neo-tree/neo-tree.nvim",
+	{
+		"nvim-neo-tree/neo-tree.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
@@ -251,21 +258,60 @@ plugins = {
 		end,
 		cmd = { "NeoTreeToggle", "NeoTreeFocusToggle" },
 	},
-	{
-		"akinsho/bufferline.nvim",
-		config = function()
-			require("bufferline").setup()
-			vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCyclePrev<cr>", { noremap = true })
-			vim.keymap.set("n", "<backspace>", "<cmd>BufferLineCycleNext<cr>",
-				{ noremap = true })
-		end
-	},
+	-- {
+	-- 	"akinsho/bufferline.nvim",
+	-- 	config = function()
+	-- 		require("bufferline").setup()
+	-- 		vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCyclePrev<cr>", { noremap = true })
+	-- 		vim.keymap.set("n", "<backspace>", "<cmd>BufferLineCycleNext<cr>",
+	-- 			{ noremap = true })
+	-- 	end
+	-- },
 	{
 		"edluffy/hologram.nvim",
 		config = function()
 			require('hologram').setup {
 				auto_display = false -- WIP automatic markdown image display, may be prone to breaking
 			}
+		end
+	},
+	{
+		"chrishrb/gx.nvim",
+		event = { "BufEnter" },
+		config = true, -- default settings
+		-- you can specify also another config if you want
+		config = function()
+			require("gx").setup {
+				open_browser_app = "xdg-open", -- specify your browser app; default for macos is "open" and for linux "xdg-open"
+				handlers = {
+					plugin = true, -- open plugin links in lua (e.g. packer, lazy, ..)
+					github = true, -- open github issues
+				},
+			}
+		end,
+	},
+	{
+		"folke/twilight.nvim",
+		config = function()
+			require("twilight").setup {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			}
+		end
+	},
+	{
+		'willothy/nvim-cokeline',
+		requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
+		config = function()
+			require('cokeline').setup()
+			-- vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCyclePrev<cr>", { noremap = true })
+			-- vim.keymap.set("n", "<backspace>", "<cmd>BufferLineCycleNext<cr>",
+
+			vim.keymap.set('n', '<Tab>', '<Plug>(cokeline-focus-prev)', { silent = true })
+			vim.keymap.set('n', '<backspace>', '<Plug>(cokeline-focus-next)', { silent = true })
+			vim.keymap.set('n', '<Leader>p', '<Plug>(cokeline-switch-prev)', { silent = true })
+			vim.keymap.set('n', '<Leader>n', '<Plug>(cokeline-switch-next)', { silent = true })
 		end
 	},
 
@@ -280,8 +326,10 @@ plugins = {
 		},
 		config = function()
 			require("mason").setup()
-			require("mason-lspconfig").setup{
-				ensure_installed = {"elixirls", "ocamllsp", "yamlls", "bashls", "pyright", "dockerls", "docker_compose_language_service", "cssls", "html", "jsonls", "vimls",  "jsonls"}
+			require("mason-lspconfig").setup {
+				ensure_installed = { "elixirls", "ocamllsp", "yamlls", "bashls", "pyright", "dockerls",
+					"docker_compose_language_service", "cssls", "html", "jsonls", "vimls", "jsonls",
+					"lua_ls" }
 			}
 			require("mason-lspconfig").setup_handlers {
 				-- The first entry (without a key) will be the default handler
@@ -305,7 +353,9 @@ plugins = {
 				{ noremap = true, silent = true, buffer = true })
 			vim.keymap.set("n", "<leader>t", vim.lsp.buf.document_symbol, { noremap = true, silent = true })
 			vim.keymap.set({ "n", "v" }, "<leader>f", vim.lsp.buf.format, { noremap = true, silent = true })
-		end },
+			vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, { noremap = true, silent = true })
+		end
+	},
 
 	{
 		"hrsh7th/nvim-cmp",
@@ -356,7 +406,7 @@ vim.opt.smartcase = true
 -- vim.opt.t_Co = 256
 vim.opt.wrap = true
 vim.opt.termguicolors = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 -- filetype indent on
 -- filetype on
