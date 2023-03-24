@@ -51,6 +51,7 @@ plugins = {
 	"cocopon/iceberg.vim",
 	"EdenEast/nightfox.nvim",
 	"navarasu/onedark.nvim",
+	"folke/tokyonight.nvim",
 	{
 		"EdenEast/nightfox.nvim",
 		config = function()
@@ -150,6 +151,23 @@ plugins = {
 			end)
 		end,
 		ft = "elixir",
+	},
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		config = function()
+			require("barbecue").setup {
+				theme = "tokyonight"
+			}
+		end,
+		opts = {
+			-- configurations go here
+		},
 	},
 
 	-- interface
@@ -414,7 +432,7 @@ vim.cmd([[
 set clipboard+=unnamedplus
 set completeopt=menu,menuone,noselect
 
-colorscheme catppuccin
+colorscheme tokyonight
 
 
 
