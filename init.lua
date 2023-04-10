@@ -153,6 +153,9 @@ plugins = {
 		ft = "elixir",
 	},
 	-- {
+	-- 	"LintaoAmons/scratch.nvim",
+	-- },
+	-- {
 	-- 	"utilyre/barbecue.nvim",
 	-- 	name = "barbecue",
 	-- 	version = "*",
@@ -365,7 +368,7 @@ plugins = {
 			require("mason-lspconfig").setup {
 				ensure_installed = { "elixirls", "ocamllsp", "yamlls", "bashls", "pyright", "dockerls",
 					"docker_compose_language_service", "cssls", "html", "jsonls", "vimls", "jsonls",
-					"lua_ls" }
+					"lua_ls", "sqlls", "solargraph" }
 			}
 			require("mason-lspconfig").setup_handlers {
 				-- The first entry (without a key) will be the default handler
@@ -412,6 +415,25 @@ plugins = {
 			require("nvim-cmp-config")
 		end,
 		event = "BufRead"
+	},
+
+	-- others
+	{
+		"epwalsh/obsidian.nvim",
+		config = function()
+			require("obsidian").setup({
+				dir = "~/Notes/Notes",
+				completion = {
+					nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
+				}
+			})
+			vim.keymap.set("n", "<leader>os", ":ObsidianSearch<CR>", { noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>oqs", ":ObsidianQuickSwitch<CR>", { noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>on", ":ObsidianNew ", { noremap = true })
+		end,
+	},
+	{
+		"rhysd/vim-grammarous"
 	},
 }
 
