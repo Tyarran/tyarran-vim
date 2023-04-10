@@ -152,33 +152,32 @@ plugins = {
 		end,
 		ft = "elixir",
 	},
-	{
-		"utilyre/barbecue.nvim",
-		name = "barbecue",
-		version = "*",
-		dependencies = {
-			"SmiteshP/nvim-navic",
-			"nvim-tree/nvim-web-devicons", -- optional dependency
-		},
-		config = function()
-			require("barbecue").setup {
-				theme = "tokyonight"
-			}
-		end,
-		opts = {
-			-- configurations go here
-		},
-	},
+	-- {
+	-- 	"utilyre/barbecue.nvim",
+	-- 	name = "barbecue",
+	-- 	version = "*",
+	-- 	dependencies = {
+	-- 		"SmiteshP/nvim-navic",
+	-- 		"nvim-tree/nvim-web-devicons", -- optional dependency
+	-- 	},
+	-- 	config = function()
+	-- 		require("barbecue").setup {
+	-- 			theme = "tokyonight"
+	-- 		}
+	-- 	end,
+	-- 	opts = {
+	-- 		-- configurations go here
+	-- 	},
+	-- },
 
 	-- interface
-	-- {
-	-- 	"glepnir/dashboard-nvim",
-	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	-- 	event = 'VimEnter',
-	-- 	config = function()
-	-- 		require("dashboard-config")
-	-- 	end
-	-- },
+	{
+		'goolord/alpha-nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		config = function()
+			require 'alpha'.setup(require 'alpha.themes.startify'.config)
+		end
+	},
 	{
 		"eandrju/cellular-automaton.nvim",
 		config = function()
@@ -331,6 +330,28 @@ plugins = {
 	},
 
 	-- LSP
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			{
+				"SmiteshP/nvim-navbuddy",
+				dependencies = {
+					"SmiteshP/nvim-navic",
+					"MunifTanjim/nui.nvim"
+				},
+				-- config = function()
+				-- 	-- vim.keymap.set("n", "<Leader>nn", require('nvim-navbuddy').open,
+				-- 	-- 	{ silent = true, noremap = true })
+				-- end,
+				opts = { lsp = { auto_attach = true } }
+			}
+		},
+		config = function()
+			vim.keymap.set("n", "<Leader>nn", require('nvim-navbuddy').open,
+				{ silent = true, noremap = true })
+		end
+		-- your lsp config or other stuff
+	},
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
