@@ -217,17 +217,17 @@ plugins = {
 		},
 		config = function()
 			require("telescope-config")
-			vim.keymap.set("n", "<Leader>gf", "<cmd>Telescope find_files<cr>", { silent = true })
+			vim.keymap.set("n", "<Leader>gf", "<cmd>Telescope git_files<cr>", { silent = true })
+			vim.keymap.set("n", "<Leader>ff", "<cmd>Telescope find_files<cr>", { silent = true })
 			-- vim.keymap.set("n", "<C-p>", "<cmd>Telescope git_files<cr>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<Leader>p", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 				{ noremap = true, silent = true })
 			vim.keymap.set("n", "<Leader>b", "<cmd>Telescope buffers<cr>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<Leader>d", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 				{ noremap = true, silent = true })
-			vim.keymap.set("n", "<C-f>", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 				{ noremap = true, silent = true })
-			vim.keymap.set("n", "<C-p>", "<cmd>Telescope find_files<cr>",
+			vim.keymap.set("n", "<C-p>", "<cmd>Telescope git_files<cr>",
 				{ noremap = true, silent = true })
 		end
 	},
@@ -371,7 +371,8 @@ plugins = {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup {
-				ensure_installed = { "elixirls", "ocamllsp", "yamlls", "bashls", "pyright", "dockerls",
+				ensure_installed = { "elixirls", "ocamllsp", "ocamlformat", "yamlls", "bashls",
+					"pyright", "dockerls",
 					"docker_compose_language_service", "cssls", "html", "jsonls", "vimls", "jsonls",
 					"lua_ls", "sqlls", "solargraph" }
 			}

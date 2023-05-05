@@ -33,6 +33,9 @@ require("telescope").setup({
 		}
 	},
 	defaults = {
+		layout_config = {
+			prompt_position = "top",
+		},
 		mappings = {
 			i = {
 				["<esc>"] = actions.close
@@ -46,7 +49,22 @@ require("telescope").setup({
 			"--line-number",
 			"--column",
 			"--smart-case",
+			"--hidden",
+			"--glob=!.git/",
 		}
+	},
+	pickers = {
+		find_files = {
+			hidden = true,
+			find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+		},
+		live_grep = {
+			only_sort_text = true,
+		},
+		git_files = {
+			hidden = true,
+			show_untracked = true,
+		},
 	}
 })
 
