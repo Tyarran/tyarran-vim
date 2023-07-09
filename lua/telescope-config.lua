@@ -34,7 +34,7 @@ require("telescope").setup({
 	},
 	defaults = {
 		layout_config = {
-			prompt_position = "top",
+			prompt_position = "bottom",
 		},
 		mappings = {
 			i = {

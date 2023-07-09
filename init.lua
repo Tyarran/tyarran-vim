@@ -152,26 +152,29 @@ plugins = {
 		end,
 		ft = "elixir",
 	},
+	{
+		"tpope/vim-fugitive"
+	},
 	-- {
 	-- 	"LintaoAmons/scratch.nvim",
 	-- },
-	-- {
-	-- 	"utilyre/barbecue.nvim",
-	-- 	name = "barbecue",
-	-- 	version = "*",
-	-- 	dependencies = {
-	-- 		"SmiteshP/nvim-navic",
-	-- 		"nvim-tree/nvim-web-devicons", -- optional dependency
-	-- 	},
-	-- 	config = function()
-	-- 		require("barbecue").setup {
-	-- 			theme = "tokyonight"
-	-- 		}
-	-- 	end,
-	-- 	opts = {
-	-- 		-- configurations go here
-	-- 	},
-	-- },
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		config = function()
+			require("barbecue").setup {
+				theme = "tokyonight"
+			}
+		end,
+		opts = {
+			-- configurations go here
+		},
+	},
 
 	-- interface
 	{
@@ -227,7 +230,11 @@ plugins = {
 				{ noremap = true, silent = true })
 			vim.keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 				{ noremap = true, silent = true })
-			vim.keymap.set("n", "<C-p>", "<cmd>Telescope git_files<cr>",
+			vim.keymap.set("n", "<C-p>", "<cmd>Telescope find_files<cr>",
+				{ noremap = true, silent = true })
+			vim.keymap.set("n", "<C-f>", "<cmd>Telescope live_grep<cr>",
+				{ noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>cb", "<cmd>Telescope current_buffer_fuzzy_find<cr>",
 				{ noremap = true, silent = true })
 		end
 	},
@@ -371,7 +378,7 @@ plugins = {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup {
-				ensure_installed = { "elixirls", "ocamllsp", "ocamlformat", "yamlls", "bashls",
+				ensure_installed = { "elixirls", "ocamllsp", "bashls",
 					"pyright", "dockerls",
 					"docker_compose_language_service", "cssls", "html", "jsonls", "vimls", "jsonls",
 					"lua_ls", "sqlls", "solargraph" }
@@ -481,7 +488,7 @@ vim.cmd([[
 set clipboard+=unnamedplus
 set completeopt=menu,menuone,noselect
 
-colorscheme carbonfox
+colorscheme tokyonight-moon
 
 
 
