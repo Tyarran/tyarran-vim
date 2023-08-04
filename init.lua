@@ -488,7 +488,7 @@ vim.cmd([[
 set clipboard+=unnamedplus
 set completeopt=menu,menuone,noselect
 
-colorscheme tokyonight-moon
+colorscheme tokyonight
 
 
 
