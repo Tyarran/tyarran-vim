@@ -288,28 +288,28 @@ plugins = {
 		config = function()
 			require("neo-tree").setup()
 		end,
-		cmd = { "NeoTreeToggle", "NeoTreeFocusToggle" },
+		cmd = { "Neotree" },
 	},
-	{
-		'willothy/nvim-cokeline',
-		dependencies = { "nvim-tree/nvim-web-devicons" }, -- If you want devicons
-		config = function()
-			require('cokeline').setup()
-
-			vim.keymap.set('n', '<Tab>', '<Plug>(cokeline-focus-prev)', { silent = true })
-			vim.keymap.set('n', '<backspace>', '<Plug>(cokeline-focus-next)', { silent = true })
-			vim.keymap.set('n', '<Leader>p', '<Plug>(cokeline-switch-prev)', { silent = true })
-			vim.keymap.set('n', '<Leader>n', '<Plug>(cokeline-switch-next)', { silent = true })
-			vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { silent = true })
-
-			for i = 1, 9 do
-				vim.keymap.set('n', ('<F%s>'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i),
-					{ silent = true })
-				vim.keymap.set('n', ('<Leader>%s'):format(i), ('<Plug>(cokeline-switch-%s)'):format(i),
-					{ silent = true })
-			end
-		end
-	},
+	-- {
+	-- 	'willothy/nvim-cokeline',
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" }, -- If you want devicons
+	-- 	config = function()
+	-- 		require('cokeline').setup()
+	--
+	-- 		vim.keymap.set('n', '<Tab>', '<Plug>(cokeline-focus-prev)', { silent = true })
+	-- 		vim.keymap.set('n', '<backspace>', '<Plug>(cokeline-focus-next)', { silent = true })
+	-- 		vim.keymap.set('n', '<Leader>p', '<Plug>(cokeline-switch-prev)', { silent = true })
+	-- 		vim.keymap.set('n', '<Leader>n', '<Plug>(cokeline-switch-next)', { silent = true })
+	-- 		vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { silent = true })
+	--
+	-- 		for i = 1, 9 do
+	-- 			vim.keymap.set('n', ('<F%s>'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i),
+	-- 				{ silent = true })
+	-- 			vim.keymap.set('n', ('<Leader>%s'):format(i), ('<Plug>(cokeline-switch-%s)'):format(i),
+	-- 				{ silent = true })
+	-- 		end
+	-- 	end
+	-- },
 	{
 		"edluffy/hologram.nvim",
 		config = function()
@@ -452,7 +452,8 @@ plugins = {
 
 require("lazy").setup(plugins, opts)
 -- vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>ft", ":NeoTreeFocusToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ft", ":Neotree toggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ftr", ":Neotree reveal<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { noremap = true, silent = true })
 
 local options = {
@@ -506,7 +507,6 @@ let g:copilot_no_tab_map = v:true
 
 " aliases
 command! TT :ToggleTerm direction=float
-
 autocmd BufReadPost *.re set filetype=reason
 autocmd BufWritePre * lua vim.lsp.buf.format()
 ]])
