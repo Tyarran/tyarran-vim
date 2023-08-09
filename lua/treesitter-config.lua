@@ -12,7 +12,8 @@ require 'nvim-treesitter.configs'.setup {
 		"html",
 		"vim",
 		-- "help",
-		"lua"
+		"lua",
+		"javascript",
 	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)

@@ -452,8 +452,7 @@ plugins = {
 
 require("lazy").setup(plugins, opts)
 -- vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>ft", ":Neotree toggle<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>ftr", ":Neotree reveal<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ft", ":Neotree reveal toggle<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { noremap = true, silent = true })
 
 local options = {
