@@ -87,7 +87,9 @@ plugins = {
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
-			require("gitsigns").setup()
+			require("gitsigns").setup({
+				current_line_blame = true
+			})
 		end,
 		event = "BufRead",
 	},
@@ -106,13 +108,13 @@ plugins = {
 		"liuchengxu/vista.vim",
 		cmd = { "Vista" },
 	},
-	{
-		"TimUntersberger/neogit",
-		config = function()
-			require("neogit").setup({})
-		end,
-		cmd = { "Neogit" },
-	},
+	-- {
+	-- 	"TimUntersberger/neogit",
+	-- 	config = function()
+	-- 		require("neogit").setup({})
+	-- 	end,
+	-- 	cmd = { "Neogit" },
+	-- },
 	"wakatime/vim-wakatime",
 	{
 		"github/copilot.vim",
@@ -298,7 +300,19 @@ plugins = {
 		}, -- If you want devicons
 		-- config = true
 		config = function()
-			require('cokeline').setup()
+			require('cokeline').setup({
+				sidebar = {
+					filetype = { 'neo-tree', 'NvimTree' },
+					components = {
+						{
+							text = function(buf)
+								return vim.bo[buf.number].filetype
+							end,
+							-- ...
+						},
+					}
+				},
+			})
 			vim.keymap.set('n', '<Tab>', '<Plug>(cokeline-focus-prev)', { silent = true })
 			vim.keymap.set('n', '<backspace>', '<Plug>(cokeline-focus-next)', { silent = true })
 			vim.keymap.set('n', '<Leader>p', '<Plug>(cokeline-switch-prev)', { silent = true })
@@ -381,7 +395,7 @@ plugins = {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup {
-				ensure_installed = { "elixirls", "ocamllsp", "bashls",
+				ensure_installed = { "elixirls", "bashls",
 					"pyright", "dockerls",
 					"docker_compose_language_service", "cssls", "html", "jsonls", "vimls", "jsonls",
 					"lua_ls", "sqlls", "solargraph" }
@@ -486,14 +500,12 @@ vim.opt.relativenumber = false
 -- filetype on
 -- filetype plugin on
 --
--- colorscheme tokyonight
 vim.cmd([[
 
 set clipboard+=unnamedplus
 set completeopt=menu,menuone,noselect
 
-colorscheme carbonfox
-
+colorscheme tokyonight-night
 
 "Keybindings
 nmap <C-y> :set hlsearch! hlsearch?<CR>
